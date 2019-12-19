@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Agregar nuevo tipo de transaccion</h1>
+	<h:form>
+		<h:panelGrid  columns="3">
+			<h:outputLabel for="txtNombre" value="Nombre de tipo de transaccion"/>
+			<h:inputText id="txtNombre" value="#{gestionTipoTransaccionesBean.tipoTransaccion.nombre_tipo_transaccion}" />
+			<h:message for="txtNombre"/>
+			
+			<h:outputLabel for="txtDescripcion" value="Descripcion de tipo de transaccion"/>
+			<h:inputText id="txtDescripcion" value="#{gestionTipoTransaccionesBean.tipoTransaccion.descripcion_tipo_transaccion}" />
+			<h:message for="txtDescripcion"/>
+		</h:panelGrid>
+		<h:commandButton action="#{gestionTipoTransaccionesBean.guardarTipoTransaccion()}" value="Guardar" />
+	</h:form>
+</body> 
+</html>
