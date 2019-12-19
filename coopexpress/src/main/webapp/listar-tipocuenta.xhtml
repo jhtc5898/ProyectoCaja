@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h1>Listar Tipos De Cuentas</h1>
+<h:form>
+	<h:panelGrid columns="3">
+	<h:dataTable value="#{gestionTipoCuentasBean.tipocuentalist}" var="tipo_cuenta">
+		<h:column>
+			<f:facet name="header">|Codigo|</f:facet>
+			#{tipo_cuenta.codigo_tipo_cuenta}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">|Nombre Tipo Cuenta|</f:facet>
+			#{tipo_cuenta.nombre_tipo_cuenta}
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">|Descripcion|</f:facet>
+			#{tipo_cuenta.descripcion_tipo_cuenta}
+		</h:column>
+</h:dataTable>	
+<h:commandButton action="crear-tipocuenta"  value="Regresar"/>
+</h:panelGrid>
+	</h:form>
+
+</body> 
+</html>
