@@ -30,6 +30,9 @@ public class Usuario {
 	@Column(name = "usuario_correo")
 	private String correo;
 
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
+    private List<Cuenta> cuentas;
+	
 	public String getCedula() {
 		return cedula;
 	}

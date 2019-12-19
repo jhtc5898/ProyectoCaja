@@ -1,11 +1,15 @@
 package modelo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -22,6 +26,9 @@ public class Tipo_Cuenta {
 	
 	@Column(name = "descripcion_tipo_cuenta")
 	private String descripcion_tipo_cuenta;
+	
+	@OneToMany(mappedBy="tipo_cuenta", cascade = CascadeType.ALL)
+    private List<Cuenta> cuentas;
 
 	public int getCodigo_tipo_cuenta() {
 		return codigo_tipo_cuenta;

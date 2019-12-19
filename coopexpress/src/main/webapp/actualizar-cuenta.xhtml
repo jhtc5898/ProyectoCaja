@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h1>Actualizar Cuenta</h1>
+	<h3>Busqueda por Numero de Cuenta</h3>
+	<h:form>
+		Numero Cuenta: <h:inputText value="#{actualizarCuenta.numeroCuenta}" />
+		<h:commandButton  value="Buscar Cuenta" action="#{actualizarCuenta.buscar()}" />
+		
+		<h:panelGrid columns="3" value="#{actualizarCuenta.cuentas}" var="cuenta">
+			<h:column>
+					<h:outputLabel for="numeroCuenta" value="Numero Cuenta" />	
+					##{cuenta.codigo_cuenta} 
+					<f:facet name="header">Numero Cuenta</f:facet>
+			</h:column>
+			
+			
+			<h:commandButton action="#{actualizarCuenta.actualizar()}" value="Actulizar Datos" />
+			<h:commandButton action="#{actualizarCuenta.eliminar()}" value="Eliminar Cuenta" />
+			
+		</h:panelGrid>
+		<h:commandButton action="crear-cuenta" value="Crear Nueva Cuenta" />
+		<h:commandButton action="listar-cuentas" value="Listado Cuentas" />
+
+	</h:form>
+
+</body> 
+</html>

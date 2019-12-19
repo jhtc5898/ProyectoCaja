@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+<h1>Crear Cuenta</h1>
+
+
+	
+	<h:form>
+		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta">
+		<h:column>
+			#{cuenta.numero_cuenta}
+			<f:facet name="header">Numero Cuenta</f:facet>
+		</h:column>
+		<h:column>
+			#{cuenta.saldo_cuenta}
+			<f:facet name="header">Saldo</f:facet>
+		</h:column>
+		<h:column>
+			#{cuenta.usuario.cedula}
+			<f:facet name="header">Numero Cedula Usuario</f:facet>
+		</h:column>
+		<h:column>			
+			
+		</h:column>
+		</h:dataTable>
+		
+		<br/>
+		<h3>Ingrese Cuenta a Eliminar</h3>
+		<h:inputText  value="#{gestionCuentasBean.eliminarNumero}" />
+		<h:commandButton action="#{gestionCuentasBean.buscar()}" value="Eliminar" />
+		<br />
+		<br />
+		<h:commandButton action="crear-cuenta" value="Crear Nueva Cuenta" />
+		
+		
+	</h:form>
+	
+	
+
+</body> 
+</html>
