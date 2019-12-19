@@ -1,0 +1,6 @@
+projectKey=org.jboss.tools.examples:coopexpress
+serverUrl=http://localhost:9000
+serverVersion=7.1.0.11001
+dashboardUrl=http://localhost:9000/dashboard/index/org.jboss.tools.examples:coopexpress
+ceTaskId=AW8e3SlZzTbWBdTOZMdf
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AW8e3SlZzTbWBdTOZMdf
