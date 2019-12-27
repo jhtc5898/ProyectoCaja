@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Actualizar tipo transaccion</h1>
+	<h2>Buscar por nombre</h2>
+	<h:form>
+		Nombre de tipo de transacción<h:inputText value="#{gestionTipoTransaccionesBean.nombre}" />
+		<h:commandButton action="#{gestionTipoTransaccionesBean.buscarNombre()}" value="Buscar" />
+		<h:panelGrid>
+			<h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccion}" var="tipoTransaccion">
+				<h:column>
+					<h:outputLabel value="Nombre" />
+					<h:inputText value="#{tipoTransaccion.nombre_tipo_transaccion}" />
+					<f:facet name="header">Nombre</f:facet>
+				</h:column>
+				
+				<h:column>
+					<h:outputLabel value="Descripcion" />
+					<h:inputText value="#{tipoTransaccion.descripcion_tipo_transaccion}" />
+					<f:facet name="header">Descripción</f:facet>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{gestionTipoTransaccionesBean.actualizarTipoTransaccion()}" value="Actualizar" />
+			<h:commandButton action="lista-tipo-transaccion" value="Listar" />
+		</h:panelGrid>
+	</h:form>
+
+</body> 
+</html>

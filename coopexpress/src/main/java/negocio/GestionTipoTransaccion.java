@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import datos.TipoTransaccionDAO;
 import modelo.Tipo_Transaccion;
+import modelo.Usuario;
 
 @Stateless
 public class GestionTipoTransaccion {
@@ -32,5 +33,9 @@ public class GestionTipoTransaccion {
 	
 	public List<Tipo_Transaccion> getTipoTransacciones(){
 		return tipoTransaccionDAO.getTipoTransacciones();
+	}
+	
+	public Tipo_Transaccion getTipoTransaccionNombre(String nombre){
+		return tipoTransaccionDAO.getTipoTransaccionNombre(nombre);
 	}
 }
