@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.NoneScoped;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
@@ -27,6 +26,7 @@ public class GestionTipoTransaccionesBean {
 	@PostConstruct
 	public void init() {
 		tipoTransaccion = new Tipo_Transaccion();
+		nombre= null;
 	}
 
 	public String guardarTipoTransaccion() {
@@ -38,7 +38,7 @@ public class GestionTipoTransaccionesBean {
 	
 	public String eliminarTipoTransaccion() {
 		gtt.elimnarTipoTransaccion(tipoTransaccion.getCodigo_tipo_transaccion());
-		return null;
+		return "lista-tipo-transaccion";
 	}
 	
 	public String actualizarTipoTransaccion() {

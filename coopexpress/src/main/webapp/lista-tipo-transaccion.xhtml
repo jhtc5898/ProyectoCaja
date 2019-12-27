@@ -1,13 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Tipos de transacciones</ui:define>
 
-<h:head></h:head>
-<body>
+<ui:define name="descripcion">Lista de los tipos de transacciones almacenadas</ui:define>
+
+<ui:define name="indicaciones">
+	<p>Ingresar el nombre del tipo de transacción a actualizar y presionar el boton <b>Buscar</b></p>
+    <p>La información del tipo de transacción buscada se cargará en la sección <b>Actualizar</b></p>
+</ui:define>
+
+<ui:define name="contenido">
 	<h:form>
-		<h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccionList}" var="tipoTransaccion">
+		<h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccionList}" var="tipoTransaccion" styleClass="table table-bordered">
 			<h:column>
 				<f:facet name="header">Codigo</f:facet>
 				#{tipoTransaccion.codigo_tipo_transaccion}
@@ -25,5 +33,10 @@
 		</h:dataTable>
 		<h:commandButton action="crear-tipo-transaccion" value="Regresar" />
 	</h:form>
-</body>
-</html>
+</ui:define>
+</ui:composition>
+
+
+
+                 
+                  

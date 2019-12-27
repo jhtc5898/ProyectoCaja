@@ -1,34 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Actualizar tipo de transaccion</ui:define>
 
-<h:head></h:head> 
-<body> 
-	<h1>Actualizar tipo transaccion</h1>
-	<h2>Buscar por nombre</h2>
-	<h:form>
-		Nombre de tipo de transacción<h:inputText value="#{gestionTipoTransaccionesBean.nombre}" />
-		<h:commandButton action="#{gestionTipoTransaccionesBean.buscarNombre()}" value="Buscar" />
-		<h:panelGrid>
-			<h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccion}" var="tipoTransaccion">
-				<h:column>
-					<h:outputLabel value="Nombre" />
-					<h:inputText value="#{tipoTransaccion.nombre_tipo_transaccion}" />
-					<f:facet name="header">Nombre</f:facet>
-				</h:column>
-				
-				<h:column>
-					<h:outputLabel value="Descripcion" />
-					<h:inputText value="#{tipoTransaccion.descripcion_tipo_transaccion}" />
-					<f:facet name="header">Descripción</f:facet>
-				</h:column>
-			</h:dataTable>
-			<h:commandButton action="#{gestionTipoTransaccionesBean.actualizarTipoTransaccion()}" value="Actualizar" />
-			<h:commandButton action="lista-tipo-transaccion" value="Listar" />
-		</h:panelGrid>
-	</h:form>
+<ui:define name="descripcion">Actualizar la informacion de un tipo de transacción ya existente</ui:define>
 
-</body> 
-</html>
+<ui:define name="indicaciones">
+	<p>1.- <b>Buscar</b> el tipo de transacción a actualizar por el nombre</p>
+	<p>2.- Modificar los datos cargados en la sección <b>Actualizar</b></p>
+</ui:define>
+
+<ui:define name="contenido">
+<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Busqueda</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form>
+              	<div class="card-body">
+                    <label class="col-form-label">Nombre de tipo de transacción: </label>
+                  	<h:inputText value="#{gestionTipoTransaccionesBean.nombre}" />
+                </div>  
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton action="#{gestionTipoTransaccionesBean.buscarNombre()}" styleClass="btn btn-info" value="Buscar" />
+                </div>
+                
+               	<hr />
+               	
+              	<div class="card card-success">
+              		<div class="card-header">
+                		<h3 class="card-title">Actualizar</h3>
+              		</div>
+              	</div>
+              	<div class="card-body">
+                   <h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccion}" var="tipoTransaccion" styleClass="table table-bordered">
+					<h:column>
+						<label class="col-form-label">Nombre </label>
+						<h:inputText value="#{tipoTransaccion.nombre_tipo_transaccion}" styleClass="form-control"/>
+					</h:column>
+					<h:column>
+						<label class="col-form-label">Descripción </label>
+						<h:inputText value="#{tipoTransaccion.descripcion_tipo_transaccion}" styleClass="form-control" />
+					</h:column>
+				</h:dataTable>
+                </div>  
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  		<h:commandButton action="#{gestionTipoTransaccionesBean.actualizarTipoTransaccion()}" styleClass="btn btn-success" value="Actualizar" />
+                </div>
+              	
+              </h:form>
+            </div>
+            <!-- /.card -->
+</ui:define>
+</ui:composition>
+
+
