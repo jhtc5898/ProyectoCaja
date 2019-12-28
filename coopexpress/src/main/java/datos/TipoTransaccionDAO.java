@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import modelo.Tipo_Transaccion;
-import modelo.Usuario;
 
 @Stateless
 public class TipoTransaccionDAO {

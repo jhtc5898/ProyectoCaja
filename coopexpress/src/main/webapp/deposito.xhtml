@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Coopexpress DEPOSITO</ui:define>
+
+<ui:define name="descripcion">Depositar dinero en una cuenta de los socios de Coopexpress</ui:define>
+
+<ui:define name="indicaciones">
+	<p>Cuenta destino.- Ingresar el numero de cuenta en la que se depositará el dinero</p>
+	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
+    <p>Descripción.- Ingresar una descripción sobre el nuevo tipo de transacción</p>
+</ui:define>
+
+<ui:define name="contenido">
+<!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Deposito</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form>
+                <div class="card-body">
+                  <div class="col-3">
+                    <label class="col-form-label">Numero de cuenta destino</label>
+                    <h:inputText id="txtNombre" styleClass="form-control" value="#{gestionTransaccionesBean.transaccion.cuenta_destino_transaccion.numero_cuenta}" />
+                  </div>
+                  <div class="col-3">
+           	        <label class="col-form-label">Monto a depositar</label>
+                  	<div class="input-group">
+                  	<div class="input-group-prepend">
+                    	<span class="input-group-text">
+                      	<i class="fas fa-dollar-sign"></i>
+                    	</span>
+                  	</div>
+                  	<h:inputText id="txtMonto" styleClass="form-control" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}" />
+                	</div>                    
+                  </div>
+                  <div class="col-3">
+                  	<label class="col-form-label">Fecha de la transaccion</label>
+                    <h:inputText id="fecha" styleClass="form-control" value="#{gestionTransaccionesBean.transaccion.fecha_transaccion}" disabled="#{gestionTransaccionesBean.transaccion.fecha_transaccion != null}" >
+                    <f:convertDateTime pattern="yyyy-MM-dd"/> 
+                    </h:inputText>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.guardarDeposito()}" />
+                </div>
+              </h:form>
+            </div>
+</ui:define>
+</ui:composition>
