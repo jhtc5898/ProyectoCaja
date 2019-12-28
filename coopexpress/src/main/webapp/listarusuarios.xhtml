@@ -9,10 +9,7 @@
 
 	<ui:define name="indicaciones">
 		<p>
-			Ingresar el nombre del usuario a buscar y presionar el boton.<b>Buscar</b>
-		</p>
-		<p>
-			La información del usuario se la puede modificar aplastando el boton.<b>Actualizar</b>
+			Comprobar el correcto funcionamiento de la pagina.
 		</p>
 	</ui:define>
 
@@ -45,7 +42,11 @@
 				#{usuario.telefono}
 			</h:column>
 			</h:dataTable>
+			<p>Si desea regresar a la pagina de crear usuario aplaste</p>
 			<h:commandButton action="guardarusuario" value="Regresar" />
+			<p>Si desea eliminar un usuario aplaste</p>
+			<h:commandButton action="eliminarusuario" value="Eliminar" />
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

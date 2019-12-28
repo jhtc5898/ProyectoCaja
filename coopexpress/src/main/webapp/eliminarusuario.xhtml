@@ -1,21 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Eliminar Usuario</ui:define>
 
-<h:head></h:head> 
-<body> 
-	<h2>Eliminar usuario</h2>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel for="txtCedula" value="Cedula" />
-			<h:inputText id="txtCedula" value="#{gestionUsuariosBean.usuario.cedula}" />
-			<h:message for="txtCedula"/>
-			
-			<h:outputText value=""/>
-			<h:commandButton action="#{gestionUsuariosBean.eliminarUsuario()}" value="Eliminar" />	
-		</h:panelGrid>
-	</h:form> 
-</body> 
-</html>
+<ui:define name="descripcion">Eliminacion de un Usuario</ui:define>
+
+<ui:define name="indicaciones">
+	<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+</ui:define>
+
+<ui:define name="contenido">
+	<div class="card card-danger">
+    	<div class="card-header">
+        	<h3 class="card-title">Usuario</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <h:form>
+        <div class="card-body">
+        	<div class="form-group">
+        		<label class="col-form-label">Cedula de Usuario</label>
+					<h:inputText id="txtCedula" value="#{gestionUsuariosBean.usuario.cedula}" />
+					<h:message for="txtCedula"/>
+          	</div>
+        </div>
+        <div class="card-footer">
+        	<h:commandButton action="#{gestionUsuariosBean.eliminarUsuario()}" styleClass="btn btn-danger" value="Eliminar" />
+        </div>
+		</h:form>
+	</div>
+</ui:define>
+</ui:composition>

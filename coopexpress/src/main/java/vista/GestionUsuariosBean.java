@@ -33,7 +33,10 @@ public class GestionUsuariosBean {
 
 	public String eliminarUsuario() {
 		gu.eliminarUsuario(usuario.getCedula());
-		return null;
+		usuarios=gu.getUsuarios();
+		init();
+		return "listarusuarios";
+		//return null;
 	}
 
 	public String actualizarUsuario() {
