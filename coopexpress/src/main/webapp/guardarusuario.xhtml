@@ -1,42 +1,62 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Creacion de un Nuevo Usuario</ui:define>
 
-<h:head></h:head>
-<body>
-	<h2>Registrar Usuario</h2>
-	<h:form>
-		<h:panelGrid columns="3">
-			
-			<h:outputLabel for="txtCedula" value="Cedula"  />
-			<h:inputText id="txtCedula" value="#{gestionUsuariosBean.usuario.cedula}"/>
-			<h:message for="txtCedula" />
-			
-			<h:outputLabel for="txtNombre" value="Nombre" />
-			<h:inputText id="txtNombre" value="#{gestionUsuariosBean.usuario.nombre}" />
-			<h:message for="txtNombre" />
-			
-			<h:outputLabel for="txtApellido" value="Apellido" />
-			<h:inputText id="txtApellido" value="#{gestionUsuariosBean.usuario.apellido}" />
-			<h:message for="txtApellido" />
+<ui:define name="descripcion">Usuario a Registrar</ui:define>
 
-			<h:outputLabel for="txtTelefono" value="Telefono" />
-			<h:inputText id="txtTelefono" value="#{gestionUsuariosBean.usuario.telefono}" />
-			<h:message for="txtTelefono" />
-			
-			<h:outputLabel for="txtDireccion" value="Direccion" />
-			<h:inputText id="txtDireccion" value="#{gestionUsuariosBean.usuario.direccion}" />
-			<h:message for="txtDireccion" />
-			
-			<h:outputLabel for="txtCorreo" value="Correo" />
-			<h:inputText id="txtCorreo" value="#{gestionUsuariosBean.usuario.correo}" />
-			<h:message for="txtCorreo" />
+<ui:define name="indicaciones">
+	<p>Nombre.- Ingresar el nombre del nuevo Usuario.</p>
+    <p>Apellido.- Ingresar el apellido del nuevo Usuario.</p>
+	<p>Cedula.- Ingresar el documento de identificacion que consta de 10 digitos.</p>
+    <p>Correo.- Ingresar un correo al cual se pueda contactar con el usuario.</p>
+	<p>Direccion.- Ingresar la ciudad o calle donde se encuentra localizado el Usuario.</p>
+    <p>Telefono.- Ingresar algun tipo de numero telefonico con el cual se pueda contactar con el Usuario.</p>
+</ui:define>
 
-			<h:outputText value="" />
-			<h:commandButton action="#{gestionUsuariosBean.guardarUsuario()}" value="Guardar" />
-		</h:panelGrid>
-	</h:form>
-</body>
-</html>
+<ui:define name="contenido">
+<!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Creacion de Usuario</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="col-form-label">Cedula de Usuario</label>
+                    <h:inputText id="txtCedula" styleClass="form-control" value="#{gestionUsuariosBean.usuario.cedula}" />
+                  </div>
+                  <div class="form-group">
+                  	<label class="col-form-label">Nombre de Usuario</label>
+                    <h:inputTextarea id="txtNombre" styleClass="form-control" value="#{gestionUsuariosBean.usuario.nombre}" />
+                  </div>
+     		<div class="form-group">
+                  	<label class="col-form-label">Apellido de Usuario</label>
+                    <h:inputTextarea id="txtApellido" styleClass="form-control" value="#{gestionUsuariosBean.usuario.apellido}" />
+                  </div>
+    		 <div class="form-group">
+                  	<label class="col-form-label">Telefono de Usuario</label>
+                    <h:inputTextarea id="txtTelefono" styleClass="form-control" value="#{gestionUsuariosBean.usuario.telefono}" />
+                  </div>
+ 		<div class="form-group">
+                  	<label class="col-form-label">Direccion de Usuario</label>
+                    <h:inputTextarea id="txtDireccion" styleClass="form-control" value="#{gestionUsuariosBean.usuario.direccion}" />
+                  </div>
+     		<div class="form-group">
+                  	<label class="col-form-label">Correo de Usuario</label>
+                    <h:inputTextarea id="txtCorreo" styleClass="form-control" value="#{gestionUsuariosBean.usuario.correo}" />
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionUsuariosBean.guardarUsuario()}" />
+                </div>
+              </h:form>
+            </div>
+</ui:define>
+</ui:composition>

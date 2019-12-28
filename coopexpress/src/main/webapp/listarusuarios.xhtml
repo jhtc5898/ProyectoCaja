@@ -1,46 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
 
-<h:head></h:head>
-<body>
-	<h2>Listar Usuarios</h2>
-	<h:form>
-		<h:panelGrid columns="7">
-			<h:dataTable value="#{gestionUsuariosBean.usuarios}" var="usuario">
+	<ui:define name="titulo">Usuarios</ui:define>
+
+	<ui:define name="descripcion">Lista de Usuarios Registrados</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>
+			Ingresar el nombre del usuario a buscar y presionar el boton.<b>Buscar</b>
+		</p>
+		<p>
+			La información del usuario se la puede modificar aplastando el boton.<b>Actualizar</b>
+		</p>
+	</ui:define>
+
+	<ui:define name="contenido">
+		<h:form>
+			<h:dataTable value="#{gestionUsuariosBean.usuarios}" var="usuario"
+				styleClass="table table-bordered">
 				<h:column>
 					<f:facet name="header">Cedula</f:facet>
-			#{usuario.cedula}
-		</h:column>
-
+				#{usuario.cedula}
+			</h:column>
 				<h:column>
 					<f:facet name="header">Nombre</f:facet>
-			#{usuario.nombre}
-		</h:column>
+				#{usuario.nombre}
+			</h:column>
 				<h:column>
 					<f:facet name="header">Apellido</f:facet>
-			#{usuario.apellido}
-		</h:column>
-
+				#{usuario.apellido}
+			</h:column>
 				<h:column>
 					<f:facet name="header">Direccion</f:facet>
-			#{usuario.direccion}
-		</h:column>
+				#{usuario.direccion}
+			</h:column>
 				<h:column>
 					<f:facet name="header">Correo</f:facet>
-			#{usuario.correo}
-		</h:column>
-
+				#{usuario.correo}
+			</h:column>
 				<h:column>
 					<f:facet name="header">Telefono</f:facet>
-			#{usuario.telefono}
-		</h:column>
+				#{usuario.telefono}
+			</h:column>
 			</h:dataTable>
-				<h:commandButton action="guardarusuario" value="Regresar" />
-		
-		</h:panelGrid>
-	</h:form>
-</body>
-</html>
+			<h:commandButton action="guardarusuario" value="Regresar" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+
+
+
