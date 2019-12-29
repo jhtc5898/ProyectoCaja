@@ -1,13 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml">
+ 
+<ui:define name="titulo">Nueva Cuenta</ui:define>
 
-<h:head></h:head> 
-<body> 
+<ui:define name="descripcion">Creación de una nueva Cuenta</ui:define>
+  
+<ui:define name="indicaciones">
+	<p>Numero.- Ingresar el numero de cuenta</p>
+    <p>Saldo.- Ingresar el saldo con el que comienza la nueva cuenta</p>
+    <p>Usuario.- Ingresar el numero de cedula a la que pertenece la nueva cuenta</p>
+    <p>Tipo CCuenta.- Ingesar el codigo al tipo de cuenta que pertence la nueva cuenta</p>
+</ui:define>
 
-<h1>Crear Cuenta</h1>
+<ui:define name="contenido">
 
 
 	<h:form>
@@ -43,5 +51,8 @@
 		<h:commandButton action="listar-cuentas" value="Listar Cuentas" />
 	</h:form>
 
-</body> 
-</html>
+
+
+
+</ui:define>
+</ui:composition>

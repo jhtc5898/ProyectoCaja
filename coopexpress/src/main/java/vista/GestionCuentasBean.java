@@ -30,7 +30,8 @@ public class GestionCuentasBean {
 	
 	public String guardar() {
 		gc.guardar(cuenta);
-		cuentas=gc.getCuentas();
+		//cuentas=gc.getCuentas();
+		init();
 		return "listar-cuentas";
 	}
 	
