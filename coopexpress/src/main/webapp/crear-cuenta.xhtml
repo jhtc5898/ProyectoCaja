@@ -12,47 +12,60 @@
 	<p>Numero.- Ingresar el numero de cuenta</p>
     <p>Saldo.- Ingresar el saldo con el que comienza la nueva cuenta</p>
     <p>Usuario.- Ingresar el numero de cedula a la que pertenece la nueva cuenta</p>
-    <p>Tipo CCuenta.- Ingesar el codigo al tipo de cuenta que pertence la nueva cuenta</p>
+    <p>Tipo Cuenta.- Ingesar el codigo al tipo de cuenta que pertence la nueva cuenta</p>
 </ui:define>
 
 <ui:define name="contenido">
-
-
-	<h:form>
-		
-		<h:panelGrid columns="3">	
-			<h:outputLabel for="txtNumeroCuenta" value="Numero Cuenta" />
-			<h:inputText id="txtNumeroCuenta" value="#{gestionCuentasBean.cuenta.numero_cuenta}" />
-			<h:message for="txtNumeroCuenta"/>
-			
-			<h:outputLabel for="txtSaldoCuenta" value="Saldo Cuenta" />
-			<h:inputText id="txtSaldoCuenta" value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
-			<h:message for="txtSaldoCuenta"/>
-			
-			<h:outputLabel value="Usuario" />
-			<h:dataTable value="#{gestionCuentasBean.cuenta.usuario}" var="usuario">
-				<h:column>
-					<f:facet name="header">Cedula Usuario</f:facet>
-					<h:inputText value="#{usuario.cedula}" />
-				</h:column>
-			</h:dataTable>
-			<br/>
-			<h:outputLabel value="Tipo Cuenta" />
-			<h:dataTable value="#{gestionCuentasBean.cuenta.tipo_cuenta}" var="tipo_cuenta">
-				<h:column>
-					<f:facet name="header">Codigo Tipo Cuenta</f:facet>
-					<h:inputText value="#{tipo_cuenta.codigo_tipo_cuenta}" />
-				</h:column>
-			</h:dataTable>
-			
-		</h:panelGrid>
-		
-		<h:commandButton  value="Guardar" action="#{gestionCuentasBean.guardar()}" />
-		<h:commandButton action="listar-cuentas" value="Listar Cuentas" />
-	</h:form>
-
-
-
-
+<!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Cuenta</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              
+            <h:form>
+            	
+            	<div class="card-body">
+            		<div class="form-group">
+            			<label class="col-form-label">Numero Cuenta</label>
+            			<h:inputText id="txtNumeroCuenta" styleClass="form-control" value="#{gestionCuentasBean.cuenta.numero_cuenta}" />
+            		</div>
+            		
+            		<div class="form-group">
+            			<label class="col-form-label">Saldo Cuenta</label>
+            			<h:inputText id="txtSaldoCuenta" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
+            		</div>
+            		
+            		
+            		<div class="form-group">
+            			<label class="col-form-label">Usuario</label>
+            			<h:dataTable value="#{gestionCuentasBean.cuenta.usuario}" var="usuario">
+							<h:column>
+							<f:facet name="header">Cedula Usuario</f:facet>
+							<h:inputText styleClass="form-control" value="#{usuario.cedula}" />
+							</h:column>
+						</h:dataTable>
+            		</div>
+            		
+            		
+            		<div class="form-group">
+            			<label class="col-form-label">Tipo Cuenta</label>
+            			<h:dataTable value="#{gestionCuentasBean.cuenta.tipo_cuenta}" var="tipo_cuenta">
+							<h:column>
+								<f:facet name="header">Codigo Tipo Cuenta</f:facet>
+								<h:inputText styleClass="form-control" value="#{tipo_cuenta.codigo_tipo_cuenta}" />
+							</h:column>
+						</h:dataTable>
+            		</div>
+            		
+            		 <div class="card-footer">
+                  		<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionCuentasBean.guardar()}" />
+                  		<h:commandButton  value="Listar Cuentas" styleClass="btn btn-info" action="listar-cuentas" />
+              		  </div>
+            	</div>	
+		</h:form>
+  
+    </div>
 </ui:define>
 </ui:composition>

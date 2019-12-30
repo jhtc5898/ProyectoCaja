@@ -41,6 +41,7 @@ public class GestionCuentasBean {
 		cuenta.setUsuario(new Usuario());
 		cuenta.setTipo_cuenta(new Tipo_Cuenta());
 		cuentas=gc.getCuentas();
+		eliminarNumero=String.valueOf(0);
 	}
 	
 	public void buscar() {
@@ -51,7 +52,7 @@ public class GestionCuentasBean {
 	
 	public String eliminar() {
 		gc.eliminar(this.cuenta.getCodigo_cuenta());
-		cuentas=gc.getCuentas();
+		this.init();
 		return null;
 	}
 //	

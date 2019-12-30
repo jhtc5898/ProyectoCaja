@@ -15,8 +15,9 @@
 
 <ui:define name="contenido">
 	<h:form>
-		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta">
-		<h:column>
+	
+		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta" styleClass="table table-bordered">
+		<h:column >
 			#{cuenta.numero_cuenta}
 			<f:facet name="header">Numero Cuenta</f:facet>
 		</h:column>
@@ -28,20 +29,26 @@
 			#{cuenta.usuario.cedula}
 			<f:facet name="header">Numero Cedula Usuario</f:facet>
 		</h:column>
-		<h:column>			
-		
-		</h:column>
 		</h:dataTable>
 		
-		<br/>
-		<h3>Ingrese Cuenta a Eliminar</h3>
-		<h:inputText  value="#{gestionCuentasBean.eliminarNumero}" />
-		<h:commandButton action="#{gestionCuentasBean.buscar()}" value="Eliminar" />
-		<br />
-		<br />
-		<h:commandButton action="crear-cuenta" value="Crear Nueva Cuenta" />
-		
-		
+		 <div class="card card-info">
+         	<div class="card-header">
+         		<h3 class="card-title">Eliminar </h3>
+            </div>
+            <h:form>
+            	<div class="card-body">
+            		 <div class="form-group">
+            		 <h3 class="col-form-label">Numero de cuenta a eliminar</h3>
+            		 <h:inputText  styleClass="form-control" value="#{gestionCuentasBean.eliminarNumero}" />
+            		 
+            		 </div>
+            	</div>
+            	 <div class="card-footer">
+            	 <h:commandButton  styleClass="btn btn-info" action="#{gestionCuentasBean.buscar()}" value="Eliminar" />
+                  <h:commandButton  styleClass="btn btn-info" action="crear-cuenta" value="Crear Nueva Cuenta" />
+                </div>
+            </h:form>
+         </div>	
 	</h:form>
 
 </ui:define>
