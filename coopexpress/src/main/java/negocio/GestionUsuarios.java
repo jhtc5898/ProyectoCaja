@@ -40,4 +40,8 @@ public class GestionUsuarios {
 	public List<Usuario> getUsuarios() {
 		return usuarioDAO.getUsuario();
 	}
+	
+	public Usuario obtenerUsuarioCedula(String cedula) {
+		return usuarioDAO.actualizarUsuario(cedula);
+	}
 }

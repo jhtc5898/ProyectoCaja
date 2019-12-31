@@ -1,57 +1,80 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
 
-<h:head></h:head>
-<body>
-	<h1>Actualizar usuario</h1>
-	<h3>Busqueda por cedula</h3>
-	<h:form>
-		Cedula Usuario: <h:inputText value="#{busquedaUsuariosBean.cedula}" />
-		<h:commandButton action="#{busquedaUsuariosBean.buscar()}"
-			value="Buscar" />
-		<h:panelGrid columns="3">
-			<h:dataTable value="#{busquedaUsuariosBean.usuarios}" var="usuario">
-				<h:column>
-					<h:outputLabel for="Cedula" value="Cedula" />
-					<h:inputText value="#{usuario.cedula}" />
-					<f:facet name="header">Cedula</f:facet>
-				</h:column>
+	<ui:define name="titulo">Busqueda Usuario</ui:define>
 
-				<h:column>
-					<h:outputLabel for="Nombre" value="Nombre" />
-					<h:inputText value="#{usuario.nombre}" />
-					<f:facet name="header">Nombre</f:facet>
-				</h:column>
-				
-					<h:column>
-					<h:outputLabel for="Apellido" value="Apellido" />
-					<h:inputText value="#{usuario.apellido}" />
-					<f:facet name="header">Apellido</f:facet>
-				</h:column>
+	<ui:define name="descripcion">Buscar un Usuario</ui:define>
 
-				<h:column>
-					<h:outputLabel for="Telefono" value="Telefono" />
-					<h:inputText value="#{usuario.telefono}" />
-					<f:facet name="header">Telefono</f:facet>
-				</h:column>
+	<ui:define name="indicaciones">
+		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	</ui:define>
 
-				<h:column>
-					<h:outputLabel for="Direccion" value="Direccion" />
-					<h:inputText value="#{usuario.direccion}" />
-					<f:facet name="header">Direccion</f:facet>
-				</h:column>
-				
-					<h:column>
-					<h:outputLabel for="Correo" value="Correo" />
-					<h:inputText value="#{usuario.correo}" />
-					<f:facet name="header">Correo</f:facet>
-				</h:column>
+	<ui:define name="contenido">
+		<div class="card card-danger">
+			<div class="card-header">
+				<h3 class="card-title">Usuario</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<h:form>
+				<div class="card-body">
+					<div class="form-group">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText value="#{gestionUsuariosBean.cedula}" />
+						<h:commandButton action="#{gestionUsuariosBean.buscar()}"
+							value="Buscar" />
+					</div>
+				</div>
+				<h:form>
+					<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario">
+						<h:column>
+							<h:outputLabel for="Cedula" value="Cedula" />
+							<h:inputText value="#{usuario.cedula}" />
+							<f:facet name="header">Cedula</f:facet>
+						</h:column>
 
-			</h:dataTable>
-		</h:panelGrid>
-	</h:form>
-</body>
-</html>
+						<h:column>
+							<h:outputLabel for="Nombre" value="Nombre" />
+							<h:inputText value="#{usuario.nombre}" />
+							<f:facet name="header">Nombre</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Apellido" value="Apellido" />
+							<h:inputText value="#{usuario.apellido}" />
+							<f:facet name="header">Apellido</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Telefono" value="Telefono" />
+							<h:inputText value="#{usuario.telefono}" />
+							<f:facet name="header">Telefono</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Direccion" value="Direccion" />
+							<h:inputText value="#{usuario.direccion}" />
+							<f:facet name="header">Direccion</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Correo" value="Correo" />
+							<h:inputText value="#{usuario.correo}" />
+							<f:facet name="header">Correo</f:facet>
+						</h:column>
+					</h:dataTable>
+					<p>Si desea guardar la informacion modificada presione</p>
+					<h:commandButton
+						action="#{gestionUsuariosBean.actualizarUsuario()}"
+						styleClass="btn btn-info" value="Actualizar" />
+					<p>Si desea verificar la informacion modificada presione</p>
+					<h:commandButton action="listarusuarios" value="Lista"
+						styleClass="btn btn-info" />
+
+						</h:form>
+					</h:form>
+					</div> 
+</ui:define>					
+</ui:composition>

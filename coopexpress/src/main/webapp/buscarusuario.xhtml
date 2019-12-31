@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+
+	<ui:define name="titulo">Busqueda Usuario</ui:define>
+
+	<ui:define name="descripcion">Buscar un Usuario</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	</ui:define>
+
+	<ui:define name="contenido">
+		<div class="card card-danger">
+			<div class="card-header">
+				<h3 class="card-title">Usuario</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<h:form>
+				<div class="card-body">
+					<div class="form-group">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText value="#{busquedaUsuariosBean.cedula}" />
+						<h:commandButton action="#{busquedaUsuariosBean.buscar()}"
+							value="Buscar" />
+					</div>
+				</div>
+				<h:form>
+				<h:dataTable value="#{busquedaUsuariosBean.usuarios}" var="usuario"
+					styleClass="table table-bordered">
+					<h:column>
+						<h:outputText value="#{usuario.cedula}" />
+						<f:facet name="header">Cedula</f:facet>
+					</h:column>
+
+					<h:column>
+
+						<h:outputText value="#{usuario.nombre}" />
+						<f:facet name="header">Nombre</f:facet>
+					</h:column>
+
+					<h:column>
+
+						<h:outputText value="#{usuario.apellido}" />
+						<f:facet name="header">Apellido</f:facet>
+					</h:column>
+
+					<h:column>
+
+						<h:outputText value="#{usuario.telefono}" />
+						<f:facet name="header">Telefono</f:facet>
+					</h:column>
+
+					<h:column>
+
+						<h:outputText value="#{usuario.direccion}" />
+						<f:facet name="header">Direccion</f:facet>
+					</h:column>
+
+					<h:column>
+						<h:outputText value="#{usuario.correo}" />
+						<f:facet name="header">Correo</f:facet>
+					</h:column>
+				</h:dataTable>
+				<p>Si desea regresar presione</p>
+				<h:commandButton action="listarusuarios" styleClass="btn btn-info"
+					value="Regresar" />
+					</h:form>
+					</h:form>
+					</div> 
+</ui:define>					
+</ui:composition>
+			
+

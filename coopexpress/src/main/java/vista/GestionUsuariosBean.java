@@ -22,25 +22,32 @@ public class GestionUsuariosBean {
 	/* Bean Properties */
 	private Usuario usuario = new Usuario();
 
+	private String cedula;
+
 	/* Action Controller */
 	public String guardarUsuario() {
 		gu.guardarUsuario(usuario);
-		usuarios=gu.getUsuarios();
+		//usuarios = gu.getUsuarios();
 		init();
 		return "listarusuarios";
-		//return null;
+		// return null;
 	}
 
 	public String eliminarUsuario() {
 		gu.eliminarUsuario(usuario.getCedula());
-		usuarios=gu.getUsuarios();
+		//usuarios = gu.getUsuarios();
 		init();
 		return "listarusuarios";
-		//return null;
+		// return null;
+	}
+
+	public void buscar() {
+		usuario = gu.obtenerUsuarioCedula(cedula);
 	}
 
 	public String actualizarUsuario() {
 		gu.actualizarUsuario(usuario);
+		init();
 		return null;
 	}
 
@@ -59,8 +66,18 @@ public class GestionUsuariosBean {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
 	@PostConstruct
 	public void init() {
-		usuario=new Usuario();
+		usuario = new Usuario();
+		usuarios = gu.getUsuarios();
 	}
 }

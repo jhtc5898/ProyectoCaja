@@ -41,9 +41,17 @@
 			</h:column>
 			</h:dataTable>
 			<p>Si desea regresar a la pagina de crear usuario aplaste</p>
-			<h:commandButton action="guardarusuario" value="Regresar" />
+			<h:commandButton action="guardarusuario" styleClass="btn btn-info"
+				value="Regresar" />
 			<p>Si desea eliminar un usuario aplaste</p>
-			<h:commandButton action="eliminarusuario" value="Eliminar" />
+			<h:commandButton action="eliminarusuario" styleClass="btn btn-info"
+				value="Eliminar" />
+			<p>Si desea buscar un usuario mediante su cedula presione</p>
+			<h:commandButton action="buscarusuario" styleClass="btn btn-info"
+				value="Buscar" />
+			<p>Si desea modificar la informacion de un Usuario presione</p>
+			<h:commandButton action="actualizarusuario" styleClass="btn btn-info"
+				value="Actualizar" />
 
 		</h:form>
 	</ui:define>
