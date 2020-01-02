@@ -50,6 +50,18 @@
 						</h:dataTable>
             		</div>
             		
+            		<div class="form-group">
+            			<label class="col-form-label">Correo Cuenta</label>
+            			<h:inputText id="txtCorreo" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.correo_cuenta}" />
+            		</div>
+            		
+            		<div class="form-group">
+            			<label class="col-form-label">Contraseña Cuenta</label>
+            			<h:inputSecret id="txtPassword" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.pswd_cuenta}" type="password" />
+            		</div>
+            		
+            
+            
             		
             		<div class="form-group">
             			<label class="col-form-label">Tipo Cuenta</label>
@@ -64,6 +76,7 @@
 						</h:column>
             			
             		</div>
+            				
             		
             		 <div class="card-footer">
                   		<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionCuentasBean.guardar()}" />

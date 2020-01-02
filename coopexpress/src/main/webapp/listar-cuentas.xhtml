@@ -16,7 +16,7 @@
 <ui:define name="contenido">
 	<h:form>
 	
-		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta" styleClass="table table-bordered">
+		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta" styleClass="table table-bordered" editable="true" editMode="cell">
 		<h:column >
 			#{cuenta.numero_cuenta}
 			<f:facet name="header">Numero Cuenta</f:facet>
@@ -28,6 +28,10 @@
 		<h:column>
 			#{cuenta.usuario.cedula}
 			<f:facet name="header">Numero Cedula Usuario</f:facet>
+		</h:column>
+		<h:column>
+			#{cuenta.correo_cuenta}
+			<f:facet name="header">Correo</f:facet>
 		</h:column>
 		</h:dataTable>
 		
