@@ -18,6 +18,9 @@ public class GestionTransaccionesBean {
 	@Inject
 	private GestionTransaccion gt;
 	
+	@Inject
+	private LoginBean sesion;
+	
 	private List<Transaccion> transaccionList = new ArrayList<Transaccion>();
 	private Transaccion transaccion = new Transaccion();	
 	private String cuentaOrigen;
@@ -26,13 +29,25 @@ public class GestionTransaccionesBean {
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
-		cuentaOrigen = "";
+		cuentaOrigen = " ";
 		cuentaDestino = "";
 	}
 	
 	public String guardarDeposito() {
 		gt.guardarTransaccionDeposito(transaccion, cuentaOrigen, cuentaDestino, 1);
 		init();
+		return null;
+	}
+	
+	public String deposito(String cuentaOrigen) {
+		this.cuentaOrigen = cuentaOrigen;
+		guardarDeposito();
+		return null;
+	}
+	
+	public String retiro(String cuentaOrigen) {
+		this.cuentaOrigen = cuentaOrigen;
+		guardarRetiro();
 		return null;
 	}
 	

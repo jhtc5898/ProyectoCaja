@@ -4,14 +4,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blank.xhtml"> 
       
+<ui:define name="user"><h:commandLink action="#{loginBean.cerrarSesion()}" value="#{loginBean.nameUser.toLowerCase()}" /></ui:define>
+<ui:define name="nombreAdmin">#{loginBean.nameUser.toUpperCase()}</ui:define>  
+      
 <ui:define name="titulo">Coopexpress RETIRO</ui:define>
-
 <ui:define name="descripcion">Retiro de dinero de tu cuenta Coopexpress</ui:define>
-
 <ui:define name="indicaciones">
 	<p>Cuenta.- Ingresar el numero de cuenta de la que se retirará el dinero</p>
 	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
 </ui:define>
+
 
 <ui:define name="contenido">
 <!-- Horizontal Form -->
@@ -25,7 +27,7 @@
                 <div class="card-body">
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{gestionTransaccionesBean.cuentaOrigen}" />
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.nameUser}" readonly="true" />
                   </div>
                   <div class="col-3">
            	        <label class="col-form-label">Monto a retirar</label>
@@ -41,7 +43,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.guardarRetiro()}" />
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.retiro(loginBean.nameUser)}" />
                 </div>
               </h:form>
             </div>

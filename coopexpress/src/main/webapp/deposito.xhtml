@@ -4,10 +4,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blank.xhtml"> 
       
+<ui:define name="user"><h:commandLink action="#{loginBean.cerrarSesion()}" value="#{loginBean.nameUser.toLowerCase()}" /></ui:define>
+<ui:define name="nombreAdmin">#{loginBean.nameUser.toUpperCase()}</ui:define>  
+      
 <ui:define name="titulo">Coopexpress DEPOSITO</ui:define>
-
 <ui:define name="descripcion">Deposita dinero en una cuenta de los socios de Coopexpress</ui:define>
-
 <ui:define name="indicaciones">
 	<p>Cuenta destino.- Ingresar el numero de cuenta en la que se depositará el dinero</p>
 	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
@@ -26,7 +27,7 @@
                 <div class="card-body">
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{gestionTransaccionesBean.cuentaOrigen}" />
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.nameUser}" readonly = "true"/>
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
@@ -46,7 +47,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.guardarDeposito()}" />
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.deposito(loginBean.nameUser)}" />
                 </div>
               </h:form>
             </div>
