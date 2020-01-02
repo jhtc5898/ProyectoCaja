@@ -48,21 +48,51 @@
 						</h:column>
 
 						<h:column>
+							<h:outputLabel for="Fecha" value="Fecha" />
+							<h:inputText value="#{usuario.fecha_nacimiento}" />
+							<f:facet name="header">Fecha Nacimiento</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Nivel" value="Nivel" />
+							<h:inputText value="#{usuario.educacion}" />
+							<f:facet name="header">Nivel Educacion</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Estado" value="Estado" />
+							<h:inputText value="#{usuario.estado}" />
+							<f:facet name="header">Estado Civil</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Genero" value="Genero" />
+							<h:inputText value="#{usuario.genero}" />
+							<f:facet name="header">Genero</f:facet>
+						</h:column>
+
+						<h:column>
 							<h:outputLabel for="Telefono" value="Telefono" />
 							<h:inputText value="#{usuario.telefono}" />
 							<f:facet name="header">Telefono</f:facet>
 						</h:column>
 
 						<h:column>
-							<h:outputLabel for="Direccion" value="Direccion" />
-							<h:inputText value="#{usuario.direccion}" />
-							<f:facet name="header">Direccion</f:facet>
+							<h:outputLabel for="Ciudad" value="Ciudad" />
+							<h:inputText value="#{usuario.ciudad}" />
+							<f:facet name="header">Ciudad</f:facet>
 						</h:column>
 
 						<h:column>
-							<h:outputLabel for="Correo" value="Correo" />
-							<h:inputText value="#{usuario.correo}" />
-							<f:facet name="header">Correo</f:facet>
+							<h:outputLabel for="Principal" value="Principal" />
+							<h:inputText value="#{usuario.principal}" />
+							<f:facet name="header">Calle Principal</f:facet>
+						</h:column>
+
+						<h:column>
+							<h:outputLabel for="Secundaria" value="Secundaria" />
+							<h:inputText value="#{usuario.secundaria}" />
+							<f:facet name="header">Calle Secundaria</f:facet>
 						</h:column>
 					</h:dataTable>
 					<p>Si desea guardar la informacion modificada presione</p>
@@ -73,8 +103,8 @@
 					<h:commandButton action="listarusuarios" value="Lista"
 						styleClass="btn btn-info" />
 
-						</h:form>
-					</h:form>
-					</div> 
-</ui:define>					
+				</h:form>
+			</h:form>
+		</div>
+	</ui:define>
 </ui:composition>
