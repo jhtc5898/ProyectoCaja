@@ -35,6 +35,8 @@ public class GestionCuentasBean implements Serializable{
 	
 	private String eliminarNumero;
 	
+	private String numeroCuenta2;
+	
 	public String guardar() {
 		gc.guardar(cuenta);
 		//cuentas=gc.getCuentas();
@@ -49,18 +51,34 @@ public class GestionCuentasBean implements Serializable{
 		cuenta.setTipo_cuenta(new Tipo_Cuenta());
 		cuentas=gc.getCuentas();
 		
-		
 		eliminarNumero=String.valueOf(0);
+		numeroCuenta2=String.valueOf(0);
 	}
 	
 	public void buscar() {
 		cuenta=gc.obtenerCuentaNumero(eliminarNumero);
-		this.eliminar();
+		//this.eliminar();
 		this.init();
 	}
 	
-	public String eliminar() {
-		gc.eliminar(this.cuenta.getCodigo_cuenta());
+	public void buscarCuenta(){
+		cuenta=gc.obtenerCuentaNumero(numeroCuenta2);
+	}
+	
+	public String cuentaActualizar(Cuenta cuenta) {
+		this.cuenta=cuenta;
+		return "actualizar-cuenta";
+	}
+	
+	public String actualizar(Cuenta cuenta) {
+		gc.actualizar(cuenta);
+		this.init();
+		return "listar-cuentas";
+	}
+	
+	public String eliminar(int codigo) {
+//		int cod=Integer.parseInt(codigo);
+		gc.eliminar(codigo);
 		this.init();
 		return null;
 	}
@@ -82,8 +100,7 @@ public class GestionCuentasBean implements Serializable{
 		return gc.nombreTipoCuenta(this.cuenta.getTipo_cuenta().getCodigo_tipo_cuenta());
 	}
 	
-	
-//	
+//	oo
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
@@ -93,6 +110,7 @@ public class GestionCuentasBean implements Serializable{
 	}
 
 	public List<Cuenta> getCuentas() {
+		this.init();
 		return cuentas;
 	}
 
@@ -149,6 +167,14 @@ public class GestionCuentasBean implements Serializable{
 
 	public void setCodigoTipoCuenta(int codigoTipoCuenta) {
 		this.codigoTipoCuenta = codigoTipoCuenta;
+	}
+
+	public String getNumeroCuenta2() {
+		return numeroCuenta2;
+	}
+
+	public void setNumeroCuenta2(String numeroCuenta2) {
+		this.numeroCuenta2 = numeroCuenta2;
 	}
 
 	
