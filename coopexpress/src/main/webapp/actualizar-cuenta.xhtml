@@ -1,34 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blank.xhtml"> 
+      
+<ui:define name="titulo">Actualizar tipo de transaccion</ui:define>
 
-<h:head></h:head> 
-<body> 
+<ui:define name="descripcion">Actualizar la informacion de un tipo de transacción ya existente</ui:define>
 
-<h1>Actualizar Cuenta</h1>
-	<h3>Busqueda por Numero de Cuenta</h3>
-	<h:form>
-		Numero Cuenta: <h:inputText value="#{actualizarCuenta.numeroCuenta}" />
-		<h:commandButton  value="Buscar Cuenta" action="#{actualizarCuenta.buscar()}" />
-		
-		<h:panelGrid columns="3" value="#{actualizarCuenta.cuentas}" var="cuenta">
-			<h:column>
-					<h:outputLabel for="numeroCuenta" value="Numero Cuenta" />	
-					##{cuenta.codigo_cuenta} 
-					<f:facet name="header">Numero Cuenta</f:facet>
-			</h:column>
-			
-			
-			<h:commandButton action="#{actualizarCuenta.actualizar()}" value="Actulizar Datos" />
-			<h:commandButton action="#{actualizarCuenta.eliminar()}" value="Eliminar Cuenta" />
-			
-		</h:panelGrid>
-		<h:commandButton action="crear-cuenta" value="Crear Nueva Cuenta" />
-		<h:commandButton action="listar-cuentas" value="Listado Cuentas" />
+<ui:define name="indicaciones">
+	<p>1.- <b>Buscar</b> el numero de cuenta</p>
+	<p>2.- Modificar los datos cargados en la sección <b>Actualizar</b></p>
+</ui:define>
 
-	</h:form>
+<ui:define name="contenido">
+<div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Busqueda</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form>
+              	<div class="card-body">
+                    <label class="col-form-label">Numero de Cuenta: </label>
+                  	<h:inputText value="#{gestionCuentasBean.numeroCuenta2}" />
+                </div>  
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton action="#{gestionCuentasBean.buscarCuenta()}" styleClass="btn btn-info" value="Buscar" />
+                </div>
+                
+               	<hr />
+               	
+              	<div class="card card-success">
+              		<div class="card-header">
+                		<h3 class="card-title">Actualizar</h3>
+              		</div>
+              	</div>
+              	<div class="card-body">
+                   <h:dataTable value="#{gestionCuentasBean.cuenta}" var="cuenta" styleClass="table table-bordered">
+					<h:column>
+						<label class="col-form-label">Numero Cuenta </label>
+						<h:inputText value="#{cuenta.numero_cuenta}" styleClass="form-control" readonly = "true"/>
+					</h:column>
+					<h:column>
+					
+						<label class="col-form-label">Saldo  </label>
+						<div class="input-group-prepend">
+                    		<span class="input-group-text">
+                      		<i class="fas fa-dollar-sign"></i>
+                    		</span>
+                    		<h:inputText value="#{cuenta.saldo_cuenta}" styleClass="form-control" readonly = "true"/>
+                  		</div>
+						
+					</h:column>
+					<h:column>
+						<label class="col-form-label">Correo  </label>
+						<h:inputText value="#{cuenta.correo_cuenta}" styleClass="form-control"/>
+					</h:column>
+					<h:column>
+						<label class="col-form-label">Modificar Contraseña  </label>
+						<h:inputText value="#{cuenta.pswd_cuenta}" type="password" styleClass="form-control" />
+					</h:column>
+					
+					<h:column>
+						<h:commandButton action="#{gestionCuentasBean.actualizar(cuenta)}" value="Actualizar" styleClass="btn btn-info" />
+					</h:column>
+				</h:dataTable>
+                </div>  
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  		
+                 </div>
+              	
+              </h:form>
+            </div>
+            <!-- /.card -->
+</ui:define>
+</ui:composition>
 
-</body> 
-</html>
+
