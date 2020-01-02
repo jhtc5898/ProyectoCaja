@@ -21,20 +21,20 @@
               	</div>
               	<h:form>
               	<div class="card-body">
-                   <h:dataTable value="#{gestionTipoTransaccionesBean.tipoTransaccion}" var="tipoTransaccion" styleClass="table table-bordered">
+                   <h:dataTable value="#{gestionTipoCuentasBean.tipo_cuenta}" var="tipoCuenta" styleClass="table table-bordered">
 					<h:column>
 						<label class="col-form-label">Nombre </label>
-						<h:inputText value="#{tipoTransaccion.nombre_tipo_transaccion}" styleClass="form-control"/>
+						<h:inputText value="#{tipoCuenta.nombre_tipo_cuenta}" styleClass="form-control"/>
 					</h:column>
 					<h:column>
 						<label class="col-form-label">Descripción </label>
-						<h:inputText value="#{tipoTransaccion.descripcion_tipo_transaccion}" styleClass="form-control" />
+						<h:inputText value="#{tipoCuenta.descripcion_tipo_cuenta}" styleClass="form-control" />
 					</h:column>
 				</h:dataTable>
                 </div>  
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  		<h:commandButton action="#{gestionTipoTransaccionesBean.actualizarTipoTransaccion()}" styleClass="btn btn-success" value="Actualizar" />
+                  		<h:commandButton action="#{gestionTipoCuentasBean.actualizarTipoTransaccion()}" styleClass="btn btn-success" value="Actualizar" />
                 </div>
                 </h:form>
             </div>

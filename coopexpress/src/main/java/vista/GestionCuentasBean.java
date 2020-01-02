@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import modelo.Cuenta;
 import modelo.Tipo_Cuenta;
+import modelo.Tipo_Transaccion;
 import modelo.Usuario;
 import negocio.GestionCuentas;
 
@@ -55,6 +56,13 @@ public class GestionCuentasBean implements Serializable{
 		numeroCuenta2=String.valueOf(0);
 	}
 	
+	public String actualizarCuenta() {
+		gc.actualizar(cuenta);
+		cuentas = gc.getCuentas();
+		init();
+		return "listar-cuentas";
+	}
+
 	public void buscar() {
 		cuenta=gc.obtenerCuentaNumero(eliminarNumero);
 		//this.eliminar();
@@ -69,13 +77,7 @@ public class GestionCuentasBean implements Serializable{
 		this.cuenta=cuenta;
 		return "actualizar-cuenta";
 	}
-	
-	public String actualizar(Cuenta cuenta) {
-		gc.actualizar(cuenta);
-		this.init();
-		return "listar-cuentas";
-	}
-	
+		
 	public String eliminar(int codigo) {
 //		int cod=Integer.parseInt(codigo);
 		gc.eliminar(codigo);
