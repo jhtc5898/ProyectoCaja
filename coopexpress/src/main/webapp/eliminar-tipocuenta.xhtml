@@ -7,12 +7,22 @@
  <ui:define name="titulo">Eliminar Tipo De Cuenta</ui:define>
 <ui:define name="contenido">
 	<h:form>
-		<h:panelGrid columns="3">	
-			<h:outputLabel for="txtNumeroTipoCuenta" value="Codigo De Tipo Cuenta A Eliminar" />
-			<h:inputText id="txtNumeroTipoCuenta" value="#{gestionTipoCuentasBean.tipo_cuenta.codigo_tipo_cuenta}" />
+	
+	<div class="card-body">
+	
+	<div class="form-group">
+	 <label class="col-form-label">Codigo De Tipo Cuenta A Eliminar.</label>
+			<h:inputText id="txtNumeroTipoCuenta" styleClass="form-control" value="#{gestionTipoCuentasBean.tipo_cuenta.codigo_tipo_cuenta}" />
 			<h:message for="txtNumeroTipoCuenta"/>
-		</h:panelGrid>
-		<h:commandButton  value="Eliminar Tipo Cuenta " action="#{gestionTipoCuentasBean.eliminarTipoCuenta()}" />
+	</div>
+	<div class="form-group">
+	<h:commandButton  value="Eliminar Tipo Cuenta "  styleClass="btn btn-info" action="#{gestionTipoCuentasBean.eliminarTipoCuenta()}" />
+	
+	</div>
+	
+	
+	</div>
+		
 	</h:form>
 </ui:define>
 </ui:composition>

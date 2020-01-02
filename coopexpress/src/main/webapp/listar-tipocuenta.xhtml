@@ -7,26 +7,32 @@
 <ui:define name="titulo">Listar Tipo De Cuentas</ui:define>
 <ui:define name="contenido">
 <h:form>
-	<h:panelGrid columns="3">
-	<h:dataTable value="#{gestionTipoCuentasBean.tipocuentalist}" var="tipo_cuenta">
+
+	<h:dataTable value="#{gestionTipoCuentasBean.tipocuentalist}" var="tipo_cuenta"  styleClass="table table-bordered">
 		<h:column>
-			<f:facet name="header">|Codigo|</f:facet>
+			<f:facet name="header">Codigo</f:facet>
 			#{tipo_cuenta.codigo_tipo_cuenta}
 		</h:column>
 		
 		<h:column>
-			<f:facet name="header">|Nombre Tipo Cuenta|</f:facet>
+			<f:facet name="header">Nombre Tipo Cuenta</f:facet>
 			#{tipo_cuenta.nombre_tipo_cuenta}
 		</h:column>
 		
 		<h:column>
-			<f:facet name="header">|Descripcion|</f:facet>
+			<f:facet name="header">Descripcion</f:facet>
 			#{tipo_cuenta.descripcion_tipo_cuenta}
 		</h:column>
 </h:dataTable>	
-<h:commandButton action="crear-tipocuenta"  value="Regresar"/>
-<h:commandButton action="eliminar-tipocuenta"  value="Eliminar Un Tipo Cuenta"/>
-</h:panelGrid>
+ <div class="card card-info">
+ <h:commandButton action="crear-tipocuenta"  value="Regresar" styleClass="btn btn-info" />
+
+ </div>
+ 
+  <div class="card card-info">
+ <h:commandButton action="eliminar-tipocuenta"  value="Eliminar Un Tipo Cuenta" styleClass="btn btn-info" />
+ 
+ </div>
 	</h:form>
 </ui:define>
 </ui:composition>
