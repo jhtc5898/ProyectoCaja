@@ -32,12 +32,12 @@ public class TipoTransaccionDAO {
 	}
 	
 	public List<Tipo_Transaccion> getTipoTransacciones(){
-		String jpql = "SELECT t FROM TipoTransaccion t";
+		String jpql = "SELECT t FROM Tipo_Transaccion t";
 		return em.createQuery(jpql,Tipo_Transaccion.class).getResultList();
 	}
 	
 	public Tipo_Transaccion getTipoTransaccionNombre(String nombre){
-		String jpql = "SELECT t FROM TipoTransaccion t WHERE nombre_tipo_transaccion LIKE ?1";
+		String jpql = "SELECT t FROM Tipo_Transaccion t WHERE nombre_tipo_transaccion LIKE ?1";
 		Query q = em.createQuery(jpql, Tipo_Transaccion.class);
 		q.setParameter(1, "%" + nombre + "%");
 		Tipo_Transaccion tipoTransaccion = (Tipo_Transaccion) q.getSingleResult();

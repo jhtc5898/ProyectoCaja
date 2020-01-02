@@ -20,7 +20,8 @@ public class TransaccionDAO {
 	public boolean insertarTransaccionDeposito(Transaccion transaccion, String cuentaOrigen, String cuentaDestino, int tipoTransaccion) {
 		Cuenta ctaOrigen = getCuenta(cuentaOrigen);
 		transaccion.setCuenta_origen_transaccion(ctaOrigen);
-		transaccion.setCuenta_destino_transaccion(ctaOrigen);
+		Cuenta ctaDestino = getCuenta(cuentaDestino);
+		transaccion.setCuenta_destino_transaccion(ctaDestino);
 		Tipo_Transaccion tipo_transaccion = getTipoTransaccion(tipoTransaccion);
 		transaccion.setTipo_transaccion(tipo_transaccion);
 		long millis=System.currentTimeMillis();  
@@ -34,8 +35,7 @@ public class TransaccionDAO {
 	public boolean insertarTransaccionRetiro(Transaccion transaccion, String cuentaOrigen, String cuentaDestino, int tipoTransaccion) {
 		Cuenta ctaOrigen = getCuenta(cuentaOrigen);
 		transaccion.setCuenta_origen_transaccion(ctaOrigen);
-		Cuenta ctaDestino = getCuenta(cuentaDestino);
-		transaccion.setCuenta_destino_transaccion(ctaDestino);
+		transaccion.setCuenta_destino_transaccion(ctaOrigen);
 		Tipo_Transaccion tipo_transaccion = getTipoTransaccion(tipoTransaccion);
 		transaccion.setTipo_transaccion(tipo_transaccion);
 		long millis=System.currentTimeMillis();  
@@ -82,7 +82,7 @@ public class TransaccionDAO {
 	}
 	
 	public Tipo_Transaccion getTipoTransaccion(int tipoTransaccion) {
-		String jpql = "SELECT t FROM TipoTransaccion t WHERE codigo_tipo_transaccion = ?1";
+		String jpql = "SELECT t FROM Tipo_Transaccion t WHERE codigo_tipo_transaccion = ?1";
 		Query q = em.createQuery(jpql, Tipo_Transaccion.class);
 		q.setParameter(1, tipoTransaccion);
 		Tipo_Transaccion tipo_transaccion = (Tipo_Transaccion) q.getSingleResult();
