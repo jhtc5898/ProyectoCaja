@@ -59,20 +59,24 @@
 					<f:facet name="header">Calle Secundaria</f:facet>
 				#{usuario.secundaria}
 			</h:column>
+
+				<h:column>
+					<!-- <p>Si desea regresar a la pagina de crear usuario aplaste</p> -->
+
+					<!--<p>Si desea eliminar un usuario aplaste</p>-->
+					<h:commandButton action="eliminarusuario" styleClass="btn btn-info"
+						value="Eliminar" />
+					<!--<p>Si desea buscar un usuario mediante su cedula presione</p>-->
+
+					<!--<p>Si desea modificar la informacion de un Usuario presione</p>-->
+					<h:commandButton action="actualizarusuario"
+						styleClass="btn btn-info" value="Actualizar" />
+				</h:column>
 			</h:dataTable>
-			<p>Si desea regresar a la pagina de crear usuario aplaste</p>
-			<h:commandButton action="guardarusuario" styleClass="btn btn-info"
-				value="Regresar" />
-			<p>Si desea eliminar un usuario aplaste</p>
-			<h:commandButton action="eliminarusuario" styleClass="btn btn-info"
-				value="Eliminar" />
-			<p>Si desea buscar un usuario mediante su cedula presione</p>
 			<h:commandButton action="buscarusuario" styleClass="btn btn-info"
 				value="Buscar" />
-			<p>Si desea modificar la informacion de un Usuario presione</p>
-			<h:commandButton action="actualizarusuario" styleClass="btn btn-info"
-				value="Actualizar" />
-
+			<h:commandButton action="guardarusuario" styleClass="btn btn-info"
+				value="Regresar" />
 		</h:form>
 	</ui:define>
 </ui:composition>
