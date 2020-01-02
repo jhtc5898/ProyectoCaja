@@ -20,14 +20,11 @@ public class GestionTipoTransaccionesBean {
 	private List<Tipo_Transaccion> tipoTransaccionList;
 	
 	private Tipo_Transaccion tipoTransaccion = new Tipo_Transaccion();
-	
-	private String nombre;
-	
+		
 	@PostConstruct
 	public void init() {
 		tipoTransaccion = new Tipo_Transaccion();
 		tipoTransaccionList=gtt.getTipoTransacciones();
-		nombre= null;
 	}
 
 	public String guardarTipoTransaccion() {
@@ -37,8 +34,8 @@ public class GestionTipoTransaccionesBean {
 		return "lista-tipo-transaccion";
 	}
 	
-	public String eliminarTipoTransaccion() {
-		gtt.elimnarTipoTransaccion(tipoTransaccion.getCodigo_tipo_transaccion());
+	public String eliminarTipoTransaccion(int codigo) {
+		gtt.elimnarTipoTransaccion(codigo);
 		return "lista-tipo-transaccion";
 	}
 	
@@ -48,13 +45,8 @@ public class GestionTipoTransaccionesBean {
 		init();
 		return "lista-tipo-transaccion";
 	}
-	
-	public String buscarNombre() {
-		tipoTransaccion = gtt.getTipoTransaccionNombre(nombre);
-		return null;
-	}
 
-	public String cargarEditar(Tipo_Transaccion tipoTransaccion) {
+	public String actualizar(Tipo_Transaccion tipoTransaccion) {
 		this.tipoTransaccion=tipoTransaccion;
 		return "actualizar-tipo-transaccion";
 	}
@@ -76,12 +68,5 @@ public class GestionTipoTransaccionesBean {
 	public void setTipoTransaccion(Tipo_Transaccion tipoTransaccion) {
 		this.tipoTransaccion = tipoTransaccion;
 	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+
 }

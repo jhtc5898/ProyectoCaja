@@ -61,14 +61,8 @@
 			</h:column>
 
 				<h:column>
-					<!-- <p>Si desea regresar a la pagina de crear usuario aplaste</p> -->
-
-					<!--<p>Si desea eliminar un usuario aplaste</p>-->
-					<h:commandButton action="#{gestionUsuariosBean.eliminarUsuarioCedula(usuario.cedula)}" styleClass="btn btn-info"
+					<h:commandButton action="#{gestionUsuariosBean.eliminarUsuarioCedula(usuario.cedula)}" styleClass="btn btn-danger"
 						value="Eliminar" />
-					<!--<p>Si desea buscar un usuario mediante su cedula presione</p>-->
-
-					<!--<p>Si desea modificar la informacion de un Usuario presione</p>-->
 					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario)}"
 						styleClass="btn btn-info" value="Actualizar" />
 				</h:column>

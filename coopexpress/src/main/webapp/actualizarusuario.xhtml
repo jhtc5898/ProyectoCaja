@@ -28,83 +28,74 @@
 					</div>
 				</div>
 				<h:form>
-					<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario">
-						<h:column>
-							<h:outputLabel for="Cedula" value="Cedula" />
-							<h:inputText value="#{usuario.cedula}" />
-							<f:facet name="header">Cedula</f:facet>
-						</h:column>
+					<div class="form-group">
+						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							<h:column>
+								<h:inputText value="#{usuario.cedula}" />
+								<f:facet name="header">Cedula</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Nombre" value="Nombre" />
-							<h:inputText value="#{usuario.nombre}" />
-							<f:facet name="header">Nombre</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.nombre}" />
+								<f:facet name="header">Nombre</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Apellido" value="Apellido" />
-							<h:inputText value="#{usuario.apellido}" />
-							<f:facet name="header">Apellido</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.apellido}" />
+								<f:facet name="header">Apellido</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Fecha" value="Fecha" />
-							<h:inputText value="#{usuario.fecha_nacimiento}" >
-							<f:convertDateTime pattern="yyyy-MM-dd" />
-							</h:inputText>
-							<f:facet name="header">Fecha Nacimiento</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.fecha_nacimiento}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:inputText>
+								<f:facet name="header">Fecha Nacimiento</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Nivel" value="Nivel" />
-							<h:inputText value="#{usuario.educacion}" />
-							<f:facet name="header">Nivel Educacion</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.educacion}" />
+								<f:facet name="header">Nivel Educacion</f:facet>
+							</h:column>
+							</h:dataTable>
+	<div class="row">
+	<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							<h:column>
+								<h:inputText value="#{usuario.estado}" />
+								<f:facet name="header">Estado Civil</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Estado" value="Estado" />
-							<h:inputText value="#{usuario.estado}" />
-							<f:facet name="header">Estado Civil</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.genero}" />
+								<f:facet name="header">Genero</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Genero" value="Genero" />
-							<h:inputText value="#{usuario.genero}" />
-							<f:facet name="header">Genero</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.telefono}" />
+								<f:facet name="header">Telefono</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Telefono" value="Telefono" />
-							<h:inputText value="#{usuario.telefono}" />
-							<f:facet name="header">Telefono</f:facet>
-						</h:column>
+							<h:column>
+								<h:inputText value="#{usuario.ciudad}" />
+								<f:facet name="header">Ciudad</f:facet>
+							</h:column>
 
-						<h:column>
-							<h:outputLabel for="Ciudad" value="Ciudad" />
-							<h:inputText value="#{usuario.ciudad}" />
-							<f:facet name="header">Ciudad</f:facet>
-						</h:column>
-
-						<h:column>
-							<h:outputLabel for="Principal" value="Principal" />
-							<h:inputText value="#{usuario.principal}" />
-							<f:facet name="header">Calle Principal</f:facet>
-						</h:column>
-
-						<h:column>
-							<h:outputLabel for="Secundaria" value="Secundaria" />
-							<h:inputText value="#{usuario.secundaria}" />
-							<f:facet name="header">Calle Secundaria</f:facet>
-						</h:column>
-					</h:dataTable>
-					<p>Si desea guardar la informacion modificada presione</p>
-					<h:commandButton
-						action="#{gestionUsuariosBean.actualizarFinal()}"
+							<h:column>
+								<h:inputText value="#{usuario.principal}" />
+								<f:facet name="header">Calle Principal</f:facet>
+							</h:column>
+								</h:dataTable>
+<div class="row">
+	<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							<h:column>
+								<h:inputText value="#{usuario.secundaria}" />
+								<f:facet name="header">Calle Secundaria</f:facet>
+							</h:column>
+						</h:dataTable>
+						</div>
+					</div>
+					</div>
+					<h:commandButton action="#{gestionUsuariosBean.actualizarFinal()}"
 						styleClass="btn btn-info" value="Actualizar" />
-					<p>Si desea verificar la informacion modificada presione</p>
-					<h:commandButton action="listarusuarios" value="Lista"
-						styleClass="btn btn-info" />
-
 				</h:form>
 			</h:form>
 		</div>

@@ -15,23 +15,8 @@
 
 <ui:define name="contenido">
 <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Busqueda</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <h:form>
-              	<div class="card-body">
-                    <label class="col-form-label">Numero de Cuenta: </label>
-                  	<h:inputText value="#{gestionCuentasBean.numeroCuenta2}" />
-                </div>  
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <h:commandButton action="#{gestionCuentasBean.buscarCuenta()}" styleClass="btn btn-info" value="Buscar" />
-                </div>
-                
-               	<hr />
-               	
               	<div class="card card-success">
               		<div class="card-header">
                 		<h3 class="card-title">Actualizar</h3>
@@ -62,17 +47,12 @@
 						<label class="col-form-label">Modificar Contraseña  </label>
 						<h:inputText value="#{cuenta.pswd_cuenta}" type="password" styleClass="form-control" />
 					</h:column>
-					
-					<h:column>
-						<h:commandButton action="#{gestionCuentasBean.actualizar(cuenta)}" value="Actualizar" styleClass="btn btn-info" />
-					</h:column>
 				</h:dataTable>
                 </div>  
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  		
+                  		<h:commandButton action="#{gestionCuentasBean.actualizarCuenta()}" value="Actualizar" styleClass="btn btn-info" />
                  </div>
-              	
               </h:form>
             </div>
             <!-- /.card -->

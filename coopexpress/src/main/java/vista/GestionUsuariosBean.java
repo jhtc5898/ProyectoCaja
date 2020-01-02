@@ -55,7 +55,7 @@ public class GestionUsuariosBean {
 	public String actualizarFinal() {
 		gu.actualizarUsuario(this.usuario);
 		this.init();
-		return null;
+		return "listarusuarios";
 	}
 	
 	
