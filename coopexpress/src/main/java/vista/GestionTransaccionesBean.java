@@ -1,7 +1,6 @@
 package vista;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,9 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
-import modelo.Tipo_Transaccion;
 import modelo.Transaccion;
-import negocio.GestionTipoTransaccion;
 import negocio.GestionTransaccion;
 
 @ManagedBean
@@ -20,34 +17,26 @@ public class GestionTransaccionesBean {
 
 	@Inject
 	private GestionTransaccion gt;
-	private GestionTipoTransaccion gtt;
 	
 	private List<Transaccion> transaccionList = new ArrayList<Transaccion>();
-	
 	private Transaccion transaccion = new Transaccion();	
+	private String cuentaOrigen;
+	private String cuentaDestino;
 	
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
-		long millis=System.currentTimeMillis();  
-		java.sql.Date fecha=new java.sql.Date(millis);
-		transaccion.setFecha_transaccion(fecha);
 	}
 	
 	public String guardarDeposito() {
-		Tipo_Transaccion deposito = gtt.getTipoTransaccionNombre("Deposito");
-		transaccion.setTipo_transaccion(deposito);
-		gt.guardarTransaccionDeposito(transaccion);
+		gt.guardarTransaccionDeposito(transaccion, cuentaOrigen, cuentaDestino, 1);
 		init();
 		return null;
 	}
 	
 	public String guardarRetiro() {
-		Date fecha = new Date();
-		Tipo_Transaccion deposito = gtt.getTipoTransaccionNombre("Retiro");
-		transaccion.setFecha_transaccion(fecha);
-		transaccion.setTipo_transaccion(deposito);
-		gt.guardarTransaccionRetiro(transaccion);
+		gt.guardarTransaccionRetiro(transaccion, cuentaOrigen, cuentaDestino, 2);
+		init();
 		return null;
 	}
 	
@@ -71,5 +60,21 @@ public class GestionTransaccionesBean {
 
 	public void setTransaccion(Transaccion transaccion) {
 		this.transaccion = transaccion;
+	}
+
+	public String getCuentaOrigen() {
+		return cuentaOrigen;
+	}
+
+	public void setCuentaOrigen(String cuentaOrigen) {
+		this.cuentaOrigen = cuentaOrigen;
+	}
+
+	public String getCuentaDestino() {
+		return cuentaDestino;
+	}
+
+	public void setCuentaDestino(String cuentaDestino) {
+		this.cuentaDestino = cuentaDestino;
 	}
 }

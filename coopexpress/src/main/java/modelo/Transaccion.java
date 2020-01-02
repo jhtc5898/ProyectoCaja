@@ -25,7 +25,7 @@ public class Transaccion {
 	private double monto_transaccion;
 	
 	@Column(name = "fecha_transaccion")
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha_transaccion;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -63,7 +63,7 @@ public class Transaccion {
 	public void setFecha_transaccion(Date fecha_transaccion) {
 		this.fecha_transaccion = fecha_transaccion;
 	}
-
+	
 	public Cuenta getCuenta_origen_transaccion() {
 		return cuenta_origen_transaccion;
 	}
@@ -87,7 +87,7 @@ public class Transaccion {
 	public void setTipo_transaccion(Tipo_Transaccion tipo_transaccion) {
 		this.tipo_transaccion = tipo_transaccion;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Transaccion [codigo_transaccion=" + codigo_transaccion + ", monto_transaccion=" + monto_transaccion
