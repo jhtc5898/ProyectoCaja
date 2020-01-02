@@ -23,16 +23,12 @@
 			<f:facet name="header">Descripcion</f:facet>
 			#{tipo_cuenta.descripcion_tipo_cuenta}
 		</h:column>
-</h:dataTable>	
- <div class="card card-info">
- <h:commandButton action="crear-tipocuenta"  value="Regresar" styleClass="btn btn-info" />
-
- </div>
- 
-  <div class="card card-info">
- <h:commandButton action="eliminar-tipocuenta"  value="Eliminar Un Tipo Cuenta" styleClass="btn btn-info" />
- 
- </div>
+		<h:column>
+				<f:facet name="header">Acciones</f:facet>
+				<h:commandButton action="#{gestionTipoCuentasBean.actualizar(tipo_cuenta)}" styleClass="btn btn-info" value="Actualizar" />
+				<h:commandButton action="#{gestionTipoCuentasBean.eliminarTipoCuenta(tipo_cuenta.codigo_tipo_cuenta)}" styleClass="btn btn-danger" value="Eliminar" />
+		</h:column>
+	</h:dataTable>	
 	</h:form>
 </ui:define>
 </ui:composition>

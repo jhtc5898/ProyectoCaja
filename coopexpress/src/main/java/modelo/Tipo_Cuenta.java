@@ -21,7 +21,6 @@ public class Tipo_Cuenta {
 	private int codigo_tipo_cuenta;
 	
 	@Column(name = "nombre_tipo_cuenta")
-	//@NotEmpty
 	private String nombre_tipo_cuenta;
 	
 	@Column(name = "descripcion_tipo_cuenta")

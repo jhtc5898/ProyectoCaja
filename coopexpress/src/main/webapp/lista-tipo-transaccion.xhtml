@@ -9,8 +9,8 @@
 <ui:define name="descripcion">Lista de los tipos de transacciones almacenadas</ui:define>
 
 <ui:define name="indicaciones">
-	<p>Ingresar el nombre del tipo de transacción a actualizar y presionar el boton <b>Buscar</b></p>
-    <p>La información del tipo de transacción buscada se cargará en la sección <b>Actualizar</b></p>
+	<p>Para modificar un tipo transacción clic en el boton <b>Actualizar</b> ubicado en el tipo de transacción que se desea actualizar</p>
+    <p>Para eliminar un tipo de transaccion clic en el boton <b>Eliminar</b> en la fila del tipo de transacción que se va a eliminar</p>
 </ui:define>
 
 <ui:define name="contenido">
@@ -32,8 +32,8 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Acciones</f:facet>
-				<h:commandButton action="#{gestionTipoTransaccionesBean.cargarEditar(tipoTransaccion)}" styleClass="btn btn-info" value="Editar" />
-				<h:commandButton action="#{gestionMedicoBean.eliminar(_medicos.codigo)}" styleClass="btn btn-danger" value="Eliminar" />
+				<h:commandButton action="#{gestionTipoTransaccionesBean.actualizar(tipoTransaccion)}" styleClass="btn btn-info" value="Actualizar" />
+				<h:commandButton action="#{gestionTipoTransaccionesBean.eliminarTipoTransaccion(tipoTransaccion.codigo_tipo_transaccion)}" styleClass="btn btn-danger" value="Eliminar" />
 			</h:column>
 		</h:dataTable>
 	</h:form>
