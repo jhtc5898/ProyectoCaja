@@ -49,7 +49,9 @@
 
 						<h:column>
 							<h:outputLabel for="Fecha" value="Fecha" />
-							<h:inputText value="#{usuario.fecha_nacimiento}" />
+							<h:inputText value="#{usuario.fecha_nacimiento}" >
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+							</h:inputText>
 							<f:facet name="header">Fecha Nacimiento</f:facet>
 						</h:column>
 
@@ -97,7 +99,7 @@
 					</h:dataTable>
 					<p>Si desea guardar la informacion modificada presione</p>
 					<h:commandButton
-						action="#{gestionUsuariosBean.actualizarUsuario()}"
+						action="#{gestionUsuariosBean.actualizarFinal()}"
 						styleClass="btn btn-info" value="Actualizar" />
 					<p>Si desea verificar la informacion modificada presione</p>
 					<h:commandButton action="listarusuarios" value="Lista"
