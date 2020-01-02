@@ -54,9 +54,14 @@ public class GestionTipoTransaccionesBean {
 		return null;
 	}
 
+	public String cargarEditar(Tipo_Transaccion tipoTransaccion) {
+		this.tipoTransaccion=tipoTransaccion;
+		return "actualizar-tipo-transaccion";
+	}
 	
 	/*Getters and Setters*/
 	public List<Tipo_Transaccion> getTipoTransaccionList() {
+		init();
 		return tipoTransaccionList;
 	}
 

@@ -30,6 +30,11 @@
 				<f:facet name="header">Nombre</f:facet>
 				#{tipoTransaccion.descripcion_tipo_transaccion}
 			</h:column>
+			<h:column>
+				<f:facet name="header">Acciones</f:facet>
+				<h:commandButton action="#{gestionTipoTransaccionesBean.cargarEditar(tipoTransaccion)}" styleClass="btn btn-info" value="Editar" />
+				<h:commandButton action="#{gestionMedicoBean.eliminar(_medicos.codigo)}" styleClass="btn btn-danger" value="Eliminar" />
+			</h:column>
 		</h:dataTable>
 	</h:form>
 </ui:define>
