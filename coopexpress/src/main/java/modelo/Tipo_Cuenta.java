@@ -60,6 +60,41 @@ public class Tipo_Cuenta {
 				+ ", descripcion_tipo_cuenta=" + descripcion_tipo_cuenta + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codigo_tipo_cuenta;
+		result = prime * result + ((descripcion_tipo_cuenta == null) ? 0 : descripcion_tipo_cuenta.hashCode());
+		result = prime * result + ((nombre_tipo_cuenta == null) ? 0 : nombre_tipo_cuenta.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tipo_Cuenta other = (Tipo_Cuenta) obj;
+		if (codigo_tipo_cuenta != other.codigo_tipo_cuenta)
+			return false;
+		if (descripcion_tipo_cuenta == null) {
+			if (other.descripcion_tipo_cuenta != null)
+				return false;
+		} else if (!descripcion_tipo_cuenta.equals(other.descripcion_tipo_cuenta))
+			return false;
+		if (nombre_tipo_cuenta == null) {
+			if (other.nombre_tipo_cuenta != null)
+				return false;
+		} else if (!nombre_tipo_cuenta.equals(other.nombre_tipo_cuenta))
+			return false;
+		return true;
+	}
+	
+
 	
 
 

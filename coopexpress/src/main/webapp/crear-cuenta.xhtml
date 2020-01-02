@@ -17,6 +17,8 @@
 
 <ui:define name="contenido">
 <!-- Horizontal Form -->
+			
+			
             <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Cuenta</h3>
@@ -51,12 +53,16 @@
             		
             		<div class="form-group">
             			<label class="col-form-label">Tipo Cuenta</label>
-            			<h:dataTable value="#{gestionCuentasBean.cuenta.tipo_cuenta}" var="tipo_cuenta">
-							<h:column>
-								<f:facet name="header">Codigo Tipo Cuenta</f:facet>
-								<h:inputText styleClass="form-control" value="#{tipo_cuenta.codigo_tipo_cuenta}" />
-							</h:column>
-						</h:dataTable>
+            			
+            			<h:column>
+							<h:selectOneMenu id="tipo" value="#{gestionCuentasBean.cuenta.tipo_cuenta.codigo_tipo_cuenta}" styleClass="form-control">
+								<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
+								<f:selectItems value="#{gestionCuentasBean.cuentasItem}" />
+				
+							</h:selectOneMenu>
+				
+						</h:column>
+            			
             		</div>
             		
             		 <div class="card-footer">

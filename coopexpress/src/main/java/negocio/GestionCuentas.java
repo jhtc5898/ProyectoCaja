@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import datos.CuentaDAO;
 import modelo.Cuenta;
+import modelo.Tipo_Cuenta;
 
 @Stateless
 public class GestionCuentas {
@@ -37,5 +38,12 @@ public class GestionCuentas {
 		return cuentadDAO.listaEliminar(numeroCuenta);
 	}
 	
+	public List<Tipo_Cuenta> comboBox(){
+		return cuentadDAO.comboBox();
+	}
+	
+	public String nombreTipoCuenta(int codigoTipoCuenta) {
+		return cuentadDAO.nombreTipoCuenta(codigoTipoCuenta);
+	}
 	
 }

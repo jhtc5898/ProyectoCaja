@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import modelo.Cuenta;
+import modelo.Tipo_Cuenta;
 
 @Stateless
 public class CuentaDAO {
@@ -56,6 +57,26 @@ public class CuentaDAO {
 		q.setParameter(1, "%" + numeroCuenta + "%");
 		List<Cuenta> cuentas = q.getResultList();
 		return cuentas;
+	}
+	
+	public List<Tipo_Cuenta> comboBox(){
+		String jpql = "SELECT c FROM Tipo_Cuenta c";
+		Query q = em.createQuery(jpql,Tipo_Cuenta.class);
+		
+		List<Tipo_Cuenta> tc=q.getResultList();
+		
+		return tc;
+	}
+	
+	public String nombreTipoCuenta(int codigoTipoCuenta) {
+		String jpql="SELECT TC.nombre_tipo_cuenta FROM Cuenta C, Tipo_Cuenta TC WHERE C.tipo_cuenta_codigo = TC.codigo_tipo_cuenta and TC.codigo_tipo_cuenta LIKE ?1";
+		Query q = em.createQuery(jpql);
+		
+		q.setParameter(1, "%" +codigoTipoCuenta +"%");
+		
+		String rv=q.getSingleResult().toString();
+		
+		return rv;
 	}
 	
 }
