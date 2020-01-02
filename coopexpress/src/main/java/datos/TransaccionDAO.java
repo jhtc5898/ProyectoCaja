@@ -82,7 +82,7 @@ public class TransaccionDAO {
 	}
 	
 	public Tipo_Transaccion getTipoTransaccion(int tipoTransaccion) {
-		String jpql = "SELECT t FROM Tipo_Transaccion t WHERE codigo_tipo_transaccion = ?1";
+		String jpql = "SELECT t FROM TipoTransaccion t WHERE codigo_tipo_transaccion = ?1";
 		Query q = em.createQuery(jpql, Tipo_Transaccion.class);
 		q.setParameter(1, tipoTransaccion);
 		Tipo_Transaccion tipo_transaccion = (Tipo_Transaccion) q.getSingleResult();

@@ -26,6 +26,7 @@ public class GestionTipoTransaccionesBean {
 	@PostConstruct
 	public void init() {
 		tipoTransaccion = new Tipo_Transaccion();
+		tipoTransaccionList=gtt.getTipoTransacciones();
 		nombre= null;
 	}
 

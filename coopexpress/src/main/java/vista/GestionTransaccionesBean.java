@@ -26,6 +26,8 @@ public class GestionTransaccionesBean {
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
+		cuentaOrigen = "";
+		cuentaDestino = "";
 	}
 	
 	public String guardarDeposito() {

@@ -41,9 +41,6 @@ public class Cuenta {
     @JoinColumn(name="tipo_cuenta_codigo", nullable=false)
 	private Tipo_Cuenta tipo_cuenta;
 	
-	
-	
-	
 	public Tipo_Cuenta getTipo_cuenta() {
 		return tipo_cuenta;
 	}
