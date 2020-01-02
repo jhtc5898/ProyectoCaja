@@ -16,6 +16,7 @@ public class CuentaDAO {
 	@Inject
 	private EntityManager em;
 	
+	
 	public void insert(Cuenta cuenta) {
 		em.persist(cuenta);
 	}
