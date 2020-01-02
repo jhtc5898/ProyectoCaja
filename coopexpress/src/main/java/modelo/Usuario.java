@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Usuario {
@@ -21,18 +24,34 @@ public class Usuario {
 	@Column(name = "apellido_usuario")
 	private String apellido;
 
+	@Column(name = "fecha_nacimiento_usuario")
+	@Temporal(TemporalType.DATE)
+	private Date fecha_nacimiento;
+
+	@Column(name = "nivel_educacion_usuario")
+	private String educacion;
+
+	@Column(name = "estado_civil_usuario")
+	private String estado;
+
+	@Column(name = "genero_usuario")
+	private String genero;
+
 	@Column(name = "telefono_usuario")
 	private String telefono;
 
-	@Column(name = "direccion_usuario")
-	private String direccion;
+	@Column(name = "ciudad_usuario")
+	private String ciudad;
 
-	@Column(name = "usuario_correo")
-	private String correo;
+	@Column(name = "calle_principal_usuario")
+	private String principal;
 
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL)
-    private List<Cuenta> cuentas;
-	
+	@Column(name = "calle_secundaria_usuario")
+	private String secundaria;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Cuenta> cuentas;
+
 	public String getCedula() {
 		return cedula;
 	}
@@ -57,6 +76,38 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
+	public Date getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+
+	public void setFecha_nacimiento(Date fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
+	}
+
+	public String getEducacion() {
+		return educacion;
+	}
+
+	public void setEducacion(String educacion) {
+		this.educacion = educacion;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
@@ -65,26 +116,46 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	public String getDireccion() {
-		return direccion;
+	public String getCiudad() {
+		return ciudad;
 	}
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
-	public String getCorreo() {
-		return correo;
+	public String getPrincipal() {
+		return principal;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
+	public void setPrincipal(String principal) {
+		this.principal = principal;
+	}
+
+	public String getSecundaria() {
+		return secundaria;
+	}
+
+	public void setSecundaria(String secundaria) {
+		this.secundaria = secundaria;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono
-				+ ", direccion=" + direccion + ", correo=" + correo + "]";
+		return "Usuario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fecha_nacimiento="
+				+ fecha_nacimiento + ", educacion=" + educacion + ", estado=" + estado + ", genero=" + genero
+				+ ", telefono=" + telefono + ", ciudad=" + ciudad + ", principal=" + principal + ", secundaria="
+				+ secundaria + ", cuentas=" + cuentas + "]";
 	}
+	
+	
 
 }

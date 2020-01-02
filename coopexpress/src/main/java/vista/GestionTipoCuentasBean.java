@@ -21,6 +21,7 @@ public class GestionTipoCuentasBean {
 
 	@Inject
 	private GestionTipoCuentas gtc;
+	
 	private List<Tipo_Cuenta> tipocuentalist;
 	
 	private Tipo_Cuenta tipo_cuenta = new Tipo_Cuenta();
