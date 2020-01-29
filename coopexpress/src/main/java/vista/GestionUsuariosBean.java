@@ -21,8 +21,13 @@ public class GestionUsuariosBean {
 
 	/* Bean Properties */
 	private Usuario usuario = new Usuario();
-
 	private String cedula;
+	
+	@PostConstruct
+	public void init() {
+		usuario = new Usuario();
+		usuarios = gu.getUsuarios();
+	}
 
 	/* Action Controller */
 	public String guardarUsuario() {
@@ -58,8 +63,6 @@ public class GestionUsuariosBean {
 		return "listarusuarios";
 	}
 	
-	
-
 	public void buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
 	}
@@ -94,9 +97,4 @@ public class GestionUsuariosBean {
 		return cedula;
 	}
 
-	@PostConstruct
-	public void init() {
-		usuario = new Usuario();
-		usuarios = gu.getUsuarios();
-	}
 }

@@ -23,7 +23,6 @@ public class CuentaDAO {
 	
 	public void update(Cuenta cuenta) {
 		em.merge(cuenta);
-		
 	}
 	
 	public void remove(int codigo) {
@@ -37,25 +36,21 @@ public class CuentaDAO {
 	
 	public List<Cuenta> getCuentas(){
 		String jpql = "SELECT c FROM Cuenta c";
-		Query q = em.createQuery(jpql,Cuenta.class);
-		
-		List<Cuenta> cuentas = q.getResultList();
-		return cuentas;
+		return em.createQuery(jpql, Cuenta.class).getResultList();
 	}
 	
 	public Cuenta getCuentaNumero(String numeroCuenta){
-		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta LIKE ?1";
+		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";
 		Query q = em.createQuery(jpql,Cuenta.class);
-		q.setParameter(1, "%" + numeroCuenta + "%");
-		Cuenta c =  (Cuenta) q.getSingleResult();
-		
-		return c;
+		q.setParameter(1, numeroCuenta);
+		Cuenta cuenta =  (Cuenta) q.getSingleResult();
+		return cuenta;
 	}
 	
 	public List<Cuenta> listaEliminar(String numeroCuenta){
-		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta LIKE ?1";
+		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";
 		Query q = em.createQuery(jpql,Cuenta.class);
-		q.setParameter(1, "%" + numeroCuenta + "%");
+		q.setParameter(1, numeroCuenta);
 		List<Cuenta> cuentas = q.getResultList();
 		return cuentas;
 	}
@@ -63,20 +58,15 @@ public class CuentaDAO {
 	public List<Tipo_Cuenta> comboBox(){
 		String jpql = "SELECT c FROM Tipo_Cuenta c";
 		Query q = em.createQuery(jpql,Tipo_Cuenta.class);
-		
 		List<Tipo_Cuenta> tc=q.getResultList();
-		
 		return tc;
 	}
 	
 	public String nombreTipoCuenta(int codigoTipoCuenta) {
 		String jpql="SELECT TC.nombre_tipo_cuenta FROM Cuenta C, Tipo_Cuenta TC WHERE C.tipo_cuenta_codigo = TC.codigo_tipo_cuenta and TC.codigo_tipo_cuenta LIKE ?1";
 		Query q = em.createQuery(jpql);
-		
 		q.setParameter(1, "%" +codigoTipoCuenta +"%");
-		
 		String rv=q.getSingleResult().toString();
-		
 		return rv;
 	}
 	

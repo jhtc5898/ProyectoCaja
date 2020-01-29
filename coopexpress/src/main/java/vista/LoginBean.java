@@ -22,21 +22,21 @@ public class LoginBean {
 	private String email;
 	private String contrasena;
 	private String user;
-	private String nameUser;
-	private String cuenta;
+	private String nombre;
+	private String numeroCuenta;
 	
+	//Inicio de sesion
 	public String iniciarSesion() {
 		
-		Cuenta cuenta = this.validarUsuario();
+		Cuenta cuentaUsuario = this.validarUsuario();
 		
-		if(cuenta != null) {
+		if(cuentaUsuario != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", this.email);
-			this.nameUser=cuenta.getNumero_cuenta();
-			this.cuenta=cuenta.getNumero_cuenta();
+			this.nombre = cuentaUsuario.getUsuario().getNombre()+" "+cuentaUsuario.getUsuario().getApellido();
+			this.numeroCuenta=cuentaUsuario.getNumero_cuenta();
 			return "deposito.xhtml";
 		}
-		
 		return null;
 	}
 	
@@ -47,6 +47,7 @@ public class LoginBean {
 		return "login.xhtml";
 	}
 	
+	//Si se encuentra un usuario
 	public Cuenta validarUsuario() {		
 		List<Cuenta> cuentas = new ArrayList<Cuenta>();
 		cuentas = this.gc.getCuentas();		
@@ -56,6 +57,14 @@ public class LoginBean {
 			}
 		}
 		return null;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getEmail() {
@@ -82,25 +91,19 @@ public class LoginBean {
 		this.user = user;
 	}
 
-	public String getNameUser() {
-		return nameUser;
+	public String getNumeroCuenta() {
+		return numeroCuenta;
 	}
 
-	public void setNameUser(String nameUser) {
-		this.nameUser = nameUser;
-	}
-
-	public String getCuenta() {
-		return cuenta;
-	}
-
-	public void setCuenta(String cuenta) {
-		this.cuenta = cuenta;
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
 	}
 
 	@Override
 	public String toString() {
-		return "LoginBean [nameUser=" + nameUser + "]";
+		return "LoginBean [gc=" + gc + ", email=" + email + ", contrasena=" + contrasena + ", user=" + user
+				+ ", nombre=" + nombre + ", numeroCuenta=" + numeroCuenta + "]";
 	}
+
 	
 }

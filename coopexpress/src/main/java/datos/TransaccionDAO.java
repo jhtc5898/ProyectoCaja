@@ -17,30 +17,19 @@ public class TransaccionDAO {
 	@Inject
 	private EntityManager em;
 	
-	public boolean insertarTransaccionDeposito(Transaccion transaccion, String cuentaOrigen, String cuentaDestino, int tipoTransaccion) {
-		Cuenta ctaOrigen = getCuenta(cuentaOrigen);
-		transaccion.setCuenta_origen_transaccion(ctaOrigen);
-		Cuenta ctaDestino = getCuenta(cuentaDestino);
-		transaccion.setCuenta_destino_transaccion(ctaDestino);
-		Tipo_Transaccion tipo_transaccion = getTipoTransaccion(tipoTransaccion);
-		transaccion.setTipo_transaccion(tipo_transaccion);
-		long millis=System.currentTimeMillis();  
-		java.util.Date fecha=new java.util.Date(millis);
-		transaccion.setFecha_transaccion(fecha);
+	public boolean insertarTransaccionDeposito(Transaccion transaccion) {
+		java.util.Date fecha = new java.util.Date();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		transaccion.setFecha_transaccion(sdf.format(fecha));
 		em.persist(transaccion);
 		
 		return true;
 	}
 	
-	public boolean insertarTransaccionRetiro(Transaccion transaccion, String cuentaOrigen, String cuentaDestino, int tipoTransaccion) {
-		Cuenta ctaOrigen = getCuenta(cuentaOrigen);
-		transaccion.setCuenta_origen_transaccion(ctaOrigen);
-		transaccion.setCuenta_destino_transaccion(ctaOrigen);
-		Tipo_Transaccion tipo_transaccion = getTipoTransaccion(tipoTransaccion);
-		transaccion.setTipo_transaccion(tipo_transaccion);
-		long millis=System.currentTimeMillis();  
-		java.util.Date fecha=new java.util.Date(millis);
-		transaccion.setFecha_transaccion(fecha);
+	public boolean insertarTransaccionRetiro(Transaccion transaccion, Cuenta cuenta, int tipoTransaccion) {
+		java.util.Date fecha = new java.util.Date();
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		transaccion.setFecha_transaccion(sdf.format(fecha));
 		em.persist(transaccion);
 		
 		return true;

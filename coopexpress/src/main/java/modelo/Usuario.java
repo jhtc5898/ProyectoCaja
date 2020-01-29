@@ -49,9 +49,6 @@ public class Usuario {
 	@Column(name = "calle_secundaria_usuario")
 	private String secundaria;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private List<Cuenta> cuentas;
-
 	public String getCedula() {
 		return cedula;
 	}
@@ -140,22 +137,12 @@ public class Usuario {
 		this.secundaria = secundaria;
 	}
 
-	public List<Cuenta> getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(List<Cuenta> cuentas) {
-		this.cuentas = cuentas;
-	}
-
 	@Override
 	public String toString() {
 		return "Usuario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fecha_nacimiento="
 				+ fecha_nacimiento + ", educacion=" + educacion + ", estado=" + estado + ", genero=" + genero
 				+ ", telefono=" + telefono + ", ciudad=" + ciudad + ", principal=" + principal + ", secundaria="
-				+ secundaria + ", cuentas=" + cuentas + "]";
+				+ secundaria + "]";
 	}
-	
-	
 
 }

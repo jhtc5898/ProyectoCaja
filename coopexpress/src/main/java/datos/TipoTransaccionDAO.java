@@ -37,9 +37,9 @@ public class TipoTransaccionDAO {
 	}
 	
 	public Tipo_Transaccion getTipoTransaccionNombre(String nombre){
-		String jpql = "SELECT t FROM Tipo_Transaccion t WHERE nombre_tipo_transaccion LIKE ?1";
+		String jpql = "SELECT t FROM Tipo_Transaccion t WHERE nombre_tipo_transaccion = ?1";
 		Query q = em.createQuery(jpql, Tipo_Transaccion.class);
-		q.setParameter(1, "%" + nombre + "%");
+		q.setParameter(1, nombre);
 		Tipo_Transaccion tipoTransaccion = (Tipo_Transaccion) q.getSingleResult();
 		return tipoTransaccion;
 	}

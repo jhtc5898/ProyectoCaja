@@ -4,10 +4,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blank.xhtml"> 
       
-<ui:define name="user"><h:commandLink action="#{loginBean.cerrarSesion()}" value="#{loginBean.nameUser.toLowerCase()}" /></ui:define>
-<ui:define name="nombreAdmin">#{loginBean.nameUser.toUpperCase()}</ui:define>  
-      
-<ui:define name="titulo">Coopexpress DEPOSITO</ui:define>
+<ui:define name="user"><h:commandLink action="#{loginBean.cerrarSesion()}" value="#{loginBean.nameUser.toLowerCase()}" /></ui:define>      
+<ui:define name="titulo">Coopexpress DEPOSITO </ui:define>
 <ui:define name="descripcion">Deposita dinero en una cuenta de los socios de Coopexpress</ui:define>
 <ui:define name="indicaciones">
 	<p>Cuenta destino.- Ingresar el numero de cuenta en la que se depositará el dinero</p>
@@ -23,15 +21,16 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <h:form>
+              <h:form id="formulario-deposito">
                 <div class="card-body">
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.nameUser}" readonly = "true"/>
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
-                    <h:inputText id="txtCuentaDestino" styleClass="form-control" value="#{gestionTransaccionesBean.cuentaDestino}" />
+                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}" />
+                    <h:message for="txtCuentaDestino" style="color:red" />
                   </div>                	
                   <div class="col-3">
            	        <label class="col-form-label">Monto a depositar</label>
@@ -41,13 +40,14 @@
                       		<i class="fas fa-dollar-sign"></i>
                     		</span>
                   		</div>
-                  		<h:inputText id="txtMonto" styleClass="form-control" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}" />
-                	</div>                    
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}"/>
+                	</div> 
+                	<h:message for="txtMonto" style="color:red" />                    
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.deposito(loginBean.nameUser)}" />
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.deposito(loginBean.numeroCuenta)}" />
                 </div>
               </h:form>
             </div>

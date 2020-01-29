@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
+import modelo.Cuenta;
 import modelo.Transaccion;
 import negocio.GestionTransaccion;
 
@@ -17,45 +18,42 @@ public class GestionTransaccionesBean {
 
 	@Inject
 	private GestionTransaccion gt;
-	
-	@Inject
-	private LoginBean sesion;
-	
+		
 	private List<Transaccion> transaccionList = new ArrayList<Transaccion>();
 	private Transaccion transaccion = new Transaccion();	
-	private String cuentaOrigen;
+	private Cuenta cuenta;
 	private String cuentaDestino;
 	
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
-		cuentaOrigen = " ";
+		cuenta = new Cuenta();
 		cuentaDestino = "";
 	}
 	
 	public String guardarDeposito() {
-		gt.guardarTransaccionDeposito(transaccion, cuentaOrigen, cuentaDestino, 1);
+		gt.guardarTransaccionDeposito(transaccion, cuenta, cuentaDestino);
 		init();
 		return null;
 	}
 	
 	public String deposito(String cuentaOrigen) {
-		this.cuentaOrigen = cuentaOrigen;
+		this.cuenta.setNumero_cuenta(cuentaOrigen);
 		guardarDeposito();
 		return null;
 	}
 	
-	public String retiro(String cuentaOrigen) {
-		this.cuentaOrigen = cuentaOrigen;
-		guardarRetiro();
-		return null;
-	}
-	
-	public String guardarRetiro() {
-		gt.guardarTransaccionRetiro(transaccion, cuentaOrigen, cuentaDestino, 2);
-		init();
-		return null;
-	}
+//	public String retiro(String cuentaOrigen) {
+//		this.cuentaOrigen = cuentaOrigen;
+//		guardarRetiro();
+//		return null;
+//	}
+//	
+//	public String guardarRetiro() {
+//		gt.guardarTransaccionRetiro(transaccion, cuentaOrigen, cuentaDestino, 2);
+//		init();
+//		return null;
+//	}
 	
 	public String getTransacciones() {
 		transaccionList = gt.getTransacciones();
@@ -79,12 +77,12 @@ public class GestionTransaccionesBean {
 		this.transaccion = transaccion;
 	}
 
-	public String getCuentaOrigen() {
-		return cuentaOrigen;
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
 
-	public void setCuentaOrigen(String cuentaOrigen) {
-		this.cuentaOrigen = cuentaOrigen;
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
 	}
 
 	public String getCuentaDestino() {

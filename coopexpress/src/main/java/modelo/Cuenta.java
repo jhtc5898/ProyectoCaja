@@ -9,9 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 public class Cuenta {
 	
@@ -21,7 +18,6 @@ public class Cuenta {
 	private int codigo_cuenta;
 	
 	@Column(name = "numero_cuenta")
-	//@NotEmpty
 	private String numero_cuenta;
 	
 	@Column(name = "saldo_cuenta")
@@ -33,11 +29,11 @@ public class Cuenta {
 	@Column(name = "pswd_cuenta")
 	private String pswd_cuenta;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="usuario_cedula", nullable=false)
 	private Usuario usuario;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="tipo_cuenta_codigo", nullable=false)
 	private Tipo_Cuenta tipo_cuenta;
 	
@@ -73,7 +69,6 @@ public class Cuenta {
 		this.saldo_cuenta = saldo_cuenta;
 	}
 
-	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -81,8 +76,6 @@ public class Cuenta {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
 
 	public String getCorreo_cuenta() {
 		return correo_cuenta;
@@ -106,9 +99,5 @@ public class Cuenta {
 				+ saldo_cuenta + ", correo_cuenta=" + correo_cuenta + ", pswd_cuenta=" + pswd_cuenta + ", usuario="
 				+ usuario + ", tipo_cuenta=" + tipo_cuenta + "]";
 	}
-
-	
-	
-
 
 }
