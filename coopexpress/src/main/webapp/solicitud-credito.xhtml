@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="blank.xhtml"> 
+            
+<ui:define name="titulo">Coopexpress - Solicitud de crédito </ui:define>
+<ui:define name="descripcion">Ingresar una solicitud de credito</ui:define>
+<ui:define name="indicaciones">
+	<p>Cuenta destino.- Ingresar el numero de cuenta en la que se depositará el dinero</p>
+	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
+    <p>Descripción.- Ingresar una descripción sobre el deposito realizado (opcional)</p>
+</ui:define>
+
+<ui:define name="contenido">
+<!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Solicitud de crédito</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form id="formulario-deposito">
+                <div class="card-body">
+                  <h:messages style="color:red" />
+                  <div class="col-3">
+                    <label class="col-form-label">Su número de cuenta</label>
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
+                  </div>
+                  <div class="col-3">
+           	        <label class="col-form-label">Cantidad del crédito</label>
+                  	<div class="input-group">
+                  		<div class="input-group-prepend">
+                    		<span class="input-group-text">
+                      		<i class="fas fa-dollar-sign"></i>
+                    		</span>
+                  		</div>
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" binding="#{messagesBean.componente}" validatorMessage="Ingresar una cantidad entre 100 y 5000$"  requiredMessage="Debe ingresar un valor" value="#{gestionCreditoBean.credito.monto_credito}">
+                  			<f:validateLongRange for="txtMonto" minimum="100" maximum="5000"/>
+                  		</h:inputText>
+                	</div>                     
+                  </div>
+                  <div class="col-3">
+                    <label class="col-form-label">Plazo de pago en meses</label>
+                    <h:inputText id="txtMeses" styleClass="form-control" required="true" requiredMessage="Debe ingresar el numero de meses" value="#{gestionCreditoBean.credito.numero_meses_credito}"/>
+                  </div>
+                  <div class="form-group">
+                  	<label class="col-form-label">Ingresar una descripción sobre la solicitud</label>
+                    <h:inputTextarea id="txtDescripcion" styleClass="form-control" required="true" requiredMessage="Debe ingresar una descripción" value="#{gestionCreditoBean.credito.desripcion_credito}" />
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionCreditoBean.solicitar(loginBean.numeroCuenta)}" />
+                </div>
+              </h:form>
+            </div>
+</ui:define>
+</ui:composition>

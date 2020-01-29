@@ -30,6 +30,7 @@ public class GestionCuentas {
 	public List<Cuenta> getCuentas(){
 		return cuentadDAO.getCuentas();
 	}
+	
 	public Cuenta obtenerCuentaNumero(String numeroCuenta) {
 		return cuentadDAO.getCuentaNumero(numeroCuenta);
 	}

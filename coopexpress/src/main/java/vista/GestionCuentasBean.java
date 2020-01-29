@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import modelo.Cuenta;
 import modelo.Tipo_Cuenta;
-import modelo.Tipo_Transaccion;
 import modelo.Usuario;
 import negocio.GestionCuentas;
 
@@ -20,22 +19,18 @@ import negocio.GestionCuentas;
 @SessionScoped
 public class GestionCuentasBean implements Serializable{
 
+	private static final long serialVersionUID = -8788194274849479867L;
+
 	@Inject
 	private GestionCuentas gc;
 	
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
-	
 	private List<SelectItem> cuentasItem;
-	
 	private List<Cuenta> busqueda;
-	
 	private int numeroCuenta;
-	
 	private int codigoTipoCuenta;
-	
 	private String eliminarNumero;
-	
 	private String numeroCuenta2;
 	
 	public String guardar() {

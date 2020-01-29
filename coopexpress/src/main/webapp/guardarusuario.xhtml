@@ -2,7 +2,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
-	template="blank2.xhtml">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blank.xhtml">
 
 	<ui:define name="titulo">Creacion de un Nuevo Usuario</ui:define>
 
@@ -31,68 +32,75 @@
 			<!-- form start -->
 			<h:form>
 				<div class="card-body">
-					<div class="form-group">
+					<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
 						<h:inputText id="txtCedula" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.cedula}" />
 					</div>
-					<div class="form-group">
+					<div class="col-4">
 						<label class="col-form-label">Nombre de Usuario</label>
 						<h:inputText id="txtNombre" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.nombre}" />
 					</div>
-					<div class="form-group">
+					<div class="col-4">
 						<label class="col-form-label">Apellido de Usuario</label>
 						<h:inputText id="txtApellido" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.apellido}" />
 					</div>
-					<div class="form-group">
-						<label class="col-form-label">Fecha Nacimiento Usuario</label>
-						<h:inputText value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
-    					<f:convertDateTime pattern="yyyy-MM-dd" />
-						</h:inputText>
+					
+					<div class="col-3">
+						<label class="col-form-label">Fecha Nacimiento AAAA/MM/dd</label>
+						 <div class="input-group-prepend">
+                      		<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      		<h:inputText styleClass="form-control" pt:placeholder="AAAA/MM/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
+    							<f:convertDateTime pattern="yyyy-MM-dd" />
+    						</h:inputText>
+                    	</div>
 					</div>
-					<div class="form-group">
+					<div class="col-3">
 						<label class="col-form-label">Nivel Educacion de Usuario</label>
-						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}">
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}" styleClass="form-control">
 							<f:selectItem itemValue="Primario" itemLabel="Primario" />
 							<f:selectItem itemValue="Secundario" itemLabel="Secundario" />
 							<f:selectItem itemValue="Superior" itemLabel="Superior" />
 						</h:selectOneMenu>
 					</div>
-					<div class="form-group">
+					<div class="col-3">
 						<label class="col-form-label">Estado civil Usuario</label>
-						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}">
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}" styleClass="form-control">
 							<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
 							<f:selectItem itemValue="Casado" itemLabel="Casado" />
 							<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
-							<f:selectItem itemValue="Union Libre" itemLabel="UnionLibre" />
+							<f:selectItem itemValue="Union Libre" itemLabel="Union Libre" />
 						</h:selectOneMenu>
 					</div>
-					<div class="form-group">
+					<div class="col-3">
 						<label class="col-form-label">Genero Usuario</label>
-						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}">
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}" styleClass="form-control">
 							<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
 							<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
 							<f:selectItem itemValue="Otro" itemLabel="Otro" />
 						</h:selectOneMenu>
 					</div>
-					<div class="form-group">
+					<div class="col-3">
+						<label class="col-form-label">Ciudad de Usuario</label>
+						<h:selectOneMenu id="txtCiudad" styleClass="form-control" value="#{gestionUsuariosBean.usuario.ciudad}">
+							<f:selectItem itemValue="Cuenca" itemLabel="Cuenca" />
+							<f:selectItem itemValue="Azogues" itemLabel="Azogues" />
+							<f:selectItem itemValue="Loja" itemLabel="Loja" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-3">
 						<label class="col-form-label">Telefono de Usuario</label>
 						<h:inputText id="txtTelefono" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.telefono}" />
 					</div>
-					<div class="form-group">
-						<label class="col-form-label">Ciudad de Usuario</label>
-						<h:inputText id="txtCiudad" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.ciudad}" />
-					</div>
-					<div class="form-group">
+					<div class="col-4">
 						<label class="col-form-label">Calle Principal de Usuario</label>
 						<h:inputText id="txtPrincipal" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.principal}" />
 					</div>
-					<div class="form-group">
+					<div class="col-4">
 						<label class="col-form-label">Calle Secundaria de Usuario</label>
 						<h:inputText id="txtSecundaria" styleClass="form-control"
 							value="#{gestionUsuariosBean.usuario.secundaria}" />
@@ -100,8 +108,7 @@
 				</div>
 				<!-- /.card-body -->
 				<div class="card-footer">
-					<h:commandButton value="Guardar" styleClass="btn btn-info"
-						action="#{gestionUsuariosBean.guardarUsuario()}" />
+					<h:commandButton value="Guardar" styleClass="btn btn-info" action="#{gestionUsuariosBean.guardarUsuario()}" />
 				</div>
 			</h:form>
 		</div>

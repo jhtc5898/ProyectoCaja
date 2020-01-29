@@ -17,9 +17,9 @@ public class GestionTipoTransaccionesBean {
 	@Inject
 	private GestionTipoTransaccion gtt;
 	
+	private Tipo_Transaccion tipoTransaccion = new Tipo_Transaccion();
 	private List<Tipo_Transaccion> tipoTransaccionList;
 	
-	private Tipo_Transaccion tipoTransaccion = new Tipo_Transaccion();
 		
 	@PostConstruct
 	public void init() {

@@ -30,11 +30,7 @@
 				<h:form>
 					<div class="form-group">
 						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							<h:column>
-								<h:inputText value="#{usuario.cedula}" />
-								<f:facet name="header">Cedula</f:facet>
-							</h:column>
-
+							
 							<h:column>
 								<h:inputText value="#{usuario.nombre}" />
 								<f:facet name="header">Nombre</f:facet>
@@ -56,13 +52,16 @@
 								<h:inputText value="#{usuario.educacion}" />
 								<f:facet name="header">Nivel Educacion</f:facet>
 							</h:column>
-							</h:dataTable>
-	<div class="row">
-	<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							
 							<h:column>
 								<h:inputText value="#{usuario.estado}" />
 								<f:facet name="header">Estado Civil</f:facet>
 							</h:column>
+						</h:dataTable>
+					</div>
+					<div class="form-group">
+						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							
 
 							<h:column>
 								<h:inputText value="#{usuario.genero}" />
@@ -83,16 +82,12 @@
 								<h:inputText value="#{usuario.principal}" />
 								<f:facet name="header">Calle Principal</f:facet>
 							</h:column>
-								</h:dataTable>
-<div class="row">
-	<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							
 							<h:column>
 								<h:inputText value="#{usuario.secundaria}" />
 								<f:facet name="header">Calle Secundaria</f:facet>
 							</h:column>
 						</h:dataTable>
-						</div>
-					</div>
 					</div>
 					<h:commandButton action="#{gestionUsuariosBean.actualizarFinal()}"
 						styleClass="btn btn-info" value="Actualizar" />
