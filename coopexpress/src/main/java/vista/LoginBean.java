@@ -22,7 +22,7 @@ public class LoginBean {
 	private String email;
 	private String contrasena;
 	private String user;
-	private String nombre;
+	private String nombreUsuario;
 	private String numeroCuenta;
 	
 	//Inicio de sesion
@@ -33,9 +33,9 @@ public class LoginBean {
 		if(cuentaUsuario != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", this.email);
-			this.nombre = cuentaUsuario.getUsuario().getNombre()+" "+cuentaUsuario.getUsuario().getApellido();
+			this.nombreUsuario = cuentaUsuario.getUsuario().getNombre()+" "+cuentaUsuario.getUsuario().getApellido();
 			this.numeroCuenta=cuentaUsuario.getNumero_cuenta();
-			return "deposito.xhtml";
+			return "home.xhtml";
 		}
 		return null;
 	}
@@ -59,12 +59,12 @@ public class LoginBean {
 		return null;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getNombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreUsuario(String nombre) {
+		this.nombreUsuario = nombre;
 	}
 
 	public String getEmail() {
@@ -102,7 +102,7 @@ public class LoginBean {
 	@Override
 	public String toString() {
 		return "LoginBean [gc=" + gc + ", email=" + email + ", contrasena=" + contrasena + ", user=" + user
-				+ ", nombre=" + nombre + ", numeroCuenta=" + numeroCuenta + "]";
+				+ ", nombre=" + nombreUsuario + ", numeroCuenta=" + numeroCuenta + "]";
 	}
 
 	

@@ -37,23 +37,24 @@ public class GestionTransaccionesBean {
 		return null;
 	}
 	
+	public String guardarRetiro() {
+		gt.guardarTransaccionRetiro(transaccion, cuenta);
+		init();
+		return null;
+	}
+	
+	//Datos desde la página
 	public String deposito(String cuentaOrigen) {
 		this.cuenta.setNumero_cuenta(cuentaOrigen);
 		guardarDeposito();
 		return null;
 	}
 	
-//	public String retiro(String cuentaOrigen) {
-//		this.cuentaOrigen = cuentaOrigen;
-//		guardarRetiro();
-//		return null;
-//	}
-//	
-//	public String guardarRetiro() {
-//		gt.guardarTransaccionRetiro(transaccion, cuentaOrigen, cuentaDestino, 2);
-//		init();
-//		return null;
-//	}
+	public String retiro(String cuentaOrigen) {
+		this.cuenta.setNumero_cuenta(cuentaOrigen);
+		guardarRetiro();
+		return null;
+	}
 	
 	public String getTransacciones() {
 		transaccionList = gt.getTransacciones();

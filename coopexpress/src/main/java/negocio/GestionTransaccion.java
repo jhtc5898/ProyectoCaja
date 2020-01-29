@@ -41,19 +41,24 @@ public class GestionTransaccion {
 				transaccionDest.setDescripcion_transaccion("Deposito realizado desde la cuenta " + cuentaOrigen.getNumero_cuenta());
 				transaccionDest.setCuenta_transaccion(cuentaDestino);
 				transaccionDAO.insertarTransaccionDeposito(transaccionDest);
+				//Retiro de dinero de una cuentaOrigen y deposito en una cuentaDestino
 				transaccionDAO.realizarDeposito(cuentaOrigen.getNumero_cuenta().toString(), ctaDestino, transaccion.getMonto_transaccion());
 			}
 		}
 	}
 	
-	
-	
-	
-//	public void guardarTransaccionRetiro(Transaccion transaccion, String cuentaOrigen, String cuentaDestino, int tipoTransaccion) {
-//		if(transaccionDAO.insertarTransaccionRetiro(transaccion, cuentaOrigen, cuentaDestino, tipoTransaccion)) {
-//			transaccionDAO.realizarRetiro(cuentaOrigen, transaccion.getMonto_transaccion());
-//		}
-//	}
+	public void guardarTransaccionRetiro(Transaccion transaccion, Cuenta cuentaOrigen) {
+		cuentaOrigen =  cuentaDAO.getCuentaNumero(cuentaOrigen.getNumero_cuenta());
+		if(cuentaOrigen.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
+			//Guardar la transaccion
+			transaccion.setTipo_transaccion(tipoTransaccionDAO.read(3));
+			transaccion.setDescripcion_transaccion("Retiro de dinero de la cuenta " + cuentaOrigen.getNumero_cuenta());
+			transaccion.setCuenta_transaccion(cuentaOrigen);
+			transaccionDAO.insertarTransaccionRetiro(transaccion);
+			//Retiro de dinero de la cuenta
+			transaccionDAO.realizarRetiro(cuentaOrigen.getNumero_cuenta(), transaccion.getMonto_transaccion());
+		}
+	}
 	
 	public List<Transaccion> getTransacciones() {
 		return transaccionDAO.getTransacciones();

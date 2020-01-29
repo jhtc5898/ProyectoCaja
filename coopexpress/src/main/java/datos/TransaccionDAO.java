@@ -26,7 +26,7 @@ public class TransaccionDAO {
 		return true;
 	}
 	
-	public boolean insertarTransaccionRetiro(Transaccion transaccion, Cuenta cuenta, int tipoTransaccion) {
+	public boolean insertarTransaccionRetiro(Transaccion transaccion) {
 		java.util.Date fecha = new java.util.Date();
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		transaccion.setFecha_transaccion(sdf.format(fecha));
@@ -79,8 +79,8 @@ public class TransaccionDAO {
 	}
 	
 	public void realizarDeposito(String cuentaOrigen, String cuentaDestino, double monto) {	
-		Query depositar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta + ?1 WHERE numero_cuenta LIKE ?2");
-		Query retirar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta - ?1 WHERE numero_cuenta LIKE ?2");
+		Query depositar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta + ?1 WHERE numero_cuenta = ?2");
+		Query retirar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta - ?1 WHERE numero_cuenta = ?2");
 		depositar.setParameter(1, monto);
 		depositar.setParameter(2, cuentaDestino);
 		retirar.setParameter(1, monto);
@@ -90,7 +90,7 @@ public class TransaccionDAO {
 	}
 	
 	public void realizarRetiro(String cuentaOrigen, double monto) {	
-		Query retirar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta - ?1 WHERE numero_cuenta LIKE ?2");
+		Query retirar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta - ?1 WHERE numero_cuenta = ?2");
 		retirar.setParameter(1, monto);
 		retirar.setParameter(2, cuentaOrigen);
 		retirar.executeUpdate();

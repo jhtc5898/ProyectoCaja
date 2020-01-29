@@ -4,10 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blank.xhtml"> 
       
-<ui:define name="user"><h:commandLink action="#{loginBean.cerrarSesion()}" value="#{loginBean.nameUser.toLowerCase()}" /></ui:define>
-<ui:define name="nombreAdmin">#{loginBean.nameUser.toUpperCase()}</ui:define>  
+<ui:define name="nombreAdmin">#{loginBean.nombreUsuario}</ui:define>  
       
-<ui:define name="titulo">Coopexpress RETIRO</ui:define>
+<ui:define name="titulo">Coopexpress - RETIRO</ui:define>
 <ui:define name="descripcion">Retiro de dinero de tu cuenta Coopexpress</ui:define>
 <ui:define name="indicaciones">
 	<p>Cuenta.- Ingresar el numero de cuenta de la que se retirará el dinero</p>
@@ -27,7 +26,7 @@
                 <div class="card-body">
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.nameUser}" readonly="true" />
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly="true" />
                   </div>
                   <div class="col-3">
            	        <label class="col-form-label">Monto a retirar</label>
@@ -37,13 +36,14 @@
                       		<i class="fas fa-dollar-sign"></i>
                     		</span>
                   		</div>
-                  		<h:inputText id="txtMonto" styleClass="form-control" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}" />
-                	</div>                    
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}" />
+                	</div>   
+                	<h:message for="txtMonto" style="color:red" />                  
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.retiro(loginBean.nameUser)}" />
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.retiro(loginBean.numeroCuenta)}" />
                 </div>
               </h:form>
             </div>
