@@ -2,6 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       template="blank.xhtml"> 
             
 <ui:define name="titulo">Coopexpress - DEPOSITO </ui:define>
@@ -16,19 +17,22 @@
 <!-- Horizontal Form -->
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Deposito</h3>
+                <h3 class="card-title">Depósito</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <h:form id="formulario-deposito">
                 <div class="card-body">
+                  <h:messages style="color:red" />
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
                     <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
-                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}" />
+                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válida" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
+                    	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
+                    </h:inputText>
                     <h:message for="txtCuentaDestino" style="color:red" />
                   </div>                	
                   <div class="col-3">
@@ -39,9 +43,11 @@
                       		<i class="fas fa-dollar-sign"></i>
                     		</span>
                   		</div>
-                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}"/>
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" binding="#{messagesBean.componente}" validatorMessage="Ingresar una cantidad entre 10 y 1000$"  requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}">
+                  			<f:validateLongRange for="txtMonto" minimum="10" maximum="1000"/>
+                  		</h:inputText>
                 	</div> 
-                	<h:message for="txtMonto" style="color:red" />                    
+                	<h:message for="txtMonto" style="color:red"  />                    
                   </div>
                 </div>
                 <!-- /.card-body -->

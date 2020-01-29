@@ -23,7 +23,7 @@ public class GestionTransaccionesBean {
 	private Transaccion transaccion = new Transaccion();	
 	private Cuenta cuenta;
 	private String cuentaDestino;
-	
+		
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();

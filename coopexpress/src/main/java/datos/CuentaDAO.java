@@ -40,11 +40,15 @@ public class CuentaDAO {
 	}
 	
 	public Cuenta getCuentaNumero(String numeroCuenta){
-		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";
-		Query q = em.createQuery(jpql,Cuenta.class);
-		q.setParameter(1, numeroCuenta);
-		Cuenta cuenta =  (Cuenta) q.getSingleResult();
-		return cuenta;
+		try {
+			String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";
+			Query q = em.createQuery(jpql,Cuenta.class);
+			q.setParameter(1, numeroCuenta);
+			Cuenta cuenta =  (Cuenta) q.getSingleResult();
+			return cuenta;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Cuenta> listaEliminar(String numeroCuenta){
