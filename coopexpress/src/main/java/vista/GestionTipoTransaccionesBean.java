@@ -31,19 +31,19 @@ public class GestionTipoTransaccionesBean {
 		gtt.guardarTipoTransaccion(tipoTransaccion);
 		tipoTransaccionList = gtt.getTipoTransacciones();
 		init();
-		return "lista-tipo-transaccion";
+		return "listar-tipo-transaccion";
 	}
 	
 	public String eliminarTipoTransaccion(int codigo) {
 		gtt.elimnarTipoTransaccion(codigo);
-		return "lista-tipo-transaccion";
+		return "listar-tipo-transaccion";
 	}
 	
 	public String actualizarTipoTransaccion() {
 		gtt.actualizarTipoTransaccion(tipoTransaccion);
 		tipoTransaccionList = gtt.getTipoTransacciones();
 		init();
-		return "lista-tipo-transaccion";
+		return "listar-tipo-transaccion";
 	}
 
 	public String actualizar(Tipo_Transaccion tipoTransaccion) {

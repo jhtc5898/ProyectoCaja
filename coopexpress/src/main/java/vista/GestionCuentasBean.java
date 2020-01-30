@@ -54,7 +54,7 @@ public class GestionCuentasBean implements Serializable{
 	
 	public String cuentaActualizar(Cuenta cuenta) {
 		this.cuenta=cuenta;
-		return "/Usuario/actualizar-cuenta";
+		return "actualizar-cuenta";
 	}
 		
 	public String eliminar(int codigo) {
