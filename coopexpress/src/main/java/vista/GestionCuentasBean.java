@@ -27,15 +27,9 @@ public class GestionCuentasBean implements Serializable{
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
 	private List<SelectItem> cuentasItem;
-	private List<Cuenta> busqueda;
-	private int numeroCuenta;
-	private int codigoTipoCuenta;
-	private String eliminarNumero;
-	private String numeroCuenta2;
 	
 	public String guardar() {
 		gc.guardar(cuenta);
-		//cuentas=gc.getCuentas();
 		init();
 		return "listar-cuentas";
 	}
@@ -46,26 +40,16 @@ public class GestionCuentasBean implements Serializable{
 		cuenta.setUsuario(new Usuario());
 		cuenta.setTipo_cuenta(new Tipo_Cuenta());
 		cuentas=gc.getCuentas();
-		
-		eliminarNumero=String.valueOf(0);
-		numeroCuenta2=String.valueOf(0);
 	}
 	
 	public String actualizarCuenta() {
 		gc.actualizar(cuenta);
-		cuentas = gc.getCuentas();
 		init();
 		return "listar-cuentas";
 	}
-
-	public void buscar() {
-		cuenta=gc.obtenerCuentaNumero(eliminarNumero);
-		//this.eliminar();
-		this.init();
-	}
 	
-	public void buscarCuenta(){
-		cuenta=gc.obtenerCuentaNumero(numeroCuenta2);
+	public Cuenta cargarCuenta(String numeroCuenta) {
+		return cuenta= gc.obtenerCuentaNumero(numeroCuenta);
 	}
 	
 	public String cuentaActualizar(Cuenta cuenta) {
@@ -74,7 +58,6 @@ public class GestionCuentasBean implements Serializable{
 	}
 		
 	public String eliminar(int codigo) {
-//		int cod=Integer.parseInt(codigo);
 		gc.eliminar(codigo);
 		this.init();
 		return null;
@@ -82,7 +65,6 @@ public class GestionCuentasBean implements Serializable{
 	
 	public List<SelectItem> getItems(){
 		this.cuentasItem= new ArrayList<SelectItem>();
-		
 		List<Tipo_Cuenta> tc = gc.comboBox();
 		cuentasItem.clear();
 		
@@ -97,7 +79,6 @@ public class GestionCuentasBean implements Serializable{
 		return gc.nombreTipoCuenta(this.cuenta.getTipo_cuenta().getCodigo_tipo_cuenta());
 	}
 	
-//	oo
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
@@ -113,30 +94,6 @@ public class GestionCuentasBean implements Serializable{
 
 	public void setCuentas(List<Cuenta> cuentas) {
 		this.cuentas = cuentas;
-	}
-
-	public int getNumeroCuenta() {
-		return numeroCuenta;
-	}
-
-	public void setNumeroCuenta(int numeroCuenta) {
-		this.numeroCuenta = numeroCuenta;
-	}
-
-	public List<Cuenta> getBusqueda() {
-		return busqueda;
-	}
-
-	public void setBusqueda(List<Cuenta> busqueda) {
-		this.busqueda = busqueda;
-	}
-
-	public String getEliminarNumero() {
-		return eliminarNumero;
-	}
-
-	public void setEliminarNumero(String eliminarNumero) {
-		this.eliminarNumero = eliminarNumero;
 	}
 
 	public List<SelectItem> getCuentasItem() {
@@ -157,23 +114,5 @@ public class GestionCuentasBean implements Serializable{
 	public void setCuentasItem(List<SelectItem> cuentasItem) {
 		this.cuentasItem = cuentasItem;
 	}
-
-	public int getCodigoTipoCuenta() {
-		return codigoTipoCuenta;
-	}
-
-	public void setCodigoTipoCuenta(int codigoTipoCuenta) {
-		this.codigoTipoCuenta = codigoTipoCuenta;
-	}
-
-	public String getNumeroCuenta2() {
-		return numeroCuenta2;
-	}
-
-	public void setNumeroCuenta2(String numeroCuenta2) {
-		this.numeroCuenta2 = numeroCuenta2;
-	}
-
-	
 	
 }

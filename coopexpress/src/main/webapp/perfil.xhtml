@@ -3,13 +3,12 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       template="profile.xhtml"> 
-      
-<ui:define name="titulo">Perfil</ui:define>
 
+<ui:define name="titulo">Perfil</ui:define>
 
 <ui:define name="contenido">
 	<h:form>
-		<h:dataTable value="#{gestionCuentasBean.cuentas.get(loginBean.numeroCuenta-1)}" var="cuenta" styleClass="table table-bordered" >
+		<h:dataTable value="#{gestionCuentasBean.cargarCuenta(loginBean.numeroCuenta)}" var="cuenta" styleClass="table table-bordered" >
 		<h:column >
 			#{cuenta.numero_cuenta}
 			<f:facet name="header">Numero Cuenta</f:facet>
@@ -28,71 +27,65 @@
 		</h:column>
 		
 		<h:column>
-			
 			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar" styleClass="btn btn-primary btn-block"/>
 			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta.codigo_cuenta)}" value="Eliminar Cuenta" styleClass="btn btn-primary btn-block"/>
-
 		</h:column>
 		
 		</h:dataTable> 
-		<h:dataTable value="#{gestionUsuariosBean.usuarios.get(loginBean.numeroCuenta-1)}" var="usuario"
-				styleClass="table table-bordered">
+		<h:dataTable value="#{gestionCuentasBean.cargarCuenta(loginBean.numeroCuenta)}" var="usuario" styleClass="table table-bordered">
 				<h:column>
 					<f:facet name="header">Cedula</f:facet>
-				#{usuario.cedula}
+				#{usuario.usuario.cedula}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Nombre</f:facet>
-				#{usuario.nombre}
+				#{usuario.usuario.nombre}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Apellido</f:facet>
-				#{usuario.apellido}
+				#{usuario.usuario.apellido}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Fecha Nacimiento</f:facet>
-				#{usuario.fecha_nacimiento}
+				#{usuario.usuario.fecha_nacimiento}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Nivel Educacion</f:facet>
-				#{usuario.educacion}
+				#{usuario.usuario.educacion}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Estado Civil</f:facet>
-				#{usuario.estado}
+				#{usuario.usuario.estado}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Genero</f:facet>
-				#{usuario.genero}
+				#{usuario.usuario.genero}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Telefono</f:facet>
-				#{usuario.telefono}
+				#{usuario.usuario.telefono}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Ciudad</f:facet>
-				#{usuario.ciudad}
+				#{usuario.usuario.ciudad}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Calle Principal</f:facet>
-				#{usuario.principal}
+				#{usuario.usuario.principal}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Calle Secundaria</f:facet>
-				#{usuario.secundaria}
+				#{usuario.usuario.secundaria}
 			</h:column>
 
 				<h:column>
-					<h:commandButton action="#{gestionUsuariosBean.eliminarUsuarioCedula(usuario.cedula)}" styleClass="btn btn-danger"
+					<h:commandButton action="#{gestionUsuariosBean.eliminarUsuarioCedula(usuario.usuario.cedula)}" styleClass="btn btn-danger"
 						value="Eliminar" />
-					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario)}"
+					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario.usuario)}"
 						styleClass="btn btn-info" value="Actualizar" />
 				</h:column>
-
 			</h:dataTable>	
 	</h:form>
-	
-
 </ui:define>
 	
 </ui:composition>

@@ -39,7 +39,7 @@ public class AuthorizationFilter implements Filter {
 					|| reqURI.indexOf("crear-usuario.xhtml") >=0)
 				chain.doFilter(request, response);
 			else
-				resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+				resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -47,6 +47,7 @@ public class AuthorizationFilter implements Filter {
 
 	@Override
 	public void destroy() {
+		
 	}
 	
 }
