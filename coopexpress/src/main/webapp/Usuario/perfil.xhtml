@@ -2,7 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      template="profile.xhtml"> 
+      template="profile.xhtml">
 
 <ui:define name="titulo">Perfil</ui:define>
 
@@ -27,7 +27,7 @@
 		</h:column>
 		
 		<h:column>
-			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar" styleClass="btn btn-primary btn-block"/>
+			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar Cuenta" styleClass="btn btn-primary btn-block"/>
 			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta.codigo_cuenta)}" value="Eliminar Cuenta" styleClass="btn btn-primary btn-block"/>
 		</h:column>
 		
@@ -79,10 +79,9 @@
 			</h:column>
 
 				<h:column>
-					<h:commandButton action="#{gestionUsuariosBean.eliminarUsuarioCedula(usuario.usuario.cedula)}" styleClass="btn btn-danger"
-						value="Eliminar" />
+					
 					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario.usuario)}"
-						styleClass="btn btn-info" value="Actualizar" />
+						styleClass="btn btn-primary btn-block" value="Actualizar Persona" />
 				</h:column>
 			</h:dataTable>	
 	</h:form>

@@ -39,7 +39,7 @@ public class GestionUsuariosBean {
 	public String eliminarUsuario() {
 		gu.eliminarUsuario(usuario.getCedula());
 		init();
-		return "listarusuarios";
+		return "/Usuario/listarusuarios";
 	}
 	
 	public String eliminarUsuarioCedula(String cedula) {
@@ -50,7 +50,7 @@ public class GestionUsuariosBean {
 	
 	public String actualizarUsuarioObjeto(Usuario usuario) {
 		this.usuario=usuario;
-		return "actualizarusuario";
+		return "/Usuario/actualizarusuario";
 	}
 	
 	public String actualizarFinal() {

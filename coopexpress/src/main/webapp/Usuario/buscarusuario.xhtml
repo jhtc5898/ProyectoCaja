@@ -1,9 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" template="blank.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html" template="blankUsuarios.xhtml">
 
-	<ui:define name="titulo">Busqueda Usuario</ui:define>
+	<ui:define name="titulo">Busqueda Usuarios Dentro De Usuarios</ui:define>
 
 	<ui:define name="descripcion">Buscar un Usuario</ui:define>
 
@@ -19,14 +19,7 @@
 			<!-- /.card-header -->
 			<!-- form start -->
 			<h:form>
-				<div class="card-body">
-					<div class="form-group">
-						<label class="col-form-label">Cedula de Usuario</label>
-						<h:inputText value="#{busquedaUsuariosBean.cedula}" />
-						<h:commandButton action="#{busquedaUsuariosBean.buscar()}"
-							value="Buscar" />
-					</div>
-				</div>
+				
 				<h:form>
 					<h:dataTable value="#{busquedaUsuariosBean.usuarios}" var="usuario"
 						styleClass="table table-bordered">
