@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      template="blankAdmin.xhtml"> 
+      
+<ui:define name="titulo">Actualizar tipo de transaccion</ui:define>
+
+<ui:define name="descripcion">Actualizar la informacion de un tipo de transacción ya existente</ui:define>
+
+<ui:define name="indicaciones">
+	<p>1.- <b>Buscar</b> el numero de cuenta</p>
+	<p>2.- Modificar los datos cargados en la sección <b>Actualizar</b></p>
+</ui:define>
+
+<ui:define name="contenido">
+<div class="card card-info">
+              <!-- form start -->
+              <h:form>
+              	<div class="card card-success">
+              		<div class="card-header">
+                		<h3 class="card-title">Actualizar</h3>
+              		</div>
+              	</div>
+              	<div class="card-body">
+                   <h:dataTable value="#{gestionCuentasBean.cuenta}" var="cuenta" styleClass="table table-bordered">
+					<h:column>
+						<label class="col-form-label">Numero Cuenta </label>
+						<h:inputText value="#{cuenta.numero_cuenta}" styleClass="form-control" readonly = "true"/>
+					</h:column>
+					<h:column>
+					
+						<label class="col-form-label">Saldo  </label>
+						<div class="input-group-prepend">
+                    		<span class="input-group-text">
+                      		<i class="fas fa-dollar-sign"></i>
+                    		</span>
+                    		<h:inputText value="#{cuenta.saldo_cuenta}" styleClass="form-control" readonly = "true"/>
+                  		</div>
+						
+					</h:column>
+					<h:column>
+						<label class="col-form-label">Correo  </label>
+						<h:inputText value="#{cuenta.correo_cuenta}" styleClass="form-control"/>
+					</h:column>
+					<h:column>
+						<label class="col-form-label">Modificar Contraseña  </label>
+						<h:inputText value="#{cuenta.pswd_cuenta}" type="password" styleClass="form-control" />
+					</h:column>
+				</h:dataTable>
+                </div>  
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  		<h:commandButton action="#{gestionCuentasBean.actualizarCuenta()}" value="Actualizar" styleClass="btn btn-info" />
+                 </div>
+              </h:form>
+            </div>
+            <!-- /.card -->
+</ui:define>
+</ui:composition>
+
+

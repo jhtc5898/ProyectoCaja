@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blankAdmin.xhtml">
+
+	<ui:define name="titulo">Busqueda Usuario</ui:define>
+
+	<ui:define name="descripcion">Buscar un Usuario</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	</ui:define>
+
+	<ui:define name="contenido">
+		<div class="card card-danger">
+			<div class="card-header">
+				<h3 class="card-title">Usuario</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<h:form>
+				<div class="card-body">
+					<div class="form-group">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText value="#{gestionUsuariosBean.cedula}" />
+						<h:commandButton action="#{gestionUsuariosBean.buscar()}"
+							value="Buscar" />
+					</div>
+				</div>
+				<h:form>
+					<div class="form-group">
+						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							
+							<h:column>
+								<h:inputText value="#{usuario.nombre}" />
+								<f:facet name="header">Nombre</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText value="#{usuario.apellido}" />
+								<f:facet name="header">Apellido</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText pt:placeholder="AAAA/MM/dd" value="#{usuario.fecha_nacimiento}" ></h:inputText>
+								<f:facet name="header">Fecha Nacimiento</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText value="#{usuario.educacion}" />
+								<f:facet name="header">Nivel Educacion</f:facet>
+							</h:column>
+							
+							<h:column>
+								<h:inputText value="#{usuario.estado}" />
+								<f:facet name="header">Estado Civil</f:facet>
+							</h:column>
+						</h:dataTable>
+					</div>
+					<div class="form-group">
+						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
+							
+
+							<h:column>
+								<h:inputText value="#{usuario.genero}" />
+								<f:facet name="header">Genero</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText value="#{usuario.telefono}" />
+								<f:facet name="header">Telefono</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText value="#{usuario.ciudad}" />
+								<f:facet name="header">Ciudad</f:facet>
+							</h:column>
+
+							<h:column>
+								<h:inputText value="#{usuario.principal}" />
+								<f:facet name="header">Calle Principal</f:facet>
+							</h:column>
+							
+							<h:column>
+								<h:inputText value="#{usuario.secundaria}" />
+								<f:facet name="header">Calle Secundaria</f:facet>
+							</h:column>
+						</h:dataTable>
+					</div>
+					<h:commandButton action="#{gestionUsuariosBean.actualizarFinal()}"
+						styleClass="btn btn-info" value="Actualizar" />
+				</h:form>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
