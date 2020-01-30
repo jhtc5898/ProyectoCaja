@@ -25,8 +25,7 @@ public class Usuario {
 	private String apellido;
 
 	@Column(name = "fecha_nacimiento_usuario")
-	@Temporal(TemporalType.DATE)
-	private Date fecha_nacimiento;
+	private String fecha_nacimiento;
 
 	@Column(name = "nivel_educacion_usuario")
 	private String educacion;
@@ -73,11 +72,11 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public Date getFecha_nacimiento() {
+	public String getFecha_nacimiento() {
 		return fecha_nacimiento;
 	}
 
-	public void setFecha_nacimiento(Date fecha_nacimiento) {
+	public void setFecha_nacimiento(String fecha_nacimiento) {
 		this.fecha_nacimiento = fecha_nacimiento;
 	}
 

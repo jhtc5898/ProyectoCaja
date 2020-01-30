@@ -32,18 +32,14 @@ public class GestionUsuariosBean {
 	/* Action Controller */
 	public String guardarUsuario() {
 		gu.guardarUsuario(usuario);
-		//usuarios = gu.getUsuarios();
 		init();
-		return "listarusuarios";
-		// return null;
+		return "registro-pendiente";
 	}
 
 	public String eliminarUsuario() {
 		gu.eliminarUsuario(usuario.getCedula());
-		//usuarios = gu.getUsuarios();
 		init();
 		return "listarusuarios";
-		// return null;
 	}
 	
 	public String eliminarUsuarioCedula(String cedula) {
