@@ -39,7 +39,7 @@ public class GestionUsuariosBean {
 	public String eliminarUsuario() {
 		gu.eliminarUsuario(usuario.getCedula());
 		init();
-		return "/Usuario/listarusuarios";
+		return "listar-usuario";
 	}
 	
 	public String eliminarUsuarioCedula(String cedula) {
@@ -50,13 +50,13 @@ public class GestionUsuariosBean {
 	
 	public String actualizarUsuarioObjeto(Usuario usuario) {
 		this.usuario=usuario;
-		return "/Usuario/actualizarusuario";
+		return "actualizar-usuario";
 	}
 	
 	public String actualizarFinal() {
 		gu.actualizarUsuario(this.usuario);
 		this.init();
-		return "listarusuarios";
+		return "listar-usuario";
 	}
 	
 	public void buscar() {
