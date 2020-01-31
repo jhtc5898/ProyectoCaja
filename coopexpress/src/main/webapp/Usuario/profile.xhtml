@@ -32,15 +32,19 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="home-Usuario.xhtml" class="nav-link">Home</a>
+        <a href="home-Usuario.xhtml" class="nav-link">Bienvenido: #{loginBean.nombreUsuario.toUpperCase()} </a>
       </li>
     </ul>
-
-    <!-- SEARCH FORM -->
-    
-
-    <!-- Right navbar links -->
-  
+	<!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+      <h:form id="sign-out">
+      <h:commandButton  value="Cerrar Sesion" id="cerrarSesion" styleClass="btn btn-block btn-outline-danger"  update="formulario-deposito" action="#{loginBean.cerrarSesion()}" />
+      </h:form>
+      </li>
+      <!-- Notifications Dropdown Menu -->
+    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -55,9 +59,15 @@
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="perfil.xhtml" class="d-block"><strong>#{loginBean.nombreUsuario.toUpperCase()}</strong></a>
-        </div>
+      	  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
+          	<li class="nav-item has-treeview">
+            	<a href="" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>
+                	Mi perfil
+              	</p>
+            </a>
+       </li></ul>
       </div>
 
       <!-- Sidebar Menu -->
@@ -113,12 +123,7 @@
           <div class="col-sm-6">
             <h1><ui:insert name="titulo">Titulo</ui:insert></h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Home</a></li>
-              <li class="breadcrumb-item active">Perfil De Usuario</li>
-            </ol>
-          </div>
+          <ui:insert name="navegador">Ruta pagina</ui:insert>
         </div>
       </div><!-- /.container-fluid -->
     </section>

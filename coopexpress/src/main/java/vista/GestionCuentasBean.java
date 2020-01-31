@@ -42,21 +42,27 @@ public class GestionCuentasBean implements Serializable{
 		cuentas=gc.getCuentas();
 	}
 	
-	public String actualizarCuenta() {
+	public String actualizarCuentaUsuario() {
+		gc.actualizar(cuenta);
+		init();
+		return "perfil";
+	}
+	
+	public String actualizarCuentaAdmin() {
 		gc.actualizar(cuenta);
 		init();
 		return "listar-cuentas";
-	}
-	
-	public Cuenta cargarCuenta(String numeroCuenta) {
-		return cuenta= gc.obtenerCuentaNumero(numeroCuenta);
 	}
 	
 	public String cuentaActualizar(Cuenta cuenta) {
 		this.cuenta=cuenta;
 		return "actualizar-cuenta";
 	}
-		
+	
+	public Cuenta cargarCuenta(String numeroCuenta) {
+		return cuenta= gc.obtenerCuentaNumero(numeroCuenta);
+	}
+	
 	public String eliminar(int codigo) {
 		gc.eliminar(codigo);
 		this.init();

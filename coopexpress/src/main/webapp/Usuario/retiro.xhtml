@@ -4,9 +4,17 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blank-Usuarios.xhtml"> 
       
-<ui:define name="nombreAdmin">#{loginBean.nombreUsuario}</ui:define>  
-      
 <ui:define name="titulo">Coopexpress - RETIRO</ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item active">Transaccion - Retiro</li>
+            </ol>
+    </div>
+</ui:define>
+
 <ui:define name="descripcion">Retiro de dinero de tu cuenta Coopexpress</ui:define>
 <ui:define name="indicaciones">
 	<p>Cuenta.- Ingresar el numero de cuenta de la que se retirará el dinero</p>

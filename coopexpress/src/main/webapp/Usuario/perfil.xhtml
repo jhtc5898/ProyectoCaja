@@ -6,6 +6,15 @@
 
 <ui:define name="titulo">Perfil</ui:define>
 
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item active">Perfil De Usuario</li>
+            </ol>
+    </div>
+</ui:define>
+
 <ui:define name="contenido">
 	<h:form>
 		<h:dataTable value="#{gestionCuentasBean.cargarCuenta(loginBean.numeroCuenta)}" var="cuenta" styleClass="table table-bordered" >
@@ -41,9 +50,6 @@
 				<h:column>
 					<f:facet name="header">Nombre</f:facet>
 				#{usuario.usuario.nombre}
-			</h:column>
-				<h:column>
-					<f:facet name="header">Apellido</f:facet>
 				#{usuario.usuario.apellido}
 			</h:column>
 				<h:column>
@@ -80,7 +86,7 @@
 			</h:column>
 
 				<h:column>
-					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario.usuario)}" styleClass="btn btn-primary btn-block" value="Actualizar Persona" />
+					<h:commandButton action="#{gestionUsuariosBean.actualizar(usuario.usuario)}" styleClass="btn btn-primary btn-block" value="Actualizar" />
 				</h:column>
 			</h:dataTable>
 			</div>	

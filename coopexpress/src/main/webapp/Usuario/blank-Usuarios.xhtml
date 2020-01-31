@@ -55,9 +55,13 @@
      <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="perfil.xhtml" class="d-block"><strong>#{loginBean.nombreUsuario.toUpperCase()}</strong></a>
-        </div>
+      	  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
+          	<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+       </li></ul>
       </div>
 
       <!-- Sidebar Menu -->
@@ -112,11 +116,7 @@
           <div class="col-sm-6">
             <h1><ui:insert name="titulo">Titulo</ui:insert></h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            
-            </ol>
-          </div>
+          <ui:insert name="navegador">Ruta pagina</ui:insert>
         </div>
       </div><!-- /.container-fluid -->
     </section>

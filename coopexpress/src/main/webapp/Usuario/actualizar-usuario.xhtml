@@ -1,11 +1,23 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" template="blank-Usuarios.xhtml">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" 
+	template="blank-Usuarios.xhtml">
 
-	<ui:define name="titulo">Busqueda Usuario</ui:define>
+	<ui:define name="titulo">Actualizar datos personales</ui:define>
+	
+	<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="perfil.xhtml">Perfil De Usuario</a></li>
+              <li class="breadcrumb-item active">Actualizar Usuario</li>
+            </ol>
+    </div>
+	</ui:define>
 
-	<ui:define name="descripcion">Buscar un Usuario</ui:define>
+	<ui:define name="descripcion">Actualiza tu informacion</ui:define>
 
 	<ui:define name="indicaciones">
 		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
@@ -35,9 +47,7 @@
 							</h:column>
 
 							<h:column>
-								<h:inputText value="#{usuario.fecha_nacimiento}">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
-								</h:inputText>
+								<h:inputText value="#{usuario.fecha_nacimiento}" pt:placeholder="AAAA/MM/dd"></h:inputText>
 								<f:facet name="header">Fecha Nacimiento</f:facet>
 							</h:column>
 
@@ -80,7 +90,7 @@
 							</h:column>
 						</h:dataTable>
 					</div>
-					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuario()}"
+					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioUsuario()}"
 						styleClass="btn btn-info" value="Actualizar" />
 				</h:form>
 			</h:form>

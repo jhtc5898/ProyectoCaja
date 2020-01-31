@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
+import modelo.Tipo_Transaccion;
 import modelo.Usuario;
 import negocio.GestionUsuarios;
 
@@ -39,11 +40,24 @@ public class GestionUsuariosBean {
 	public void buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
 	}
-
-	public String actualizarUsuario(Usuario usuario) {
+	
+	public String actualizarUsuarioUsuario() {
 		gu.actualizarUsuario(usuario);
+		usuarios = gu.getUsuarios();
 		init();
-		return null;
+		return "perfil";
+	}
+	
+	public String actualizarUsuarioAdmin() {
+		gu.actualizarUsuario(usuario);
+		usuarios = gu.getUsuarios();
+		init();
+		return "listar-usuario";
+	}
+
+	public String actualizar(Usuario usuario) {
+		this.usuario = usuario;
+		return "actualizar-usuario";
 	}
 
 	public List<Usuario> getUsuarios() {
