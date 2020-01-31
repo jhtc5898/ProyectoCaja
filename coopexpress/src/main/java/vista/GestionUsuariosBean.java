@@ -35,29 +35,12 @@ public class GestionUsuariosBean {
 		init();
 		return "registro-pendiente";
 	}
-
-	public String eliminarUsuario() {
-		gu.eliminarUsuario(usuario.getCedula());
-		init();
-		return "listar-usuario";
-	}
-	
-	public String eliminarUsuarioCedula(String cedula) {
-		gu.eliminarUsuario(cedula);
-		init();
-		return "listarusuarios";
-	}
-	
-	public String actualizarUsuarioObjeto(Usuario usuario) {
-		this.usuario=usuario;
-		return "actualizar-usuario";
-	}
-	
+		
 	public void buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
 	}
 
-	public String actualizarUsuario() {
+	public String actualizarUsuario(Usuario usuario) {
 		gu.actualizarUsuario(usuario);
 		init();
 		return null;

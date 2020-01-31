@@ -1,150 +1,111 @@
-<!DOCTYPE html>
-<html xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>CoopExpress</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blank2.xhtml">
 
-	<!-- Font Awesome -->
-	<link rel="stylesheet"
-		href="Faceletes/plugins/fontawesome-free/css/all.min.css" />
-	<!-- Ionicons -->
-	<link rel="stylesheet"
-		href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-	<!-- overlayScrollbars -->
-	<link rel="stylesheet" href="Faceletes/dist/css/adminlte.min.css" />
-	<!-- Google Font: Source Sans Pro -->
-	<link
-		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-		rel="stylesheet" />
-</h:head>
-<body class="hold-transition register-page">
-	<div class="register-box">
-		<div class="register-logo">
-			<a href="../../index2.html"><b>Coop</b>Express</a>
+	<ui:define name="titulo">Creacion de un Nuevo Usuario</ui:define>
+
+	<ui:define name="descripcion">Registro en Coopexpress</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>Nombre.- Ingresar el nombre del nuevo Usuario.</p>
+		<p>Apellido.- Ingresar el apellido del nuevo Usuario.</p>
+		<p>Cedula.- Ingresar el documento de identificacion que consta de 10 digitos.</p>
+		<p>Correo.- Ingresar un correo al cual se pueda contactar con el usuario.</p>
+		<p>Direccion.- Ingresar la ciudad o calle donde se encuentra localizado el Usuario.</p>
+		<p>Telefono.- Ingresar algun tipo de numero telefonico con el cual se pueda contactar con el Usuario.</p>
+	</ui:define>
+
+	<ui:define name="contenido">
+		<!-- Horizontal Form -->
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 class="card-title">Formulario de registro</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<h:form>
+				<div class="card-body">
+					<div class="col-3">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText id="txtCedula" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.cedula}" />
+					</div>
+					<div class="col-4">
+						<label class="col-form-label">Nombre de Usuario</label>
+						<h:inputText id="txtNombre" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.nombre}" />
+					</div>
+					<div class="col-4">
+						<label class="col-form-label">Apellido de Usuario</label>
+						<h:inputText id="txtApellido" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.apellido}" />
+					</div>
+					
+					<div class="col-3">
+						<label class="col-form-label">Fecha Nacimiento AAAA/MM/dd</label>
+						 <div class="input-group-prepend">
+                      		<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                      		<h:inputText styleClass="form-control" pt:placeholder="AAAA/MM/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
+    						</h:inputText>
+                    	</div>
+					</div>
+					<div class="col-3">
+						<label class="col-form-label">Nivel Educacion de Usuario</label>
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}" styleClass="form-control">
+							<f:selectItem itemValue="Primario" itemLabel="Primario" />
+							<f:selectItem itemValue="Secundario" itemLabel="Secundario" />
+							<f:selectItem itemValue="Superior" itemLabel="Superior" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-3">
+						<label class="col-form-label">Estado civil Usuario</label>
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}" styleClass="form-control">
+							<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
+							<f:selectItem itemValue="Casado" itemLabel="Casado" />
+							<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
+							<f:selectItem itemValue="Union Libre" itemLabel="Union Libre" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-3">
+						<label class="col-form-label">Genero Usuario</label>
+						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}" styleClass="form-control">
+							<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+							<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+							<f:selectItem itemValue="Otro" itemLabel="Otro" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-3">
+						<label class="col-form-label">Ciudad de Usuario</label>
+						<h:selectOneMenu id="txtCiudad" styleClass="form-control" value="#{gestionUsuariosBean.usuario.ciudad}">
+							<f:selectItem itemValue="Cuenca" itemLabel="Cuenca" />
+							<f:selectItem itemValue="Azogues" itemLabel="Azogues" />
+							<f:selectItem itemValue="Loja" itemLabel="Loja" />
+						</h:selectOneMenu>
+					</div>
+					<div class="col-3">
+						<label class="col-form-label">Telefono de Usuario</label>
+						<h:inputText id="txtTelefono" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.telefono}" />
+					</div>
+					<div class="col-4">
+						<label class="col-form-label">Calle Principal de Usuario</label>
+						<h:inputText id="txtPrincipal" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.principal}" />
+					</div>
+					<div class="col-4">
+						<label class="col-form-label">Calle Secundaria de Usuario</label>
+						<h:inputText id="txtSecundaria" styleClass="form-control"
+							value="#{gestionUsuariosBean.usuario.secundaria}" />
+					</div>
+				</div>
+				<!-- /.card-body -->
+				<div class="card-footer">
+					<h:commandButton value="Guardar" styleClass="btn btn-info" action="#{gestionUsuariosBean.guardarUsuario()}" />
+				</div>
+			</h:form>
 		</div>
-
-		<div class="card">
-			<div class="card-body register-card-body">
-				<p class="login-box-msg">Registrar Un Usuario</p>
-
-		
-
-
-					<div style="width: 50%; float: left;">
-
-						<div class="card-body">
-							<div class="form-group">
-								<label class="col-form-label">Cedula de Usuario</label>
-								<h:inputText id="txtCedula" styleClass="form-control"
-									value="#{gestionUsuariosBean.usuario.cedula}" />
-							</div>
-
-							<div class="form-group">
-								<label class="col-form-label">Nombre de Usuario</label>
-								<h:inputTextarea id="txtNombre" styleClass="form-control"
-									value="#{gestionUsuariosBean.usuario.nombre}" />
-							</div>
-
-</div>
-
-
-							<div style="width: 50%; float: left;">
-
-
-								<div class="form-group">
-									<label class="col-form-label">Apellido de Usuario</label>
-									<h:inputTextarea id="txtApellido" styleClass="form-control"
-										value="#{gestionUsuariosBean.usuario.apellido}" />
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-form-label">Fecha Nacimiento Usuario</label>
-									<h:inputText
-										value="#{gestionUsuariosBean.usuario.fecha_nacimiento}">
-										<f:convertDateTime pattern="yyyy-MM-dd" />
-									</h:inputText>
-
-								</div>
-
-								<div class="form-group">
-									<label class="col-form-label">Nivel Educacion de
-										Usuario</label>
-									<h:selectOneMenu
-										value="#{gestionUsuariosBean.usuario.educacion}">
-										<f:selectItem itemValue="Primario" itemLabel="Primario" />
-										<f:selectItem itemValue="Secundario" itemLabel="Secundario" />
-										<f:selectItem itemValue="Superior" itemLabel="Superior" />
-									</h:selectOneMenu>
-								</div>
-								<div class="form-group">
-									<label class="col-form-label">Estado civil Usuario</label>
-									<h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}">
-										<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
-										<f:selectItem itemValue="Casado" itemLabel="Casado" />
-										<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
-										<f:selectItem itemValue="Union Libre" itemLabel="UnionLibre" />
-									</h:selectOneMenu>
-								</div>
-
-								<div class="form-group">
-									<label class="col-form-label">Genero Usuario</label>
-									<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}">
-										<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
-										<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
-										<f:selectItem itemValue="Otro" itemLabel="Otro" />
-									</h:selectOneMenu>
-								</div>
-
-
-
-								<div class="form-group">
-									<label class="col-form-label">Telefono de Usuario</label>
-									<h:inputTextarea id="txtTelefono" styleClass="form-control"
-										value="#{gestionUsuariosBean.usuario.telefono}" />
-								</div>
-
-								<div class="form-group">
-									<label class="col-form-label">Ciudad de Usuario</label>
-									<h:inputTextarea id="txtCiudad" styleClass="form-control"
-										value="#{gestionUsuariosBean.usuario.ciudad}" />
-								</div>
-
-								<div class="form-group">
-									<label class="col-form-label">Calle Principal de
-										Usuario</label>
-									<h:inputTextarea id="txtPrincipal" styleClass="form-control"
-										value="#{gestionUsuariosBean.usuario.principal}" />
-								</div>
-
-
-								<div class="form-group">
-									<label class="col-form-label">Calle Secundaria de
-										Usuario</label>
-									<h:inputTextarea id="txtSecundaria" styleClass="form-control"
-										value="#{gestionUsuariosBean.usuario.secundaria}" />
-								</div>
-							</div>
-							<div class="card-footer">
-								<h:commandButton value="Guardar" styleClass="btn btn-info"
-									action="#{gestionUsuariosBean.guardarUsuario()}" />
-							</div>
-							
-						</div>
-				
-
-
-
-						<!-- jQuery -->
-						<script src="../../plugins/jquery/jquery.min.js"></script>
-						<!-- Bootstrap 4 -->
-						<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-						<!-- AdminLTE App -->
-						<script src="../../dist/js/adminlte.min.js"></script>
-</body>
-</html>
+	</ui:define>
+</ui:composition>

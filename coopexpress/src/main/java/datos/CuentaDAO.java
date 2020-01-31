@@ -39,6 +39,18 @@ public class CuentaDAO {
 		return em.createQuery(jpql, Cuenta.class).getResultList();
 	}
 	
+	public Cuenta getCuentaCorreo(String correo) {
+		try {
+			String jpql = "SELECT c FROM Cuenta c WHERE correo_cuenta = ?1";
+			Query q = em.createQuery(jpql, Cuenta.class);
+			q.setParameter(1, correo);
+			Cuenta cuenta = (Cuenta)q.getSingleResult();
+			return cuenta;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public Cuenta getCuentaNumero(String numeroCuenta){
 		try {
 			String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";

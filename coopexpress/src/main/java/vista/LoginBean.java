@@ -1,11 +1,14 @@
 package vista;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.SessionUtils;
 
@@ -15,50 +18,69 @@ import negocio.GestionCuentas;
 @ManagedBean
 @SessionScoped
 public class LoginBean {
-	
+
 	@Inject
 	private GestionCuentas gc;
 	
 	private String email;
 	private String contrasena;
-	private String user;
 	private String nombreUsuario;
 	private String numeroCuenta;
-	
-	//Inicio de sesion
+
+	// Inicio de sesion
 	public String iniciarSesion() {
+
+		Cuenta cuenta = gc.getCuentaCorreo(this.email);
+
 		
-		Cuenta cuentaUsuario = this.validarUsuario();
-		
-		if(cuentaUsuario != null) {
-			HttpSession session = SessionUtils.getSession();
-			session.setAttribute("username", this.email);
-			this.nombreUsuario = cuentaUsuario.getUsuario().getNombre()+" "+cuentaUsuario.getUsuario().getApellido();
-			this.numeroCuenta=cuentaUsuario.getNumero_cuenta();
-			return "home.xhtml";
+		if (cuenta != null ) {
+			// Si se encontro USUARIO
+			if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==1) {
+				HttpSession session = SessionUtils.getSession();
+				session.setAttribute("username", this.email);
+				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
+				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
+				this.numeroCuenta = cuenta.getNumero_cuenta();
+				return "Usuario/home-Usuario";
+			}
+			//Si se encontro ADMIN
+			else if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==2) {
+				HttpSession session = SessionUtils.getSession();
+				session.setAttribute("username", this.email);
+				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
+				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
+				this.numeroCuenta = cuenta.getNumero_cuenta();
+				return "admin/listar-usuario";
+			}
+			//Si se encontro CAJERO
+			else if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==3) {
+				HttpSession session = SessionUtils.getSession();
+				session.setAttribute("username", this.email);
+				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
+				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
+				this.numeroCuenta = cuenta.getNumero_cuenta();
+				return "admin/404";
+			}
+			
 		}
 		return null;
 	}
-	
+
 	public String cerrarSesion() {
 		HttpSession session = SessionUtils.getSession();
-		System.out.println(session.toString());
 		session.invalidate();
-		return "login.xhtml";
+		return "login";
 	}
 	
-	//Si se encuentra un usuario
-	public Cuenta validarUsuario() {		
-		List<Cuenta> cuentas = new ArrayList<Cuenta>();
-		cuentas = this.gc.getCuentas();		
-		for(Cuenta c: cuentas) {
-			if(c.getCorreo_cuenta().equals(this.getEmail()) && c.getPswd_cuenta().equals(this.getContrasena())) {
-				return c;
-			}
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
+	    try {
+			resp.sendRedirect(req.getContextPath() + "/redirected");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return null;
 	}
-	
+
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
@@ -83,14 +105,6 @@ public class LoginBean {
 		this.contrasena = contrasena;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
 	public String getNumeroCuenta() {
 		return numeroCuenta;
 	}
@@ -101,9 +115,8 @@ public class LoginBean {
 
 	@Override
 	public String toString() {
-		return "LoginBean [gc=" + gc + ", email=" + email + ", contrasena=" + contrasena + ", user=" + user
-				+ ", nombre=" + nombreUsuario + ", numeroCuenta=" + numeroCuenta + "]";
+		return "LoginBean [gc=" + gc + ", email=" + email + ", contrasena=" + contrasena + ", nombreUsuario="
+				+ nombreUsuario + ", numeroCuenta=" + numeroCuenta + "]";
 	}
 
-	
 }

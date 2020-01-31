@@ -1,4 +1,5 @@
 package utils;
+
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -23,31 +24,93 @@ public class AuthorizationFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
 
 			HttpServletRequest reqt = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
 			HttpSession ses = reqt.getSession(false);
 
-			String reqURI = reqt.getRequestURI();
-			if (reqURI.indexOf("/login.xhtml") >= 0
-					|| (ses != null && ses.getAttribute("username") != null)
-					|| reqURI.indexOf("/public/") >= 0
-					|| reqURI.contains("javax.faces.resource")
-					|| reqURI.indexOf("crear-usuario.xhtml") >=0)
+			String reqURI = reqt.getRequestURI();// Obtener la url
+
+			// Si es una pagina que NO SE NECESITA LOGUEAR se permite
+			if (noLoguear(reqURI)) {
 				chain.doFilter(request, response);
-			else
+			}
+			// Si es una pagina de ADMIN
+			else if (soloAdmin(reqURI) && (ses != null && ses.getAttribute("username") != null)) {
+				String userName = (String) ses.getAttribute("rol");
+				if (userName.equals("2")) {
+					chain.doFilter(request, response);
+				}
+			}
+			//Si es una pagina de USUARIO
+			else if (soloUsuario(reqURI) && (ses != null && ses.getAttribute("username") != null)){
+				String userName = (String) ses.getAttribute("rol");
+				if (userName.equals("1")) {
+					chain.doFilter(request, response);
+				}
+			}else {
 				resp.sendRedirect(reqt.getContextPath() + "/login.xhtml");
+			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
+	private static final String[] noLogin = { 
+			"register.xhtml", "coopexpress.xhtml", "login.xhtml",
+			"/faces/404.xhtml" };
+
+	private static final String[] soloAdmin = { 
+			"/faces/admin/404.xhtml", "/faces/admin/actualizar-cuenta.xhtml",
+			"/faces/admin/actualizar-tipo-cuenta.xhtml", "/faces/admin/actualizar-tipo-transaccion.xhtml",
+			"/faces/admin/actualizar-usuario.xhtml", "/faces/admin/crear-cuenta.xhtml",
+			"/faces/admin/crear-tipo-cuenta.xhtml", "/faces/admin/crear-tipo-transaccion.xhtml",
+			"/faces/admin/crear-usuario.xhtml", "/faces/admin/eliminar-tipo-cuenta.xhtml",
+			"/faces/admin/eliminar-tipo-transaccion.xhtml", "/faces/admin/listar-cuenta.xhtml",
+			"/faces/admin/listar-tipo-cuenta.xhtml", "/admin/listar-usuario.xhtml",
+			"/faces/admin/lista-tipo-transaccion.xhtml"
+	};
+
+	private static final String[] soloUsuario = { 
+			"/faces/Usuario/404.xhtml", "/faces/Usuario/actualizar-cuenta.xhtml",
+			"/faces/Usuario/actualizar-usuario.xhtml", "/faces/Usuario/buscar-usuario.xhtml",
+			"/faces/Usuario/deposito.xhtml", "/faces/Usuario/home-usuario.xhtml", "/faces/Usuario/listar-usuario.xhtml",
+			"/faces/Usuario/perfil.xhtml", "/faces/Usuario/retiro.xhtml", "/faces/Usuario/solicitud-credito.xhtml" 
+	};
+
+	private boolean noLoguear(String url) {
+		for (String noLogin : noLogin) {
+			if (url.contains(noLogin)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean soloAdmin(String url) {
+		for (String admin : soloAdmin) {
+			if (url.indexOf(admin) >= 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean soloUsuario(String url) {
+		for (String usuario : soloUsuario) {
+			if (url.indexOf(usuario) >= 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void destroy() {
-		
+
 	}
-	
+
 }

@@ -27,6 +27,10 @@ public class GestionCuentas {
 		cuentadDAO.remove(codigo);
 	}
 	
+	public Cuenta getCuentaCorreo(String correo) {
+		return cuentadDAO.getCuentaCorreo(correo);
+	}
+	
 	public List<Cuenta> getCuentas(){
 		return cuentadDAO.getCuentas();
 	}
