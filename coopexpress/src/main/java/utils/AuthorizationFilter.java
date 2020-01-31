@@ -43,6 +43,8 @@ public class AuthorizationFilter implements Filter {
 				String userName = (String) ses.getAttribute("rol");
 				if (userName.equals("2")) {
 					chain.doFilter(request, response);
+				}else {
+					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 				}
 			}
 			// Si es una pagina de USUARIO
@@ -50,6 +52,8 @@ public class AuthorizationFilter implements Filter {
 				String userName = (String) ses.getAttribute("rol");
 				if (userName.equals("1")) {
 					chain.doFilter(request, response);
+				}else {
+					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 				}
 			} else {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
