@@ -77,19 +77,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="deposito.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Deposito</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="retiro.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Retiro</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="solicitud-credito.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Solicitud de crédito</p>
                 </a>
@@ -143,15 +143,7 @@
                 <p class="text-muted text-center"><strong>#{loginBean.email.toUpperCase()}</strong></p>
 
                 <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Nombre Y Apellido:</b> <a class="float-right">#{loginBean.nombreUsuario.toUpperCase()}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Correo Cuenta:</b> <a class="float-right">#{loginBean.email.toUpperCase()}</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Numero De Cuenta</b> <a class="float-right">#{loginBean.numeroCuenta.toUpperCase()}</a>
-                  </li>
+                 
                 </ul>
 
 			<ui:insert name="contenido">

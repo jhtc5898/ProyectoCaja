@@ -36,6 +36,7 @@ public class LoginBean {
 		if (cuenta != null ) {
 			// Si se encontro USUARIO
 			if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==1) {
+				System.out.println("Entro En Usuario");
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute("username", this.email);
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
@@ -45,6 +46,7 @@ public class LoginBean {
 			}
 			//Si se encontro ADMIN
 			else if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==2) {
+				System.out.println("Entro En Admin");
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute("username", this.email);
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
