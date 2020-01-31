@@ -53,12 +53,6 @@ public class GestionUsuariosBean {
 		return "actualizar-usuario";
 	}
 	
-	public String actualizarFinal() {
-		gu.actualizarUsuario(this.usuario);
-		this.init();
-		return "listar-usuario";
-	}
-	
 	public void buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
 	}

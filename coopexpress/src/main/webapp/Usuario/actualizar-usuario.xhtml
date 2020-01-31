@@ -54,8 +54,6 @@
 					</div>
 					<div class="form-group">
 						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							
-
 							<h:column>
 								<h:inputText value="#{usuario.genero}" />
 								<f:facet name="header">Genero</f:facet>
@@ -82,7 +80,7 @@
 							</h:column>
 						</h:dataTable>
 					</div>
-					<h:commandButton action="#{gestionUsuariosBean.actualizarFinal()}"
+					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuario()}"
 						styleClass="btn btn-info" value="Actualizar" />
 				</h:form>
 			</h:form>

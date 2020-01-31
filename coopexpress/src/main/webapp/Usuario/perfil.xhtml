@@ -27,14 +27,12 @@
 		</h:column>
 		
 		<h:column>
-			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar Cuenta" styleClass="btn btn-primary btn-block"/>
-			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta.codigo_cuenta)}" value="Eliminar Cuenta" styleClass="btn btn-primary btn-block"/>
+			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar Cuenta" styleClass="btn btn-primary"/>
+			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta.codigo_cuenta)}" value="Eliminar Cuenta" styleClass="btn btn-danger"/>
 		</h:column>
 		
 		</h:dataTable> 
-
-	
-		
+		<div class="form-group">
 		<h:dataTable value="#{gestionCuentasBean.cargarCuenta(loginBean.numeroCuenta)}" var="usuario" styleClass="table table-bordered">
 				<h:column>
 					<f:facet name="header">Cedula</f:facet>
@@ -82,11 +80,10 @@
 			</h:column>
 
 				<h:column>
-					
-					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario.usuario)}"
-						styleClass="btn btn-primary btn-block" value="Actualizar Persona" />
+					<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioObjeto(usuario.usuario)}" styleClass="btn btn-primary btn-block" value="Actualizar Persona" />
 				</h:column>
-			</h:dataTable>	
+			</h:dataTable>
+			</div>	
 	</h:form>
 </ui:define>
 	
