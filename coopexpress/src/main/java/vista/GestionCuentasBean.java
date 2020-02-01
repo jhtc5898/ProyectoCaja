@@ -24,6 +24,9 @@ public class GestionCuentasBean implements Serializable{
 	@Inject
 	private GestionCuentas gc;
 	
+	@Inject
+	private LoginBean login;
+	
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
 	private List<SelectItem> cuentasItem;
@@ -44,8 +47,8 @@ public class GestionCuentasBean implements Serializable{
 	
 	public String actualizarCuentaUsuario() {
 		gc.actualizar(cuenta);
-		init();
-		return "perfil";
+		login.cerrarSesion();
+		return "login.xhtml?faces-redirect=true";
 	}
 	
 	public String actualizarCuentaAdmin() {

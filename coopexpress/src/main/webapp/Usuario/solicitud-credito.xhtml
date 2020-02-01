@@ -23,9 +23,76 @@
     <p>Descripción.- Ingresar una descripción sobre el deposito realizado (opcional)</p>
 </ui:define>
 
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+            	<a href="home-Usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-home"></i>
+              	<p>Pagina de Inicio</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+      		</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
+              <p>Creditos <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tabla de pagos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informe del crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+</ui:define>
+
 <ui:define name="contenido">
 <!-- Horizontal Form -->
-            <div class="card card-info">
+            <div class="card card-info" onload="#{gestionCreditoBean.init()}">
               <div class="card-header">
                 <h3 class="card-title">Solicitud de crédito</h3>
               </div>
@@ -46,19 +113,24 @@
                       		<i class="fas fa-dollar-sign"></i>
                     		</span>
                   		</div>
-                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" binding="#{messagesBean.componente}" validatorMessage="Ingresar una cantidad entre 100 y 5000$"  requiredMessage="Debe ingresar un valor" value="#{gestionCreditoBean.credito.monto_credito}">
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" validatorMessage="Ingresar una cantidad entre 100 y 5000$"  requiredMessage="Debe ingresar un valor" value="#{gestionCreditoBean.credito.monto_credito}">
                   			<f:validateLongRange for="txtMonto" minimum="100" maximum="5000"/>
                   		</h:inputText>
-                	</div>                     
+                	</div>  
+                	<h:message for="txtMonto" style="color:red" />                    
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Plazo de pago en meses</label>
-                    <h:inputText id="txtMeses" styleClass="form-control" required="true" requiredMessage="Debe ingresar el numero de meses" value="#{gestionCreditoBean.credito.numero_meses_credito}"/>
+                    <h:inputText id="txtMeses" styleClass="form-control" required="true" validatorMessage="La cantidad de meses debe ser entre 5 y 24" requiredMessage="Debe ingresar el numero de meses" value="#{gestionCreditoBean.credito.numero_meses_credito}">
+                    	<f:validateLongRange for="txtMonto" minimum="5" maximum="24"/>
+                    </h:inputText>
                   </div>
+                  <h:message for="txtMeses" style="color:red" /> 
                   <div class="form-group">
                   	<label class="col-form-label">Ingresar una descripción sobre la solicitud</label>
                     <h:inputTextarea id="txtDescripcion" styleClass="form-control" required="true" requiredMessage="Debe ingresar una descripción" value="#{gestionCreditoBean.credito.desripcion_credito}" />
                   </div>
+                  <h:message for="txtDescripcion" style="color:red" /> 
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

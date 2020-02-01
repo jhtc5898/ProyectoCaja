@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="blank-Usuarios.xhtml">
+      
+<ui:define name="titulo">Perfil</ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            	<li class="breadcrumb-item"><a href="informe-credito.xhtml">Credito</a></li>
+              <li class="breadcrumb-item active">Tabla de pagos</li>
+            </ol>
+    </div>
+</ui:define>
+
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+            	<a href="home-Usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-home"></i>
+              	<p>Pagina de Inicio</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+      		</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
+              <p>Creditos <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tabla de pagos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informe del crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+</ui:define>
+
+</ui:composition>

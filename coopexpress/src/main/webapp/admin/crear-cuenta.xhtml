@@ -15,31 +15,136 @@
     <p><b>Tipo Cuenta.-</b> Ingresar el codigo al tipo de cuenta que pertence la nueva cuenta</p>
 </ui:define>
 
-<ui:define name="contenido">
-<!-- Horizontal Form -->
-			
-			
-            <div class="card card-info">
-              <div class="card-header">
-                <h3 class="card-title">Cuenta</h3>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              
-            <h:form>
+<ui:define name="menu1">
+	<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Usuario</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-credito.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Créditos</p>
+            </a>
+      		</li>
+	</ui:define>
+	
+	<ui:define name="menu">
+		<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-chart-pie"></i>
+              <p>
+                Administracion Cuentas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Cuentas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Cuentas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user"></i>
+              <p>
+                Administracion Usuarios
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creacion De Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-edit"></i>
+              <p>Tipo de Cuenta                
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Cuenta</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Tipo Cuenta</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
             
+              <i class="fas fa-comment-dollar"></i>
+              <p>
+                Tipo transaccion
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Transaccion</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista Tipo Transaccion</p>
+                </a>
+              </li>
+            </ul>
+    	</li>    
+	</ui:define>
+
+
+<ui:define name="contenido">
+<!-- Horizontal Form -->			
+            <div class="card card-info" onload="#{gestionCuentasBean.init()}">
+              <div class="card-header">
+                <h3 class="card-title">Crear una Cuenta</h3>
+              </div>
+            <h:form>
             	<div class="card-body">
-            		<div class="form-group">
+            		<div class="col-3">
             			<label class="col-form-label">Numero Cuenta</label>
             			<h:inputText id="txtNumeroCuenta" styleClass="form-control" value="#{gestionCuentasBean.cuenta.numero_cuenta}" />
             		</div>
             		
-            		<div class="form-group">
+            		<div class="col-3">
             			<label class="col-form-label">Saldo Cuenta</label>
             			<h:inputText id="txtSaldoCuenta" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
             		</div>
             		
-            		<div class="form-group">
+            		<div class="col-3">
             			<h:dataTable value="#{gestionCuentasBean.cuenta.usuario}" var="usuario">
 							<h:column>
 							<f:facet name="header">Cedula Usuario</f:facet>
@@ -48,18 +153,21 @@
 						</h:dataTable>
             		</div>
             		
-            		<div class="form-group">
+            		<div class="col-3">
             			<label class="col-form-label">Correo Cuenta</label>
             			<ion-icon name="mail"></ion-icon>
-            			<h:inputText id="txtCorreo" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.correo_cuenta}" />
+            			<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida"  value="#{gestionCuentasBean.cuenta.correo_cuenta}">
+            			<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+            			</h:inputText>
+            			<h:message for="txtCorreo" style="color:red" />
             		</div>
             		
-            		<div class="form-group">
+            		<div class="col-3">
             			<label class="col-form-label">Contraseña Cuenta</label>
             			<h:inputSecret id="txtPassword" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.pswd_cuenta}" type="password" />
             		</div>
             		
-            		<div class="form-group">
+            		<div class="col-3">
             			<label class="col-form-label">Tipo Cuenta</label>
             			<h:column>
 							<h:selectOneMenu id="tipo" value="#{gestionCuentasBean.cuenta.tipo_cuenta.codigo_tipo_cuenta}" styleClass="form-control">
@@ -68,10 +176,10 @@
 							</h:selectOneMenu>
 						</h:column>
             		</div>
-            		 <div class="card-footer">
-                  		<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionCuentasBean.guardar()}" />
-              		  </div>
-            	</div>	
+            	</div>
+            		<div class="card-footer">
+                      	<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionCuentasBean.guardar()}" />
+              		</div>	
 		</h:form>
     </div>
 </ui:define>

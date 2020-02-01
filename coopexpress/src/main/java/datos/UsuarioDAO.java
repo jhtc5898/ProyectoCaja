@@ -32,7 +32,7 @@ public class UsuarioDAO {
 	}
 
 	public List<Usuario> getUsuario() {
-		String jpql = "SELECT u FROM Usuario u";
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'A'";
 		Query q = em.createQuery(jpql, Usuario.class);
 
 		List<Usuario> usuarios = q.getResultList();
@@ -48,12 +48,17 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 
-	public Usuario actualizarUsuario(String cedula) {
-		String jpql = "SELECT u FROM Usuario u WHERE cedula LIKE ?1";
-		Query q = em.createQuery(jpql, Usuario.class);
-		q.setParameter(1, "%" + cedula + "%");
+	public Usuario obtenerUsuario(String cedula) {
+		try {
+			String jpql = "SELECT u FROM Usuario u WHERE cedula LIKE ?1 AND estado_usuario <> 'A'";
+			Query q = em.createQuery(jpql, Usuario.class);
+			q.setParameter(1, "%" + cedula + "%");
 
-		Usuario u = (Usuario) q.getSingleResult();
-		return u;
+			Usuario u = (Usuario) q.getSingleResult();
+			return u;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 }

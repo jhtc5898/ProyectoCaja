@@ -60,7 +60,19 @@ public class GestionTransaccionesBean {
 		transaccionList = gt.getTransacciones();
 		return null;
 	}
+	
+	public void getDepositosRecibidos(String numeroCuenta) {
+		transaccionList = gt.getDepositosRecibidos(numeroCuenta);
+	}
 
+	public void getDepositosRealizados(String numeroCuenta) {
+		transaccionList = gt.getDepositosRealizados(numeroCuenta);
+	}
+	
+	public void getRetirosHechos(String numeroCuenta) {
+		transaccionList = gt.getRetirosHechos(numeroCuenta);
+	}
+	
 	/*Getters y Setters*/
 	public List<Transaccion> getTransaccionList() {
 		return transaccionList;

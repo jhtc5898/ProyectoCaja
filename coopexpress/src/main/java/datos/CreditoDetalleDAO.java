@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import modelo.Credito;
 import modelo.Credito_Detalle;
+import modelo.Cuenta;
 
 @Stateless
 public class CreditoDetalleDAO {
@@ -38,8 +39,8 @@ public class CreditoDetalleDAO {
 		return creditoDetalles;
 	}
 	
-	public List<Credito_Detalle> getPagosCuenta(String numeroCuenta) {
-		String jpql = "SELECT cd FROM Credito_Detalle cd, Credito cr, Cuenta cu WHERE ?1 = cr.codigo_cuenta AND cr.codigo_credito = cd.codigo_credito";
+	public List<Credito_Detalle> getPagosCuenta(int numeroCuenta) {
+		String jpql = "SELECT cd FROM Credito_Detalle cd, Credito cr, Cuenta cu WHERE cd.codigo_credito = cr.codigo_credito AND cu.codigo_cuenta = ?1";
 		Query q = em.createQuery(jpql,Credito_Detalle.class);
 		q.setParameter(1, numeroCuenta);
 		List<Credito_Detalle> creditoDetalles = q.getResultList();

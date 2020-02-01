@@ -8,12 +8,16 @@ import javax.persistence.Query;
 
 import datos.UsuarioDAO;
 import modelo.Usuario;
+import vista.MessagesBean;
 
 @Stateless
 public class GestionUsuarios {
 
 	@Inject
 	private UsuarioDAO usuarioDAO;
+	
+	@Inject
+	private MessagesBean mensaje = new MessagesBean();
 
 	public void guardarUsuario(Usuario usuario) {
 		if (usuarioDAO.read(usuario.getCedula()) == null) {
@@ -33,8 +37,8 @@ public class GestionUsuarios {
 		usuarioDAO.update(usuario);
 	}
 
-	public List<Usuario> getUsuarioCedula(String cedula) {
-		return usuarioDAO.getUsuarioCedula(cedula);
+	public Usuario getUsuarioCedula(String cedula) {
+		return usuarioDAO.read(cedula);
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -42,6 +46,6 @@ public class GestionUsuarios {
 	}
 	
 	public Usuario obtenerUsuarioCedula(String cedula) {
-		return usuarioDAO.actualizarUsuario(cedula);
+		return usuarioDAO.obtenerUsuario(cedula);
 	}
 }

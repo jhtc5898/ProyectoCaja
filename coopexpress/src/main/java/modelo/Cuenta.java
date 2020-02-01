@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Cuenta {
+public class Cuenta{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

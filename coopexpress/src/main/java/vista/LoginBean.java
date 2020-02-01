@@ -1,15 +1,13 @@
 package vista;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import utils.SessionUtils;
 
 import modelo.Cuenta;
@@ -30,7 +28,7 @@ public class LoginBean {
 	// Inicio de sesion
 	public String iniciarSesion() {
 
-		Cuenta cuenta = gc.getCuentaCorreo(this.email);
+		Cuenta cuenta = validarLoginCuenta();
 
 		
 		if (cuenta != null ) {
@@ -67,22 +65,23 @@ public class LoginBean {
 		}
 		return null;
 	}
+	
+	public Cuenta validarLoginCuenta() {
+		List<Cuenta> cuentas = new ArrayList<Cuenta>();
+		cuentas = this.gc.getCuentas();
+		for(Cuenta c: cuentas) {
+			if(c.getCorreo_cuenta().equals(this.getEmail()) && c.getPswd_cuenta().equals(this.getContrasena())) {
+				return c;
+			}
+		}
+		return null;
+	}
 
-	public String cerrarSesion() {
+	public void cerrarSesion() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
-		return "login";
 	}
 	
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp){
-	    try {
-			resp.sendRedirect(req.getContextPath() + "/redirected");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}

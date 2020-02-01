@@ -29,7 +29,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="home.xhtml" class="nav-link">Home</a>
+        <a href="" class="nav-link">Bienvenido: #{loginBean.nombreUsuario.toUpperCase()} </a>
       </li>
     </ul>
     <!-- Right navbar links -->
@@ -60,111 +60,16 @@
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a class="d-block"><strong>#{loginBean.nombreUsuario.toUpperCase()}</strong></a>
-        </div>
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">  
+      	  	<ui:insert name="menu1">Menu1</ui:insert>
+		</ul>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="fas fa-chart-pie"></i>
-              <p>
-                Administracion Cuentas
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/listar-cuenta.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Administrar Cuentas</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="fas fa-user"></i>
-              <p>
-                Administracion Usuarios
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar Usuarios</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="fas fa-edit"></i>
-              <p>Tipo de Cuenta                
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-tipo-cuenta.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Tipo Cuenta</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Administrar Tipo Cuenta</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-            
-              <i class="fas fa-comment-dollar"></i>
-              <p>
-                Tipo transaccion
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Tipo De Transaccion</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lista Tipo Transacciones</p>
-                </a>
-              </li>
-            </ul>
-          </li>    
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">     
+  			<ui:insert name="menu">Menu</ui:insert>  
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>

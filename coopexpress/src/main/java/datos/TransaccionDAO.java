@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import modelo.Cuenta;
+import modelo.Tipo_Transaccion;
 import modelo.Transaccion;
 
 @Stateless
@@ -50,14 +52,41 @@ public class TransaccionDAO {
 		return em.createQuery(jpql,Transaccion.class).getResultList();
 	}
 	
-	public List<Transaccion> getTransaccioneDepositos(){
+	public List<Transaccion> getTransaccionesDepositos(){
 		String jpql = "SELECT t FROM Transaccion t WHERE tipo_transaccion = 1";
 		return em.createQuery(jpql,Transaccion.class).getResultList();
 	}
 	
-	public List<Transaccion> getTransaccioneRetiros(){
+	public List<Transaccion> getTransaccionesRetiros(){
 		String jpql = "SELECT t FROM Transaccion t WHERE tipo_transaccion = 2";
 		return em.createQuery(jpql,Transaccion.class).getResultList();
+	}
+	
+	//Depositos recibidos
+	public List<Transaccion> getDepositosRecibidos(Cuenta cuenta){
+		String jpql = "SELECT t FROM Transaccion t WHERE cuenta_transaccion = ?1 AND tipo_transaccion = 2";
+		Query q = em.createQuery(jpql, Transaccion.class);
+		q.setParameter(1, cuenta);
+		List<Transaccion> depositos = q.getResultList();
+		return depositos;
+	}
+	
+	//Depositos realizados
+	public List<Transaccion> getDepositosRealizados(Cuenta cuenta){
+		String jpql = "SELECT t FROM Transaccion t WHERE cuenta_transaccion = ?1 AND tipo_transaccion = 1";
+		Query q = em.createQuery(jpql, Transaccion.class);
+		q.setParameter(1, cuenta);
+		List<Transaccion> depositos = q.getResultList();
+		return depositos;
+	}
+	
+	//Retiros realizados
+	public List<Transaccion> getRetirosHechos(Cuenta cuenta){
+		String jpql = "SELECT t FROM Transaccion t WHERE cuenta_transaccion = ?1 AND tipo_transaccion = 3 ORDER BY t.fecha_transaccion DESC";
+		Query q = em.createQuery(jpql, Transaccion.class);
+		q.setParameter(1, cuenta);
+		List<Transaccion> retiros = q.getResultList();
+		return retiros;
 	}
 		
 	public void realizarDeposito(String cuentaOrigen, String cuentaDestino, double monto) {	

@@ -1,5 +1,6 @@
 package vista;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -28,26 +29,23 @@ public class GestionCreditoBean {
 	private GestionCuentas gcu;
 	
 	private Credito credito =  new Credito();
-	private List<Credito_Detalle> creditoDetalles;
+	private List<Credito_Detalle> creditoDetalles = new ArrayList<Credito_Detalle>();
 	private String numeroCuenta;
 
 	@PostConstruct
 	public void init() {
 		credito = new Credito();
-		creditoDetalles= gcd.getPagos(numeroCuenta);
 	}
 	
 	public String guardarSolicitudCredito() {
 		gc.guardar(credito);
-		gcd.guardar();
-		creditoDetalles = gcd.getPagos(numeroCuenta);
 		init();
-		return "pagos-credito";
+		return "informe-credito";
 	}
-	
-	public String listarPagoCredito() {
-		creditoDetalles = gcd.getPagos(numeroCuenta);
-		return "pagos-credito";
+		
+	public String getCreditoDisponible(String numeroCuenta) {
+		credito = gc.getCreditoCuentaDisponible(numeroCuenta);
+		return "informe-credito";
 	}
 	
 	public String solicitar(String numeroCuenta) {
@@ -55,6 +53,10 @@ public class GestionCreditoBean {
 		credito.setCodigo_cuenta(cuenta);
 		guardarSolicitudCredito();
 		return null;
+	}
+	
+	public void getPagosCredito(String numeroCuenta) {
+		creditoDetalles = gcd.getPagos(Integer.parseInt(numeroCuenta));
 	}
 
 	public Credito getCredito() {
@@ -66,7 +68,6 @@ public class GestionCreditoBean {
 	}
 
 	public List<Credito_Detalle> getCreditoDetalles() {
-		init();
 		return creditoDetalles;
 	}
 

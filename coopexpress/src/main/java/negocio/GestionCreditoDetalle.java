@@ -11,8 +11,10 @@ import javax.inject.Inject;
 
 import datos.CreditoDAO;
 import datos.CreditoDetalleDAO;
+import datos.CuentaDAO;
 import modelo.Credito;
 import modelo.Credito_Detalle;
+import modelo.Cuenta;
 
 @Stateless
 public class GestionCreditoDetalle {
@@ -22,6 +24,9 @@ public class GestionCreditoDetalle {
 	
 	@Inject
 	private CreditoDAO creditoDAO;
+	
+	@Inject
+	private CuentaDAO cuentaDAO;
 
 	public void guardar() {
 		List<Credito> creditos = creditoDAO.getCreditoCodigo();
@@ -60,7 +65,7 @@ public class GestionCreditoDetalle {
 		return detalleDAO.getCreditoDetalle(codigo_credito);
 	}
 	
-	public List<Credito_Detalle> getPagos(String numeroCuenta){
+	public List<Credito_Detalle> getPagos(int numeroCuenta){
 		return detalleDAO.getPagosCuenta(numeroCuenta);
 	}
 

@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blankAdmin.xhtml">
       
-<ui:define name="titulo">Agregar Tipo De Cuenta</ui:define>
+<ui:define name="titulo">Nuevo Tipo de Cuenta</ui:define>
 
 <ui:define name="descripcion">Creación de un nuevo tipo de cuenta</ui:define>
 
@@ -13,8 +13,119 @@
     <p>Descripción.- Ingresar una descripción sobre la nueva cuenta</p>
 </ui:define>
 
+<ui:define name="menu1">
+	<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Usuario</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-credito.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Créditos</p>
+            </a>
+      		</li>
+	</ui:define>
+	
+	<ui:define name="menu">
+		<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <p>
+                Administracion Cuentas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Cuentas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Cuentas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user"></i>
+              <p>
+                Administracion Usuarios
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creacion De Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-edit"></i>
+              <p>Tipo de Cuenta                
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-cuenta.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Cuenta</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Tipo Cuenta</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+            
+              <i class="fas fa-comment-dollar"></i>
+              <p>
+                Tipo transaccion
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Transaccion</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista Tipo Transaccion</p>
+                </a>
+              </li>
+            </ul>
+    	</li>    
+	</ui:define>
+
+
 <ui:define name="contenido">
-	<div class="card card-info">
+	<div class="card card-info" onload="#{gestionTipoCuentasBean.init()}">
     	<div class="card-header">
         	<h3 class="card-title">Tipo de cuenta</h3>
         </div>
@@ -22,16 +133,18 @@
 		<!-- form start -->
 	<h:form>	
 	 <div class="card-body">
-	   <div class="form-group">
+	   <div class="col-3">
 	   <label class="col-form-label">Nombre Tipo Cuenta</label>
 	  		<h:inputText id="txtNumeroCuenta" styleClass="form-control" value="#{gestionTipoCuentasBean.tipo_cuenta.nombre_tipo_cuenta}" />
 			<h:message for="txtNumeroCuenta"/>
 	   </div>
-	   <div class="form-group">
+	   <div class="col-3">
 	    <label class="col-form-label">Descripcion Tipo Cuenta</label>
 			<h:inputText id="txtSaldoCuenta" styleClass="form-control" value="#{gestionTipoCuentasBean.tipo_cuenta.descripcion_tipo_cuenta}" />
 			<h:message for="txtSaldoCuenta"/>
 	   </div>
+	   </div>
+	   <div class="card-footer">
 		<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionTipoCuentasBean.guardar()}" />	
 	 </div>
 	</h:form>

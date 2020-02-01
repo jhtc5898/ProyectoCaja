@@ -28,16 +28,14 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="home-Usuario.xhtml" class="nav-link">Home</a>
+        <a href="home-Usuario.xhtml" class="nav-link">Bienvenido: #{loginBean.nombreUsuario.toUpperCase()} </a>
       </li>
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-      <h:form id="sign-out">
-      <h:commandButton  value="Cerrar Sesion" id="cerrarSesion" styleClass="btn btn-block btn-outline-danger"  update="formulario-deposito" action="#{loginBean.cerrarSesion()}" />
-      </h:form>
+      	<a href="${pageContext.request.contextPath}/coopexpress/logout" class="btn btn-block btn-outline-danger">CERRAR SESIÓN</a>
       </li>
       <!-- Notifications Dropdown Menu -->
     </ul>
@@ -48,6 +46,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../Faceletes/index3.html" class="brand-link">
+    <img src="../Faceletes/dist/img/UsuarioLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"/>
       <span class="brand-text font-weight-light">CoopExpress</span>
     </a>
 
@@ -56,50 +55,13 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       	  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
-          	<li class="nav-item has-treeview">
-            	<a href="perfil.xhtml" class="nav-link">
-              	<i class="nav-icon fas fa-user"></i>
-              	<p>Mi perfil</p>
-            </a>
-       </li></ul>
+          	<ui:insert name="menu1">Menu1</ui:insert>
+       	</ul>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-        
-          
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Transacciones
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Deposito</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Retiro</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Solicitud de crédito</p>
-                </a>
-              </li>
-            </ul>
-          </li>   
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">     
+  			<ui:insert name="menu">Menu</ui:insert>  
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

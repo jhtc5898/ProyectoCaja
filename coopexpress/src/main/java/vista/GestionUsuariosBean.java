@@ -18,16 +18,21 @@ public class GestionUsuariosBean {
 	@Inject
 	private GestionUsuarios gu;
 
-	private List<Usuario> usuarios;
-
+	@Inject
+	private MessagesBean mensaje = new MessagesBean();
+	
 	/* Bean Properties */
 	private Usuario usuario = new Usuario();
 	private String cedula;
+	private List<Usuario> usuarios;
+	
 	
 	@PostConstruct
 	public void init() {
 		usuario = new Usuario();
 		usuarios = gu.getUsuarios();
+		cedula = "";
+
 	}
 
 	/* Action Controller */
@@ -37,8 +42,15 @@ public class GestionUsuariosBean {
 		return "registro-pendiente";
 	}
 		
-	public void buscar() {
+	public String buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
+		if(usuario != null) {
+			return "actualizar-usuario";
+		}else {
+			mensaje.setMensaje("El usuario no se encuentra registrado");
+			return null;
+		}
+		
 	}
 	
 	public String actualizarUsuarioUsuario() {
@@ -57,7 +69,7 @@ public class GestionUsuariosBean {
 
 	public String actualizar(Usuario usuario) {
 		this.usuario = usuario;
-		return "actualizar-usuario";
+		return "actualizar-usuario.xhtml";
 	}
 
 	public List<Usuario> getUsuarios() {

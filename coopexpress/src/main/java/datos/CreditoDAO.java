@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import modelo.Credito;
+import modelo.Cuenta;
+import modelo.Tipo_Transaccion;
+import modelo.Transaccion;
 
 @Stateless
 public class CreditoDAO {
@@ -36,6 +39,24 @@ public class CreditoDAO {
 		List<Credito> creditos =q.getResultList();
 		return creditos;
 	}
+	
+	public Credito getCreditoCuenta(Cuenta numeroCuenta) {
+		String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1";
+		Query q = em.createQuery(jpql, Credito.class);
+		q.setParameter(1, numeroCuenta);
+		Credito credito = (Credito) q.getSingleResult();
+		return credito;
+		
+	}
+	
+	public Credito getCreditoCuentaDisponible(Cuenta numeroCuenta) {
+		String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito <> 'P'";
+		Query q = em.createQuery(jpql, Credito.class);
+		q.setParameter(1, numeroCuenta);
+		Credito credito = (Credito) q.getSingleResult();
+		return credito;
+	}
+	
 
 	public List<Credito> getCreditoCodigo() {
 		String jpql = "SELECT c from Credito c ORDER BY c.codigo_credito ASC";

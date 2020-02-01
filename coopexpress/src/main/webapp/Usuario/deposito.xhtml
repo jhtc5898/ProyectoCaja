@@ -23,6 +23,73 @@
     <p>Descripción.- Ingresar una descripción sobre el deposito realizado (opcional)</p>
 </ui:define>
 
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+            	<a href="home-Usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-home"></i>
+              	<p>Pagina de Inicio</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+      		</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
+              <p>Creditos <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tabla de pagos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informe del crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+</ui:define>
+
 <ui:define name="contenido">
 <!-- Horizontal Form -->
             <div class="card card-info">
@@ -40,11 +107,11 @@
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
-                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válida" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
+                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
                     	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
-                    </h:inputText>
+                    </h:inputText>VERIFICAR USUARIO
                     <h:message for="txtCuentaDestino" style="color:red" />
-                  </div>                	
+                  </div>  
                   <div class="col-3">
            	        <label class="col-form-label">Monto a depositar</label>
                   	<div class="input-group">

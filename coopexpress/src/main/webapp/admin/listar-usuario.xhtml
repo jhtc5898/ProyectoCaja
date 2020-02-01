@@ -6,19 +6,151 @@
 
 	<ui:define name="titulo">Usuarios</ui:define>
 
-	<ui:define name="descripcion">Lista de Usuarios Registrados</ui:define>
+	<ui:define name="descripcion">Lista de Usuarios Registrados
+	</ui:define>
 
 	<ui:define name="indicaciones">
 		<p>Comprobar el correcto funcionamiento de la pagina.</p>
 	</ui:define>
+	
+	<ui:define name="menu1">
+	<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Usuario</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-credito.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Créditos</p>
+            </a>
+      		</li>
+	</ui:define>
+	
+	<ui:define name="menu">
+		<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <p>
+                Administracion Cuentas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Cuentas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Cuentas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-user"></i>
+              <p>
+                Administracion Usuarios
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creacion De Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-edit"></i>
+              <p>Tipo de Cuenta                
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Cuenta</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Tipo Cuenta</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+            
+              <i class="fas fa-comment-dollar"></i>
+              <p>
+                Tipo transaccion
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Transaccion</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista Tipo Transaccion</p>
+                </a>
+              </li>
+            </ul>
+    	</li>    
+	</ui:define>
 
 	<ui:define name="contenido">
 		<h:form>
-			<h:dataTable value="#{gestionUsuariosBean.usuarios}" var="usuario"
-				styleClass="table table-bordered">
+			<div class="card-body" onload="#{gestionUsuariosBean.init()}">
+			<h:messages for="cedula" style="color:red" />
+			<div class="card-footer">
+				<div class="input-group">
+					<label class="col-form-label">Buscar por cédula de usuario </label>
+                    <div class="custom-file">
+                      	<div class="col-2">
+					 		<h:inputText id="cedula" styleClass="form-control" required="true" requiredMessage="Ingresar un numero de cedula" validatorMessage="Ingresar una cédula válida (10 dígitos y sin letras)" converterMessage="Ingresar solo números" binding="#{messagesBean.componente}" value="#{gestionUsuariosBean.cedula}">
+					 			<f:validateLength for="cedula" minimum="9" maximum="9" />
+					 			<f:convertNumber integerOnly="true" type="number" /> 
+					 		</h:inputText>
+						</div>
+						<div class="input-group-append">
+                        	<h:commandButton styleClass="btn btn-success" action="#{gestionUsuariosBean.buscar()}" value="Buscar" />
+                     	</div>
+                      </div>
+                    </div>
+                    <h:message for="cedula" style="color:red" />
+                </div>
+			</div>
+			</h:form>
+			<h:form>
+			<h:dataTable value="#{gestionUsuariosBean.usuarios}" var="usuario" styleClass="table table-bordered">
 				<h:column>
 					<f:facet name="header">Cedula</f:facet>
-				#{usuario.cedula}
+					#{usuario.cedula}
 			</h:column>
 				<h:column>
 					<f:facet name="header">Nombre</f:facet>
@@ -62,11 +194,9 @@
 			</h:column>
 
 				<h:column>
-					<h:commandButton action="#{gestionUsuariosBean.actualizar(usuario)}" styleClass="btn btn-info" value="Actualizar" />
+					<a href="actualizar-usuario.xhtml"><h:commandButton action="#{gestionUsuariosBean.actualizar(usuario)}" styleClass="btn btn-info" value="Actualizar" /></a>
 				</h:column>
 			</h:dataTable>
-			<h:commandButton action="buscarusuario" styleClass="btn btn-info" value="Buscar" />
-			<h:commandButton action="guardarusuario" styleClass="btn btn-info" value="Regresar" />
 		</h:form>
 	</ui:define>
 </ui:composition>

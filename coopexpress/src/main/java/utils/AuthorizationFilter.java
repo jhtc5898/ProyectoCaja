@@ -24,8 +24,7 @@ public class AuthorizationFilter implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
 
 			HttpServletRequest reqt = (HttpServletRequest) request;
@@ -55,7 +54,8 @@ public class AuthorizationFilter implements Filter {
 				}else {
 					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 				}
-			} else {
+			}
+			else {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 			}
 			
@@ -83,7 +83,8 @@ public class AuthorizationFilter implements Filter {
 			"/faces/Usuario/404.xhtml", "/faces/Usuario/actualizar-cuenta.xhtml",
 			"/faces/Usuario/actualizar-usuario.xhtml", "/faces/Usuario/buscar-usuario.xhtml",
 			"/faces/Usuario/deposito.xhtml", "/faces/Usuario/home-Usuario.xhtml", "/faces/Usuario/listar-usuario.xhtml",
-			"/faces/Usuario/perfil.xhtml", "/faces/Usuario/retiro.xhtml", "/faces/Usuario/solicitud-credito.xhtml" 
+			"/faces/Usuario/perfil.xhtml", "/faces/Usuario/retiro.xhtml", "/faces/Usuario/solicitud-credito.xhtml",
+			"/faces/Usuario/informe-credito.xhtml", "/faces/Usuario/tabla-pagos.xhtml", 
 	};
 
 	private boolean noLoguear(String url) {

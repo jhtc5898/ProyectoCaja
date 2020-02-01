@@ -3,7 +3,9 @@ package negocio;
 import javax.inject.Inject;
 
 import datos.CreditoDAO;
+import datos.CuentaDAO;
 import modelo.Credito;
+import modelo.Cuenta;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +18,9 @@ public class GestionCredito {
 
 	@Inject
 	private CreditoDAO creditoDAO;
+	
+	@Inject
+	private CuentaDAO cuentaDAO;
 
 	public void guardar(Credito credito) {
 		Calendar cal = Calendar.getInstance();
@@ -25,6 +30,11 @@ public class GestionCredito {
 		credito.setFecha_pago_credito(sdf.format(fechaPagoSig));
 		credito.setEstado_credito("P");
 		creditoDAO.insert(credito);
+	}
+	
+	public Credito getCreditoCuentaDisponible(String numeroCuenta) {
+		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
+		return creditoDAO.getCreditoCuentaDisponible(cuenta);
 	}
 
 	public List<Credito> getCreditos() {

@@ -21,6 +21,72 @@
 	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
 </ui:define>
 
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+            	<a href="home-Usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-home"></i>
+              	<p>Pagina de Inicio</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+      		</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
+              <p>Creditos <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tabla de pagos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informe del crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+</ui:define>
 
 <ui:define name="contenido">
 <!-- Horizontal Form -->
@@ -45,7 +111,9 @@
                       		<i class="fas fa-dollar-sign"></i>
                     		</span>
                   		</div>
-                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}" />
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Debe ingresar un valor" validatorMessage="Ingresar una cantidad entre 10 y 500$" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}">
+                  			<f:validateLongRange for="txtMonto" minimum="10" maximum="500"/>
+                  		</h:inputText>
                 	</div>   
                 	<h:message for="txtMonto" style="color:red" />                  
                   </div>
