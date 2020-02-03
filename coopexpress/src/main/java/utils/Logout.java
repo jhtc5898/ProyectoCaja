@@ -27,5 +27,5 @@ public class Logout extends HttpServlet{
             response.sendRedirect(request.getContextPath() + "/faces/login.xhtml");
         }
     }
-    	
+      	
 }

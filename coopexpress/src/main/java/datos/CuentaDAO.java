@@ -68,6 +68,19 @@ public class CuentaDAO {
 		}
 	}
 	
+	//Obtener cuenta solo de usuarios para la transaccion 
+	public Cuenta getCuentaNumeroTransaccion(String numeroCuenta){
+		try {
+			String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1 AND tipo_cuenta_codigo = 1";
+			Query q = em.createQuery(jpql,Cuenta.class);
+			q.setParameter(1, numeroCuenta);
+			Cuenta cuenta =  (Cuenta) q.getSingleResult();
+			return cuenta;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public List<Cuenta> listaEliminar(String numeroCuenta){
 		String jpql = "SELECT c FROM Cuenta c WHERE numero_cuenta = ?1";
 		Query q = em.createQuery(jpql,Cuenta.class);

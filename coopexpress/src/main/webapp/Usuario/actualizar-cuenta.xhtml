@@ -19,8 +19,8 @@
 <ui:define name="descripcion">Actualiza tu cuenta</ui:define>
 
 <ui:define name="indicaciones">
-	<p><b style="color:red">*Importante</b> al actualizar el correo o contraseña la sesion se cerrará</p>
-	<p>En caso de no actualizar presionar cancelar</p>
+	<strong><p><b style="color:red">*Importante</b> al actualizar el correo o contraseña la sesion se cerrará</p>
+	<p>En caso de no actualizar presionar cancelar</p></strong>
 </ui:define>
 
 <ui:define name="menu1">
@@ -94,6 +94,7 @@
 <div class="card card-info">
               <!-- form start -->
               <h:form>
+              
               	<div class="card card-success">
               		<div class="card-header">
                 		<h3 class="card-title">Actualizar</h3>
@@ -129,7 +130,8 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                  	<h:commandButton action="#{gestionCuentasBean.actualizarCuentaUsuario()}" value="Actualizar" styleClass="btn btn-info" />
-                 </div>
+                 	<a href="perfil.xhtml" class="btn btn-danger">Cancelar</a>
+                </div>
               </h:form>
             </div>
             <!-- /.card -->

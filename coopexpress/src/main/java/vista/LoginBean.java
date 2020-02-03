@@ -1,11 +1,16 @@
 package vista;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import utils.SessionUtils;
@@ -77,9 +82,21 @@ public class LoginBean {
 		return null;
 	}
 
+	//Metodo que elimina la sesion y redirige al login
 	public void cerrarSesion() {
 		HttpSession session = SessionUtils.getSession();
 		session.invalidate();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void redirectLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath() + "/faces/login.xhtml");
 	}
 	
 	public String getNombreUsuario() {

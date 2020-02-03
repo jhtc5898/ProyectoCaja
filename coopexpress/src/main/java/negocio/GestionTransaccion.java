@@ -9,7 +9,6 @@ import datos.CuentaDAO;
 import datos.TipoTransaccionDAO;
 import datos.TransaccionDAO;
 import modelo.Cuenta;
-import modelo.Tipo_Transaccion;
 import modelo.Transaccion;
 import vista.MessagesBean;
 
@@ -30,9 +29,8 @@ public class GestionTransaccion {
 	
 	public void guardarTransaccionDeposito(Transaccion transaccion, Cuenta cuentaOrigen, String ctaDestino) {
 		Transaccion transaccionDest =  new Transaccion();
-		Cuenta cuentaDestino = cuentaDAO.getCuentaNumero(ctaDestino); 
-		cuentaOrigen = cuentaDAO.getCuentaNumero(cuentaOrigen.getNumero_cuenta());	
-		int retorno = 0;
+		Cuenta cuentaDestino = cuentaDAO.getCuentaNumeroTransaccion(ctaDestino); 
+		cuentaOrigen = cuentaDAO.getCuentaNumeroTransaccion(cuentaOrigen.getNumero_cuenta());	
 		if(cuentaDestino !=  null) {
 			if(cuentaOrigen.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
 				//Guardar transaccion origen
@@ -43,7 +41,7 @@ public class GestionTransaccion {
 				//Guardar transaccion destino
 				transaccionDest.setMonto_transaccion(transaccion.getMonto_transaccion());
 				transaccionDest.setTipo_transaccion(tipoTransaccionDAO.read(2));
-				transaccionDest.setDescripcion_transaccion("Deposito desde la cuenta " + cuentaOrigen.getNumero_cuenta());
+				transaccionDest.setDescripcion_transaccion("Deposito recibido de" + cuentaOrigen.getNumero_cuenta());
 				transaccionDest.setCuenta_transaccion(cuentaDestino);
 				transaccionDAO.insertarTransaccionDeposito(transaccionDest);
 				//Retiro de dinero de una cuentaOrigen y deposito en una cuentaDestino

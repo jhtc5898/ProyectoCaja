@@ -48,7 +48,7 @@ public class GestionCuentasBean implements Serializable{
 	public String actualizarCuentaUsuario() {
 		gc.actualizar(cuenta);
 		login.cerrarSesion();
-		return "login.xhtml?faces-redirect=true";
+		return "logout";
 	}
 	
 	public String actualizarCuentaAdmin() {
