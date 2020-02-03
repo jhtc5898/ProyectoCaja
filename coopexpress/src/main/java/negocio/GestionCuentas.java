@@ -31,6 +31,10 @@ public class GestionCuentas {
 		return cuentadDAO.getCuentaCorreo(correo);
 	}
 	
+	public List<Cuenta> getCuentasLogin(){
+		return cuentadDAO.getCuentasLogin();
+	}
+	
 	public List<Cuenta> getCuentas(){
 		return cuentadDAO.getCuentas();
 	}

@@ -68,7 +68,7 @@ public class LoginBean {
 	
 	public Cuenta validarLoginCuenta() {
 		List<Cuenta> cuentas = new ArrayList<Cuenta>();
-		cuentas = this.gc.getCuentas();
+		cuentas = this.gc.getCuentasLogin();
 		for(Cuenta c: cuentas) {
 			if(c.getCorreo_cuenta().equals(this.getEmail()) && c.getPswd_cuenta().equals(this.getContrasena())) {
 				return c;

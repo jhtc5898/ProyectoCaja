@@ -34,6 +34,11 @@ public class CuentaDAO {
 		return c;
 	}
 	
+	public List<Cuenta> getCuentasLogin(){
+		String jpql = "SELECT c FROM Cuenta c";
+		return em.createQuery(jpql, Cuenta.class).getResultList();
+	}
+	
 	public List<Cuenta> getCuentas(){
 		String jpql = "SELECT c FROM Cuenta c WHERE tipo_cuenta_codigo != 2";
 		return em.createQuery(jpql, Cuenta.class).getResultList();
