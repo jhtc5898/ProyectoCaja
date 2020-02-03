@@ -23,16 +23,23 @@ public class GestionTransaccionesBean {
 	private Transaccion transaccion = new Transaccion();	
 	private Cuenta cuenta;
 	private String cuentaDestino;
+	private String cuentaOrigen;
 		
 	@PostConstruct
 	public void init() {
 		transaccion = new Transaccion();
 		cuenta = new Cuenta();
 		cuentaDestino = "";
+		cuentaOrigen = "";
 	}
 	
 	public String guardarDeposito() {
 		gt.guardarTransaccionDeposito(transaccion, cuenta, cuentaDestino);
+		init();
+		return null;
+	}
+	public String guardarDepositoCajera() {
+		gt.guardarTransaccionDepositoCajera(transaccion, cuentaOrigen, cuentaDestino);
 		init();
 		return null;
 	}
@@ -105,4 +112,14 @@ public class GestionTransaccionesBean {
 	public void setCuentaDestino(String cuentaDestino) {
 		this.cuentaDestino = cuentaDestino;
 	}
+
+	public String getCuentaOrigen() {
+		return cuentaOrigen;
+	}
+
+	public void setCuentaOrigen(String cuentaOrigen) {
+		this.cuentaOrigen = cuentaOrigen;
+	}
+	
+	
 }

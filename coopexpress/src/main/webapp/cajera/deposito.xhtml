@@ -68,26 +68,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
-              <p>Creditos <i class="fas fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tabla de pagos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Informe del crédito</p>
-                </a>
-              </li>
-            </ul>
-          </li> 
+         
 </ui:define>
 
 <ui:define name="contenido">
@@ -102,8 +83,10 @@
                 <div class="card-body">
                   <h:messages style="color:red" />
                   <div class="col-3">
-                    <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}"/>
+                    <label class="col-form-label">Numero De Cuenta De Origen</label>
+                   <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaOrigen}">
+                    	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
+                    </h:inputText>VERIFICAR USUARIO
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
@@ -129,7 +112,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.deposito(loginBean.numeroCuenta)}" />
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.guardarDepositoCajera()}" />
                 </div>
               </h:form>
             </div>
