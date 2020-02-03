@@ -55,6 +55,18 @@ public class AuthorizationFilter implements Filter {
 					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 				}
 			}
+			// Si es una pagina de CAJERA
+						else if (soloCajera(reqURI) && (ses != null && ses.getAttribute("username") != null))
+						{
+							String userName = (String) ses.getAttribute("rol");
+							if (userName.equals("3")) {
+								chain.doFilter(request, response);
+							}else {
+								resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+							}
+						}
+			
+			
 			else {
 				resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
 			}
@@ -86,6 +98,12 @@ public class AuthorizationFilter implements Filter {
 			"/faces/Usuario/perfil.xhtml", "/faces/Usuario/retiro.xhtml", "/faces/Usuario/solicitud-credito.xhtml",
 			"/faces/Usuario/informe-credito.xhtml", "/faces/Usuario/tabla-pagos.xhtml", 
 	};
+	
+	private static final String[] soloCajera = { 
+			"/faces/cajera/deposito.xhtml","/faces/cajera/retiro.xhtml","/faces/cajera/home-cajera.xhtml",
+			"/faces/cajera/solicitud-credito.xhtml",
+		
+	};
 
 	private boolean noLoguear(String url) {
 		for (String noLogin : noLogin) {
@@ -108,6 +126,15 @@ public class AuthorizationFilter implements Filter {
 	private boolean soloUsuario(String url) {
 		for (String usuario : soloUsuario) {
 			if (url.indexOf(usuario) >= 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean soloCajera(String url) {
+		for (String cajera : soloCajera) {
+			if (url.indexOf(cajera) >= 0) {
 				return true;
 			}
 		}

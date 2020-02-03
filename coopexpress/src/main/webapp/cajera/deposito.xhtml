@@ -1,0 +1,137 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="blank-cajera.xhtml"> 
+            
+<ui:define name="titulo">Coopexpress - DEPOSITO </ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item active">Transaccion - Depósito</li>
+            </ol>
+    </div>
+</ui:define>
+
+<ui:define name="descripcion">Deposita dinero en una cuenta de los socios de Coopexpress</ui:define>
+<ui:define name="indicaciones">
+	<p>Cuenta destino.- Ingresar el numero de cuenta en la que se depositará el dinero</p>
+	<p>Monto.- Cantidad de dinero en dólares que se depositará, <b>para ingresar centavos usar el punto</b></p>
+    <p>Descripción.- Ingresar una descripción sobre el deposito realizado (opcional)</p>
+</ui:define>
+
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+            	<a href="home-Usuario.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-home"></i>
+              	<p>Pagina de Inicio</p>
+            </a>
+      		</li>
+      		<li class="nav-item has-treeview">
+            	<a href="perfil.xhtml" class="nav-link">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Mi perfil</p>
+            </a>
+      		</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
+              <p>Creditos <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tabla de pagos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Informe del crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+</ui:define>
+
+<ui:define name="contenido">
+<!-- Horizontal Form -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Depósito</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <h:form id="formulario-deposito">
+                <div class="card-body">
+                  <h:messages style="color:red" />
+                  <div class="col-3">
+                    <label class="col-form-label">Su número de cuenta</label>
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}"/>
+                  </div>
+                  <div class="col-3">
+                    <label class="col-form-label">Numero de cuenta destino</label>
+                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
+                    	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
+                    </h:inputText>VERIFICAR USUARIO
+                    <h:message for="txtCuentaDestino" style="color:red" />
+                  </div>  
+                  <div class="col-3">
+           	        <label class="col-form-label">Monto a depositar</label>
+                  	<div class="input-group">
+                  		<div class="input-group-prepend">
+                    		<span class="input-group-text">
+                      		<i class="fas fa-dollar-sign"></i>
+                    		</span>
+                  		</div>
+                  		<h:inputText id="txtMonto" styleClass="form-control" required="true" binding="#{messagesBean.componente}" validatorMessage="Ingresar una cantidad entre 10 y 1000$"  requiredMessage="Ingresar un valor" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}">
+                  			<f:validateLongRange for="txtMonto" minimum="10" maximum="1000"/>
+                  		</h:inputText>
+                	</div> 
+                	<h:message for="txtMonto" style="color:red"  />                    
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.deposito(loginBean.numeroCuenta)}" />
+                </div>
+              </h:form>
+            </div>
+</ui:define>
+</ui:composition>
