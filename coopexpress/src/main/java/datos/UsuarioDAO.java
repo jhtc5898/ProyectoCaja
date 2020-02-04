@@ -30,16 +30,28 @@ public class UsuarioDAO {
 	public Usuario read(String cedula) {
 		return em.find(Usuario.class, cedula);
 	}
+	
+	public Usuario obtenerUsuario(String cedula) {
+		try {
+			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'A'";
+			Query q = em.createQuery(jpql, Usuario.class);
+			q.setParameter(1, cedula);
+			Usuario u = (Usuario) q.getSingleResult();
+			return u;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-	//Obtener usuarios que no son admin y que fueron habilitados
+	//Obtener usuarios HABILITADOS
 	public List<Usuario> getUsuariosRegistrados() {
-		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'A'";
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'I'";
 		Query q = em.createQuery(jpql, Usuario.class);
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;
 	}
 	
-	//Obtener usuarios que estan pendientes de aprobacion
+	//Obtener usuarios que estan PENDIENTES DE APROBACION
 	public List<Usuario> getUsuariosPendientes() {
 		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario = 'I'";
 		Query q = em.createQuery(jpql, Usuario.class);
@@ -47,6 +59,7 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
+	//Consultar si un usuario esta aprobado
 	public Usuario obtenerUsuarioAprobado(String numeroCedula) {
 		try {
 			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'I'";
@@ -66,21 +79,9 @@ public class UsuarioDAO {
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;
 	}
-
-	public Usuario obtenerUsuario(String cedula) {
-		try {
-			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'A'";
-			Query q = em.createQuery(jpql, Usuario.class);
-			q.setParameter(1, cedula);
-			Usuario u = (Usuario) q.getSingleResult();
-			return u;
-		} catch (Exception e) {
-			return null;
-		}
-	}
 	
 	public void cambiarEstadoUsuario(String cedulaUsuario) {
-		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'H' WHERE cedula_usuario = ?1");
+		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'P' WHERE cedula_usuario = ?1");
 		cambiarEstado.setParameter(1, cedulaUsuario);
 		cambiarEstado.executeUpdate();
 	}
