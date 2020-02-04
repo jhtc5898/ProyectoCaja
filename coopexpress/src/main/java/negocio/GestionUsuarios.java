@@ -34,14 +34,22 @@ public class GestionUsuarios {
 		usuarioDAO.update(usuario);
 	}
 
-	public Usuario obtenerUsuarioAprobado(String numeroCedula) {
-		return usuarioDAO.obtenerUsuarioAprobado(numeroCedula);
+	public Usuario obtenerUsuarios(String numeroCedula) {
+		return usuarioDAO.obtenerUsuario(numeroCedula);
 	}
 	
 	public Usuario getUsuarioCedula(String cedula) {
 		return usuarioDAO.read(cedula);
 	}
 
+	public void aprobarUsuario(String cedula) {
+		usuarioDAO.aprobarUsuario(cedula);
+	}
+	
+	public void denegarUsuario(String cedula) {
+		usuarioDAO.denegarUsuario(cedula);
+	}
+	
 	public List<Usuario> getUsuarios() {
 		return usuarioDAO.getUsuariosRegistrados();
 	}

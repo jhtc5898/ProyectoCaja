@@ -87,6 +87,11 @@
 </ui:define>
 
 <ui:define name="contenido">
+	
+	<div class="card">
+	<b><h:outputText value="#{gestionCreditoBean.mensaje}" style="color:red"> </h:outputText></b>
+	</div>
+	
 	<div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
               <div class="card-header border-0">
                 <h3 class="card-title">Informe general</h3>

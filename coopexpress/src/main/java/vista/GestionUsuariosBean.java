@@ -61,11 +61,23 @@ public class GestionUsuariosBean {
 	}
 	
 	public String consultarAprobacion() {
-		usuario = gu.obtenerUsuarioAprobado(cedula);
+		usuario = gu.obtenerUsuarios(cedula);
+		
 		if(usuario != null) {
-			setMensaje1("Usuario:  Aprobado, acercarse a crear su cuenta en la cooperativa"); 
+			if(usuario.getEstado_usuario().equals("Pendiente")) {
+				return "registrar-cuenta"; 
+			}
+			else if(usuario.getEstado_usuario().equals("Inhabilitado")) {
+				setMensaje1("Info: su cuenta se encuentra en revisión");
+			}
+			else if(usuario.getEstado_usuario().equals("Denegado")) {
+				setMensaje1("Info: su cuenta ha sido negada, acercarse a Coopexpress para obtener más información");
+			}
+			else if(usuario.getEstado_usuario().equals("Habilitado")) {
+				setMensaje1("Info: su cuenta ya se encuentra habilitada y en uso");
+			}
 		}else {
-			setMensaje1("Usuario:  Denegado, para mas información acercarse a consultar a Coopexpress");
+			setMensaje1("Info: Usuario no encontrado");
 		}
 		return null;
 	}
@@ -94,13 +106,25 @@ public class GestionUsuariosBean {
 		return "revision-usuario";
 	}
 	
-	public String aprobarUsuario(Usuario usuario) {
+	public String registrarUsuario(Usuario usuario) {
 		this.usuario = usuario;
 		return "crear-cuenta";
 	}
 	
+	public String aprobarUsuario(Usuario usuario) {
+		gu.aprobarUsuario(usuario.getCedula());
+		init();
+		return "solicitudes-usuario";
+	}
+	
+	public String denegarUsuario(Usuario usuario) {
+		gu.denegarUsuario(usuario.getCedula());
+		init();
+		return "solicitudes-usuario";
+	}
 	public void vaciarMensaje() {
 		setMensaje(" ");
+		setMensaje1(" ");
 	}
 
 	public List<Usuario> getUsuarios() {

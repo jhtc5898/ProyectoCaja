@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
@@ -34,6 +36,7 @@ public class GestionCuentasBean implements Serializable{
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
 	private List<SelectItem> cuentasItem;
+	private String mensaje;
 		
 	@PostConstruct
 	public void init() {
@@ -50,10 +53,29 @@ public class GestionCuentasBean implements Serializable{
 	}
 	
 	public String guardarCuenta(String cedula) {
+		String pagina = "";
 		this.cuenta.setUsuario(gu.getUsuarioCedula(cedula));
-		gc.guardar(cuenta);
-		init();
-		return "listar-cuentas";
+		if(gc.guardar(cuenta)!= null) {
+			init();
+			setMensaje("Su cuenta ha sido registrada exitosamente, puede ingresar a Coopexpress en 'Iniciar Sesión'");
+		}else {
+			FacesContext.getCurrentInstance().addMessage("register:txtCedula", new FacesMessage("El correo ya esta en uso"));
+			pagina = null;
+		}
+		return pagina;
+	}
+	
+	public String guardarCuentaUsuario(String cedula) {
+		String pagina = "";
+		this.cuenta.setUsuario(gu.getUsuarioCedula(cedula));
+		if(gc.guardarUsuario(cuenta)!= null) {
+			init();
+			setMensaje("Su cuenta ha sido registrada exitosamente, puede ingresar a Coopexpress en 'Iniciar Sesión'");
+		}else {
+			FacesContext.getCurrentInstance().addMessage("register:txtCorreo", new FacesMessage("El correo ya esta en uso"));
+			pagina = null;
+		}
+		return pagina;
 	}
 	
 	
@@ -134,6 +156,14 @@ public class GestionCuentasBean implements Serializable{
 
 	public void setCuentasItem(List<SelectItem> cuentasItem) {
 		this.cuentasItem = cuentasItem;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 }

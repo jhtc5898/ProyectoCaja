@@ -50,11 +50,16 @@ public class CreditoDAO {
 	}
 	
 	public Credito getCreditoCuentaDisponible(Cuenta numeroCuenta) {
-		String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito <> 'P'";
-		Query q = em.createQuery(jpql, Credito.class);
-		q.setParameter(1, numeroCuenta);
-		Credito credito = (Credito) q.getSingleResult();
-		return credito;
+		try {
+			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito <> 'P'";
+			Query q = em.createQuery(jpql, Credito.class);
+			q.setParameter(1, numeroCuenta);
+			Credito credito = (Credito) q.getSingleResult();
+			return credito;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 
