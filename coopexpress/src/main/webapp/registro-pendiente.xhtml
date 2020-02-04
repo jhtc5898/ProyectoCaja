@@ -10,14 +10,15 @@
 	<ui:define name="descripcion">Consultar aprobación</ui:define>
 
 	<ui:define name="indicaciones">
-		<p><strong>Ingrese su número de cédula para consultar si ha sido aceptado para formar parte de Coopexpress</strong></p>
+		<p>-Ingrese su número de cédula para consultar si ha sido aceptado para formar parte de Coopexpress</p>
+		<p>-Si ha sido aceptado podra crear su cuenta con un correo y una constraseña</p>
 	</ui:define>
 
 	<ui:define name="contenido">
 			<h:form id="solicitud">
 			<div class="row">
 				<div class="col-md-6" onload="#{gestionUsuariosBean.init()}">
-					<div class="col-3">
+					<div class="col-4">
 						<label class="col-form-label">Cedula de Usuario</label>
 						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
 							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
@@ -27,7 +28,7 @@
 					<h:message for="txtCedula" style="color:red" />
 				</div>
 				<div class="col-md-4">
-					<b><h:outputText value="#{gestionUsuariosBean.mensaje1}" style="color:#1668DA"> </h:outputText></b>
+					<b><h:outputText value="#{gestionUsuariosBean.mensaje1}" style="color:red"> </h:outputText></b>
 				</div>
 				</div>
 					<hr />

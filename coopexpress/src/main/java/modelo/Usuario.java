@@ -49,6 +49,9 @@ public class Usuario {
 
 	@Column(name = "calle_secundaria_usuario")
 	private String secundaria;
+	
+	@Column(name = "estado_usuario")
+	private String estado_usuario;
 
 	public String getCedula() {
 		return cedula;
@@ -138,12 +141,20 @@ public class Usuario {
 		this.secundaria = secundaria;
 	}
 
+	public String getEstado_usuario() {
+		return estado_usuario;
+	}
+
+	public void setEstado_usuario(String estado_usuario) {
+		this.estado_usuario = estado_usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "Usuario [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fecha_nacimiento="
 				+ fecha_nacimiento + ", educacion=" + educacion + ", estado=" + estado + ", genero=" + genero
 				+ ", telefono=" + telefono + ", ciudad=" + ciudad + ", principal=" + principal + ", secundaria="
-				+ secundaria + "]";
+				+ secundaria + ", estado_usuario=" + estado_usuario + "]";
 	}
 
 }

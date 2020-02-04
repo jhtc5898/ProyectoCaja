@@ -16,6 +16,7 @@ public class UsuarioDAO {
 	private EntityManager em;
 
 	public void insert(Usuario usuario) {
+		usuario.setEstado_usuario("Inhabilitado");
 		em.persist(usuario);
 	}
 
@@ -31,9 +32,10 @@ public class UsuarioDAO {
 		return em.find(Usuario.class, cedula);
 	}
 	
+	//Retorna los usuarios que no sean admin
 	public Usuario obtenerUsuario(String cedula) {
 		try {
-			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'A'";
+			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'Admin'";
 			Query q = em.createQuery(jpql, Usuario.class);
 			q.setParameter(1, cedula);
 			Usuario u = (Usuario) q.getSingleResult();
@@ -45,7 +47,7 @@ public class UsuarioDAO {
 
 	//Obtener usuarios HABILITADOS
 	public List<Usuario> getUsuariosRegistrados() {
-		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'I'";
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'Inhabilitado' and estado_usuario <> 'Pendiente' and estado_usuario <> 'Denegado'";
 		Query q = em.createQuery(jpql, Usuario.class);
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;
@@ -53,25 +55,12 @@ public class UsuarioDAO {
 	
 	//Obtener usuarios que estan PENDIENTES DE APROBACION
 	public List<Usuario> getUsuariosPendientes() {
-		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario = 'I'";
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario = 'Inhabilitado'";
 		Query q = em.createQuery(jpql, Usuario.class);
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;
 	}
 	
-	//Consultar si un usuario esta aprobado
-	public Usuario obtenerUsuarioAprobado(String numeroCedula) {
-		try {
-			String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1 AND estado_usuario <> 'I'";
-			Query q = em.createQuery(jpql, Usuario.class);
-			q.setParameter(1, numeroCedula);
-			Usuario u = (Usuario) q.getSingleResult();
-			return u;
-		} catch (Exception e) {
-			return null;
-		}
-	}
-
 	public List<Usuario> getUsuarioCedula(String cedula) {
 		String jpql = "SELECT u FROM Usuario u WHERE cedula_usuario = ?1";
 		Query q = em.createQuery(jpql, Usuario.class);
@@ -80,8 +69,20 @@ public class UsuarioDAO {
 		return usuarios;
 	}
 	
-	public void cambiarEstadoUsuario(String cedulaUsuario) {
-		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'P' WHERE cedula_usuario = ?1");
+	public void habilitarUsuario(String cedulaUsuario) {
+		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'Habilitado' WHERE cedula_usuario = ?1");
+		cambiarEstado.setParameter(1, cedulaUsuario);
+		cambiarEstado.executeUpdate();
+	}
+	
+	public void aprobarUsuario(String cedulaUsuario) {
+		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'Pendiente' WHERE cedula_usuario = ?1");
+		cambiarEstado.setParameter(1, cedulaUsuario);
+		cambiarEstado.executeUpdate();
+	}
+	
+	public void denegarUsuario(String cedulaUsuario) {
+		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'Denegado' WHERE cedula_usuario = ?1");
 		cambiarEstado.setParameter(1, cedulaUsuario);
 		cambiarEstado.executeUpdate();
 	}

@@ -31,6 +31,7 @@ public class GestionCreditoBean {
 	private Credito credito =  new Credito();
 	private List<Credito_Detalle> creditoDetalles = new ArrayList<Credito_Detalle>();
 	private String numeroCuenta;
+	private String mensaje;
 
 	@PostConstruct
 	public void init() {
@@ -45,6 +46,9 @@ public class GestionCreditoBean {
 		
 	public String getCreditoDisponible(String numeroCuenta) {
 		credito = gc.getCreditoCuentaDisponible(numeroCuenta);
+		if(credito == null) {
+			setMensaje("No existen creditos registrados en esta cuenta");
+		}
 		return "informe-credito";
 	}
 	
@@ -82,5 +86,18 @@ public class GestionCreditoBean {
 	public void setNumeroCuenta(String numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
 	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+	
+	public void vaciarMensaje() {
+		setMensaje(" ");
+	}
+
 	
 } 

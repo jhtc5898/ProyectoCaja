@@ -202,7 +202,8 @@
              <h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario">
              	<h:column>
              		<h:commandButton action="#{gestionUsuariosBean.aprobarUsuario(usuario)}" styleClass="btn btn-success" value="Aprobar" />&#160; &#160;
-              		<h:commandButton action="#{gestionUsuariosBean.rechazarUsuario(usuario)}" styleClass="btn btn-danger" value="Denegar" />
+             		<h:commandButton action="#{gestionUsuariosBean.registrarUsuario(usuario)}" styleClass="btn btn-info" value="Registrar" />&#160; &#160;
+              		<h:commandButton action="#{gestionUsuariosBean.denegarUsuario(usuario)}" styleClass="btn btn-danger" value="Denegar" />
             	</h:column>
              </h:dataTable>
               </h:form>

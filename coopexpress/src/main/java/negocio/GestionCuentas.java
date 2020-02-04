@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import datos.CuentaDAO;
+import datos.TipoCuentaDAO;
 import datos.UsuarioDAO;
 import modelo.Cuenta;
 import modelo.Tipo_Cuenta;
@@ -19,9 +20,32 @@ public class GestionCuentas {
 	@Inject
 	private UsuarioDAO usuarioDAO;
 	
-	public void guardar(Cuenta cuenta) {
-		usuarioDAO.cambiarEstadoUsuario(cuenta.getUsuario().getCedula());
-		cuentadDAO.insert(cuenta);
+	@Inject
+	private TipoCuentaDAO tipoCuentaDAO;
+	
+	public String guardar(Cuenta cuenta) {
+		String resultado = "";
+		if (cuentadDAO.getCuentaCorreo(cuenta.getCorreo_cuenta()) == null) {
+			usuarioDAO.habilitarUsuario(cuenta.getUsuario().getCedula());
+			cuentadDAO.insert(cuenta);
+		}else {
+			resultado = null;
+		}
+		return resultado;
+	}
+	
+	public String guardarUsuario(Cuenta cuenta) {
+		String resultado = "";
+		if (cuentadDAO.getCuentaCorreo(cuenta.getCorreo_cuenta()) == null) {
+			cuenta.setSaldo_cuenta(0);
+			cuenta.setTipo_cuenta(tipoCuentaDAO.read(1));
+			cuenta.setNumero_cuenta("10000001");
+			usuarioDAO.habilitarUsuario(cuenta.getUsuario().getCedula());
+			cuentadDAO.insert(cuenta);
+		}else {
+			resultado = null;
+		}
+		return resultado;
 	}
 	
 	public void actualizar(Cuenta cuenta) {

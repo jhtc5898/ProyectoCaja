@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blank2.xhtml">
+
+	<ui:define name="titulo">Creacion de una cuenta en Coopexpress</ui:define>
+
+	<ui:define name="descripcion">Registro en Coopexpress</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>Nombre y Apellido.- Ingresar nombre y apellido</p>
+		<p>Direccion.- Se necesita una calle principal y una calle secundaria (opcional)</p>
+	</ui:define>
+
+	<ui:define name="contenido">
+		<div class="form">
+			<div class="alert alert-success alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-check"></i> Aceptado!</h5>
+                  Ha sido aceptado para formar parte de Coopexpress<br />
+                  <u>Deberá proporcionar un correo y una contraseña para crear su cuenta </u>
+            </div>
+            
+			<h:form id="register">
+				<div class="callout callout-info">
+                  <b><h:outputText value="#{gestionCuentasBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
+            	</div>
+				<div class="card-body" onload="#{gestionUsuariosBean.vaciarMensaje()}">
+					<b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
+					<div class="col-3">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText id="txtCedula" styleClass="form-control" value="#{gestionUsuariosBean.usuario.cedula}" readonly="true" />
+					</div>
+					
+					<div class="row" style="margin-left: 0.0%">
+            			<div class="col-4">
+            			<label class="col-form-label">Correo Electrónico</label>
+						<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida" value="#{gestionCuentasBean.cuenta.correo_cuenta}">
+							<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText>
+						<h:message for="txtCorreo" style="color:red"/>
+            			</div>
+            			
+            		
+            			<div class="col-3">
+            			<label class="col-form-label">Contraseña</label>
+						<h:inputText id="txtContrasena" styleClass="form-control" validatorMessage="La contraseña debe tener mas de 5 caracteres" pt:type="password" value="#{gestionCuentasBean.cuenta.pswd_cuenta}">
+							<f:validateLength for="txtContrasena" minimum="5" />
+						</h:inputText>
+						<h:message for="txtContrasena" style="color:red"/>
+            			</div>
+            			
+					</div>
+				</div>
+				<div class="card-footer">
+						<h:commandButton value="Crear cuenta" styleClass="btn btn-info" action="#{gestionCuentasBean.guardarCuentaUsuario(gestionUsuariosBean.usuario.cedula)}" />
+					</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
