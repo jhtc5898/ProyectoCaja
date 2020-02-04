@@ -1,5 +1,6 @@
 package vista;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,11 +20,12 @@ public class GestionUsuariosBean {
 
 	@Inject
 	private GestionUsuarios gu;
-	
+		
 	/* Bean Properties */
 	private Usuario usuario = new Usuario();
 	private String cedula;
-	private List<Usuario> usuarios;
+	private List<Usuario> usuarios = new ArrayList<Usuario>();
+	private List<Usuario> usuariosPendientes = new ArrayList<Usuario>();
 	private String mensaje;
 	private String mensaje1;
 	
@@ -31,6 +33,7 @@ public class GestionUsuariosBean {
 	public void init() {
 		usuario = new Usuario();
 		usuarios = gu.getUsuarios();
+		usuariosPendientes = gu.getUsuariosPendientes();
 		cedula = " ";
 	}
 
@@ -86,12 +89,30 @@ public class GestionUsuariosBean {
 		return "actualizar-usuario";
 	}
 	
+	public String cargarUsuarioRevision(Usuario usuario) {
+		this.usuario = usuario;
+		return "revision-usuario";
+	}
+	
+	public String aprobarUsuario(Usuario usuario) {
+		this.usuario = usuario;
+		return "crear-cuenta";
+	}
+	
 	public void vaciarMensaje() {
 		setMensaje(" ");
 	}
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;
+	}
+
+	public List<Usuario> getUsuariosPendientes() {
+		return usuariosPendientes;
+	}
+
+	public void setUsuariosPendientes(List<Usuario> usuariosPendientes) {
+		this.usuariosPendientes = usuariosPendientes;
 	}
 
 	public void setUsuarios(List<Usuario> usuarios) {

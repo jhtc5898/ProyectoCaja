@@ -88,8 +88,9 @@ public class AuthorizationFilter implements Filter {
 			"/faces/admin/crear-tipo-cuenta.xhtml", "/faces/admin/crear-tipo-transaccion.xhtml",
 			"/faces/admin/crear-usuario.xhtml", "/faces/admin/eliminar-tipo-cuenta.xhtml",
 			"/faces/admin/eliminar-tipo-transaccion.xhtml", "/faces/admin/listar-cuenta.xhtml",
-			"/faces/admin/listar-tipo-cuenta.xhtml", "/admin/listar-usuario.xhtml",
-			"/faces/admin/lista-tipo-transaccion.xhtml"
+			"/faces/admin/listar-tipo-cuenta.xhtml", "/faces/admin/listar-usuario.xhtml",
+			"/faces/admin/lista-tipo-transaccion.xhtml", "/admin/solicitudes-usuario.xhtml",
+			"/faces/admin/revision-usuario.xhtml"
 	};
 
 	private static final String[] soloUsuario = { 
@@ -97,13 +98,12 @@ public class AuthorizationFilter implements Filter {
 			"/faces/Usuario/actualizar-usuario.xhtml", "/faces/Usuario/buscar-usuario.xhtml",
 			"/faces/Usuario/deposito.xhtml", "/faces/Usuario/home-Usuario.xhtml", "/faces/Usuario/listar-usuario.xhtml",
 			"/faces/Usuario/perfil.xhtml", "/faces/Usuario/retiro.xhtml", "/faces/Usuario/solicitud-credito.xhtml",
-			"/faces/Usuario/informe-credito.xhtml", "/faces/Usuario/tabla-pagos.xhtml", 
+			"/faces/Usuario/informe-credito.xhtml", "/faces/Usuario/tabla-pagos.xhtml"
 	};
 	
 	private static final String[] soloCajera = { 
 			"/faces/cajera/deposito.xhtml","/faces/cajera/retiro.xhtml","/faces/cajera/home-cajera.xhtml",
-			"/faces/cajera/solicitud-credito.xhtml",
-		
+			"/faces/cajera/solicitud-credito.xhtml"
 	};
 
 	private boolean noLoguear(String url) {

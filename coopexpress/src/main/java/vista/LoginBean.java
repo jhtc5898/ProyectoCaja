@@ -54,7 +54,7 @@ public class LoginBean {
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
 				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
 				this.numeroCuenta = cuenta.getNumero_cuenta();
-				return "admin/listar-usuario";
+				return "admin/solicitudes-usuario.xhtml";
 			}
 			//Si se encontro CAJERO
 			else if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==3) {

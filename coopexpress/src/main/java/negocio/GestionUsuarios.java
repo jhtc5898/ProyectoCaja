@@ -43,7 +43,11 @@ public class GestionUsuarios {
 	}
 
 	public List<Usuario> getUsuarios() {
-		return usuarioDAO.getUsuario();
+		return usuarioDAO.getUsuariosRegistrados();
+	}
+	
+	public List<Usuario> getUsuariosPendientes(){
+		return usuarioDAO.getUsuariosPendientes();
 	}
 	
 	public Usuario obtenerUsuarioCedula(String cedula) {

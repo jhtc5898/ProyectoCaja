@@ -4,9 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blankAdmin.xhtml">
  
-<ui:define name="titulo">Nueva Cuenta</ui:define>
+<ui:define name="titulo">Crear nueva cuenta</ui:define>
 
-<ui:define name="descripcion">Creación de una nueva Cuenta</ui:define>
+<ui:define name="descripcion">Creación de una nueva a un usuario aprobado</ui:define>
   
 <ui:define name="indicaciones">
 	<p><b>Numero.-</b> Ingresar el numero de cuenta</p>
@@ -20,12 +20,6 @@
             	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
               	<i class="nav-icon fas fa-user"></i>
               	<p>Solicitudes Usuario</p>
-            </a>
-      		</li>
-      		<li class="nav-item has-treeview">
-            	<a href="/coopexpress/faces/admin/solicitudes-credito.xhtml" class="nav-link">
-              	<i class="nav-icon fas fa-user"></i>
-              	<p>Solicitudes Créditos</p>
             </a>
       		</li>
 	</ui:define>
@@ -125,47 +119,45 @@
     	</li>    
 	</ui:define>
 
-
 <ui:define name="contenido">
 <!-- Horizontal Form -->			
-            <div class="card card-info" onload="#{gestionCuentasBean.init()}">
+            <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Crear una Cuenta</h3>
+                <h3 class="card-title">Formulario de registro</h3>
               </div>
-            <h:form>
-            	<div class="card-body">
-            	
+            <h:form id="crearUsuario">
+            <div class="card-body">
             		<div class="col-3">
-            			<h:dataTable value="#{gestionCuentasBean.cuenta.usuario}" var="usuario">
-							<h:column>
-							<f:facet name="header">Cedula Usuario</f:facet>
-							<h:inputText styleClass="form-control" value="#{usuario.cedula}" />
-							</h:column>
-						</h:dataTable>
-            		</div>
-	           		<div class="col-3">
-            			<label class="col-form-label">Saldo Cuenta</label>
-            			<h:inputText id="txtSaldoCuenta" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
-            		</div>
-            		
-            		
-            		
-            		<div class="col-3">
-            			<label class="col-form-label">Correo Cuenta</label>
-            			<ion-icon name="mail"></ion-icon>
-            			<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida"  value="#{gestionCuentasBean.cuenta.correo_cuenta}">
-            			<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-            			</h:inputText>
-            			<h:message for="txtCorreo" style="color:red" />
+           				<label class="col-form-label">Cedula usuario</label>
+						<h:inputText styleClass="form-control" value="#{gestionUsuariosBean.usuario.cedula}" readonly="true"/>
             		</div>
             		
             		<div class="col-3">
-            			<label class="col-form-label">Contraseña Cuenta</label>
-            			<h:inputSecret id="txtPassword" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.pswd_cuenta}" type="password" />
+            			<label class="col-form-label">Numero de cuenta</label>
+						<h:inputText styleClass="form-control" value="#{gestionCuentasBean.cuenta.numero_cuenta}"/>
+            		</div>
+            		
+            		<div class="row" style="margin-left: 0.0%">
+            			<div class="col-4">
+            			<label class="col-form-label">Correo Electrónico</label>
+						<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida" value="#{gestionCuentasBean.cuenta.correo_cuenta}">
+							<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText>
+            			</div>
+            		
+            			<div class="col-3">
+            			<label class="col-form-label">Contraseña</label>
+						<h:inputText styleClass="form-control" value="#{gestionCuentasBean.cuenta.pswd_cuenta}"/>
+            			</div>
+					</div>
+					
+					<div class="col-3">
+            			<label class="col-form-label">Saldo</label>
+						<h:inputText styleClass="form-control" value="#{gestionCuentasBean.cuenta.saldo_cuenta}"/>
             		</div>
             		
             		<div class="col-3">
-            			<label class="col-form-label">Tipo Cuenta</label>
+            		<label class="col-form-label">Tipo Cuenta</label>
             			<h:column>
 							<h:selectOneMenu id="tipo" value="#{gestionCuentasBean.cuenta.tipo_cuenta.codigo_tipo_cuenta}" styleClass="form-control">
 								<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
@@ -173,11 +165,11 @@
 							</h:selectOneMenu>
 						</h:column>
             		</div>
-            	</div>
+            </div>
             		<div class="card-footer">
-                      	<h:commandButton  value="Guardar" styleClass="btn btn-info" action="#{gestionCuentasBean.guardar()}" />
-              		</div>	
-		</h:form>
-    </div>
+						<h:commandButton value="Crear cuenta" styleClass="btn btn-success" action="#{gestionCuentasBean.guardarCuenta(gestionUsuariosBean.usuario.cedula)}" />
+					</div>
+			</h:form>
+		</div>
 </ui:define>
 </ui:composition>

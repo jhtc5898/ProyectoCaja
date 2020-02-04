@@ -2,20 +2,20 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="blankAdmin.xhtml">
 
-	<ui:define name="titulo">Busqueda Usuario</ui:define>
+	<ui:define name="titulo">Solicitudes de ingreso de usuarios</ui:define>
 
-	<ui:define name="descripcion">Buscar un Usuario</ui:define>
-
-	<ui:define name="indicaciones">
-		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	<ui:define name="descripcion">Listado de solicitudes
 	</ui:define>
 
-<ui:define name="menu1">
+	<ui:define name="indicaciones">
+		<p>Comprobar el correcto funcionamiento de la pagina.</p>
+	</ui:define>
+	
+	<ui:define name="menu1">
 	<li class="nav-item has-treeview">
-            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link active">
               	<i class="nav-icon fas fa-user"></i>
               	<p>Solicitudes Usuario</p>
             </a>
@@ -47,7 +47,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="fas fa-user"></i>
               <p>
                 Administracion Usuarios
@@ -104,13 +104,13 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Tipo De Transaccion</p>
+                  <p>Crear Tipo Transaccion</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Tipo Transaccion</p>
+                  <p>Lista Tipo Transaccion</p>
                 </a>
               </li>
             </ul>
@@ -118,79 +118,79 @@
 	</ui:define>
 
 	<ui:define name="contenido">
-		<div class="card card-success">
-			<div class="card-header">
-				<h3 class="card-title">Usuario</h3>
+		<h:form>
+			<div class="card-body" onload="#{gestionUsuariosBean.init()}">
+			<h:messages for="cedula" style="color:red" />
+			<div class="card-footer">
+				<div class="input-group">
+					<label class="col-form-label">Buscar por cédula de usuario </label>
+                    <div class="custom-file">
+                      	<div class="col-2">
+					 		<h:inputText id="cedula" styleClass="form-control" required="true" requiredMessage="Ingresar un numero de cedula" validatorMessage="Ingresar una cédula válida (10 dígitos y sin letras)" converterMessage="Ingresar solo números" binding="#{messagesBean.componente}" value="#{gestionUsuariosBean.cedula}">
+					 			<f:validateLength for="cedula" minimum="9" maximum="9" />
+					 			<f:convertNumber integerOnly="true" type="number" /> 
+					 		</h:inputText>
+						</div>
+						<div class="input-group-append">
+                        	<h:commandButton styleClass="btn btn-success" action="#{gestionUsuariosBean.buscar()}" value="Buscar" />
+                     	</div>
+                      </div>
+                    </div>
+                    <h:message for="cedula" style="color:red" />
+                </div>
 			</div>
-			<!-- /.card-header -->
-			<!-- form start -->
-			<h:form>
-				<h:form>
-					<div class="form-group">
-						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							
-							<h:column>
-								<h:inputText value="#{usuario.nombre}" />
-								<f:facet name="header">Nombre</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.apellido}" />
-								<f:facet name="header">Apellido</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText pt:placeholder="AAAA/MM/dd" value="#{usuario.fecha_nacimiento}" ></h:inputText>
-								<f:facet name="header">Fecha Nacimiento</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.educacion}" />
-								<f:facet name="header">Nivel Educacion</f:facet>
-							</h:column>
-							
-							<h:column>
-								<h:inputText value="#{usuario.estado}" />
-								<f:facet name="header">Estado Civil</f:facet>
-							</h:column>
-						</h:dataTable>
-					</div>
-					<div class="form-group">
-						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							
-
-							<h:column>
-								<h:inputText value="#{usuario.genero}" />
-								<f:facet name="header">Genero</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.telefono}" />
-								<f:facet name="header">Telefono</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.ciudad}" />
-								<f:facet name="header">Ciudad</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.principal}" />
-								<f:facet name="header">Calle Principal</f:facet>
-							</h:column>
-							
-							<h:column>
-								<h:inputText value="#{usuario.secundaria}" />
-								<f:facet name="header">Calle Secundaria</f:facet>
-							</h:column>
-						</h:dataTable>
-					</div>  
-                	<!-- /.card-body -->
-                	<div class="card-footer">
-                  		<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioAdmin()}" styleClass="btn btn-success" value="Actualizar" />
-                	</div>	
-				</h:form>
 			</h:form>
-		</div>
+			<h:form>
+			<h:dataTable value="#{gestionUsuariosBean.usuariosPendientes}" var="usuario" styleClass="table table-bordered">
+				<h:column>
+					<f:facet name="header">Cedula</f:facet>
+					#{usuario.cedula}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Nombre</f:facet>
+				#{usuario.nombre}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Apellido</f:facet>
+				#{usuario.apellido}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Fecha Nacimiento</f:facet>
+				#{usuario.fecha_nacimiento}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Nivel Educacion</f:facet>
+				#{usuario.educacion}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Estado Civil</f:facet>
+				#{usuario.estado}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Genero</f:facet>
+				#{usuario.genero}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Telefono</f:facet>
+				#{usuario.telefono}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Ciudad</f:facet>
+				#{usuario.ciudad}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Calle Principal</f:facet>
+				#{usuario.principal}
+			</h:column>
+				<h:column>
+					<f:facet name="header">Calle Secundaria</f:facet>
+				#{usuario.secundaria}
+			</h:column>
+
+				<h:column>
+					<a href="actualizar-usuario.xhtml"><h:commandButton action="#{gestionUsuariosBean.cargarUsuarioRevision(usuario)}" styleClass="btn btn-primary" value="Revisión" /></a>
+				</h:column>
+			</h:dataTable>
+		</h:form>
 	</ui:define>
 </ui:composition>

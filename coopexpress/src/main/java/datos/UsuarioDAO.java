@@ -32,8 +32,16 @@ public class UsuarioDAO {
 	}
 
 	//Obtener usuarios que no son admin y que fueron habilitados
-	public List<Usuario> getUsuario() {
-		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'A' AND estado_usuario <> 'I'";
+	public List<Usuario> getUsuariosRegistrados() {
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'A'";
+		Query q = em.createQuery(jpql, Usuario.class);
+		List<Usuario> usuarios = q.getResultList();
+		return usuarios;
+	}
+	
+	//Obtener usuarios que estan pendientes de aprobacion
+	public List<Usuario> getUsuariosPendientes() {
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario = 'I'";
 		Query q = em.createQuery(jpql, Usuario.class);
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;
@@ -69,6 +77,11 @@ public class UsuarioDAO {
 		} catch (Exception e) {
 			return null;
 		}
-		
+	}
+	
+	public void cambiarEstadoUsuario(String cedulaUsuario) {
+		Query cambiarEstado = em.createQuery("UPDATE Usuario c SET estado_usuario = 'H' WHERE cedula_usuario = ?1");
+		cambiarEstado.setParameter(1, cedulaUsuario);
+		cambiarEstado.executeUpdate();
 	}
 }

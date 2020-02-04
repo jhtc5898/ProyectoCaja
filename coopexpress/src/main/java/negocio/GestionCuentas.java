@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import datos.CuentaDAO;
+import datos.UsuarioDAO;
 import modelo.Cuenta;
 import modelo.Tipo_Cuenta;
 
@@ -15,7 +16,11 @@ public class GestionCuentas {
 	@Inject
 	private CuentaDAO cuentadDAO;
 	
+	@Inject
+	private UsuarioDAO usuarioDAO;
+	
 	public void guardar(Cuenta cuenta) {
+		usuarioDAO.cambiarEstadoUsuario(cuenta.getUsuario().getCedula());
 		cuentadDAO.insert(cuenta);
 	}
 	

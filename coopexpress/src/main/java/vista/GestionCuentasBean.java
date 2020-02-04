@@ -14,6 +14,7 @@ import modelo.Cuenta;
 import modelo.Tipo_Cuenta;
 import modelo.Usuario;
 import negocio.GestionCuentas;
+import negocio.GestionUsuarios;
 
 @ManagedBean
 @SessionScoped
@@ -25,18 +26,15 @@ public class GestionCuentasBean implements Serializable{
 	private GestionCuentas gc;
 	
 	@Inject
-	private LoginBean login;
+	private GestionUsuarios gu;
 	
+	@Inject
+	private LoginBean login;
+		
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
 	private List<SelectItem> cuentasItem;
-	
-	public String guardar() {
-		gc.guardar(cuenta);
-		init();
-		return "listar-cuentas";
-	}
-	
+		
 	@PostConstruct
 	public void init() {
 		cuenta = new Cuenta();
@@ -44,6 +42,20 @@ public class GestionCuentasBean implements Serializable{
 		cuenta.setTipo_cuenta(new Tipo_Cuenta());
 		cuentas=gc.getCuentas();
 	}
+	
+	public String guardar() {
+		gc.guardar(cuenta);
+		init();
+		return "listar-cuentas";
+	}
+	
+	public String guardarCuenta(String cedula) {
+		this.cuenta.setUsuario(gu.getUsuarioCedula(cedula));
+		gc.guardar(cuenta);
+		init();
+		return "listar-cuentas";
+	}
+	
 	
 	public String actualizarCuentaUsuario() {
 		gc.actualizar(cuenta);

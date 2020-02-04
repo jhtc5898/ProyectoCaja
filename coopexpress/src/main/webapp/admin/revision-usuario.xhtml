@@ -1,0 +1,212 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blankAdmin.xhtml">
+
+	<ui:define name="titulo">Usuario - Revisión</ui:define>
+
+	<ui:define name="descripcion">Información del usuario solicitante</ui:define>
+
+	<ui:define name="indicaciones">
+		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	</ui:define>
+
+<ui:define name="menu1">
+	<li class="nav-item has-treeview">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link active">
+              	<i class="nav-icon fas fa-user"></i>
+              	<p>Solicitudes Usuario</p>
+            </a>
+      		</li>
+	</ui:define>
+	
+	<ui:define name="menu">
+		<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <p>
+                Administracion Cuentas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Cuentas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Cuentas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-user"></i>
+              <p>
+                Administracion Usuarios
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Creacion De Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Usuarios</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-edit"></i>
+              <p>Tipo de Cuenta                
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo Cuenta</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Tipo Cuenta</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+            
+              <i class="fas fa-comment-dollar"></i>
+              <p>
+                Tipo transaccion
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Crear Tipo De Transaccion</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lista de Tipo Transaccion</p>
+                </a>
+              </li>
+            </ul>
+    	</li>    
+	</ui:define>
+
+	<ui:define name="contenido">
+		<div class="card card-success">
+              <div class="card-header border-0">
+                <h3 class="card-title">Informe general</h3>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-sm btn-tool">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                   <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.cedula}
+                    </span>
+                    <span class="text-muted">Número de cédula</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                     #{gestionUsuariosBean.usuario.nombre} #{gestionUsuariosBean.usuario.apellido}
+                    </span>
+                    <span class="text-muted">Nombres y apellidos</span>
+                  </p>
+                </div>
+                <!-- /.d-flex -->
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                 <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.fecha_nacimiento}
+                    </span>
+                    <span class="text-muted">Fecha de nacimiento</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.ciudad}
+                    </span>
+                    <span class="text-muted">Ciudad</span>
+                  </p>
+                </div>
+                <!-- /.d-flex -->
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="d-flex flex-column text-left">
+                  	<span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.telefono}
+                    </span>
+                    <span class="text-muted">Telefono</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                  	 <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.genero}
+                    </span>
+                    <span class="text-muted">Género</span>
+                  </p>
+                </div>
+                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="d-flex flex-column text-left">
+                  	<span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.estado}
+                    </span>
+                    <span class="text-muted">Estado civil</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                     <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.educacion}
+                    </span>
+                    <span class="text-muted">Nivel de educación</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                 	<p class="d-flex flex-column text-left">
+                 		<span class="font-weight-bold">
+                      		#{gestionUsuariosBean.usuario.principal} - #{gestionUsuariosBean.usuario.secundaria}
+                    	</span>
+                    	<span class="text-muted">Dirección</span>
+                 	</p>
+                  <p class="d-flex flex-column text-right"></p>
+                </div>
+                <!-- /.d-flex -->
+              </div>
+              <div class="card-footer">
+             <h:form>
+             <h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario">
+             	<h:column>
+             		<h:commandButton action="#{gestionUsuariosBean.aprobarUsuario(usuario)}" styleClass="btn btn-success" value="Aprobar" />&#160; &#160;
+              		<h:commandButton action="#{gestionUsuariosBean.rechazarUsuario(usuario)}" styleClass="btn btn-danger" value="Denegar" />
+            	</h:column>
+             </h:dataTable>
+              </h:form>
+              </div>
+            </div>
+	</ui:define>
+</ui:composition>
