@@ -15,7 +15,7 @@ public class MessagesBean {
 	public void setMensaje(String mensaje) {
 		FacesContext.getCurrentInstance().addMessage("txtMonto", new FacesMessage(mensaje));
     }
-	 
+		 
 	public UIComponent getComponente() {
 		return componente;
 	}
@@ -23,6 +23,4 @@ public class MessagesBean {
 	public void setComponente(UIComponent componente) {
 		this.componente = componente;
 	}
-	 
-	 
 }

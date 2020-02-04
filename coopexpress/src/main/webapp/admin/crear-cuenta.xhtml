@@ -134,16 +134,7 @@
               </div>
             <h:form>
             	<div class="card-body">
-            		<div class="col-3">
-            			<label class="col-form-label">Numero Cuenta</label>
-            			<h:inputText id="txtNumeroCuenta" styleClass="form-control" value="#{gestionCuentasBean.cuenta.numero_cuenta}" />
-            		</div>
-            		
-            		<div class="col-3">
-            			<label class="col-form-label">Saldo Cuenta</label>
-            			<h:inputText id="txtSaldoCuenta" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
-            		</div>
-            		
+            	
             		<div class="col-3">
             			<h:dataTable value="#{gestionCuentasBean.cuenta.usuario}" var="usuario">
 							<h:column>
@@ -152,6 +143,12 @@
 							</h:column>
 						</h:dataTable>
             		</div>
+	           		<div class="col-3">
+            			<label class="col-form-label">Saldo Cuenta</label>
+            			<h:inputText id="txtSaldoCuenta" styleClass="form-control"  value="#{gestionCuentasBean.cuenta.saldo_cuenta}" />
+            		</div>
+            		
+            		
             		
             		<div class="col-3">
             			<label class="col-form-label">Correo Cuenta</label>

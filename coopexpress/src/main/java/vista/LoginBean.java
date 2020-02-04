@@ -35,7 +35,6 @@ public class LoginBean {
 
 		Cuenta cuenta = validarLoginCuenta();
 
-		
 		if (cuenta != null ) {
 			// Si se encontro USUARIO
 			if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==1) {
@@ -66,7 +65,6 @@ public class LoginBean {
 				this.numeroCuenta = cuenta.getNumero_cuenta();
 				return "cajera/home-cajera";
 			}
-			
 		}
 		return null;
 	}

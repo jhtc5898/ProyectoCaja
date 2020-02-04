@@ -4,11 +4,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.Query;
 
 import datos.UsuarioDAO;
 import modelo.Usuario;
-import vista.MessagesBean;
 
 @Stateless
 public class GestionUsuarios {
@@ -16,15 +14,14 @@ public class GestionUsuarios {
 	@Inject
 	private UsuarioDAO usuarioDAO;
 	
-	@Inject
-	private MessagesBean mensaje = new MessagesBean();
-
-	public void guardarUsuario(Usuario usuario) {
+	public String guardarUsuario(Usuario usuario) {
+		String resultado = "";
 		if (usuarioDAO.read(usuario.getCedula()) == null) {
 			usuarioDAO.insert(usuario);
-		} else {
-			usuarioDAO.update(usuario);
+		}else {
+			resultado = null;
 		}
+		return resultado;
 	}
 
 	public void eliminarUsuario(String cedula) {
@@ -32,11 +29,15 @@ public class GestionUsuarios {
 			usuarioDAO.remove(cedula);
 		}
 	}
-
+	
 	public void actualizarUsuario(Usuario usuario) {
 		usuarioDAO.update(usuario);
 	}
 
+	public Usuario obtenerUsuarioAprobado(String numeroCedula) {
+		return usuarioDAO.obtenerUsuarioAprobado(numeroCedula);
+	}
+	
 	public Usuario getUsuarioCedula(String cedula) {
 		return usuarioDAO.read(cedula);
 	}

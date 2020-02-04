@@ -7,16 +7,10 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <title>CoopExpress</title>
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="Faceletes/plugins/fontawesome-free/css/all.min.css"/>
-  <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
-  <!-- overlayScrollbars -->
   <link rel="stylesheet" href="Faceletes/dist/css/adminlte.min.css"/>
-  <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
 </h:head>
 <body class="hold-transition login-page">
@@ -46,14 +40,19 @@
             </div>
           </div>
         </div>
-        <div class="row">
-        	<h:commandButton action="#{loginBean.iniciarSesion()}" value="Iniciar Sesion" class="btn btn-primary btn-block" ></h:commandButton>
-          <!-- /.col -->
+        <div class="col-5">
+            <h:commandButton action="#{loginBean.iniciarSesion()}" value="Iniciar Sesion" class="btn btn-primary btn-block" ></h:commandButton>
         </div>
       </h:form>
-      <p class="mb-0">
-        <a href="register.xhtml" class="text-center">Registrarse En CoopExpress</a>
-      </p>
+      <div>
+		<HR/>
+       </div>
+       <div style="text-align: center">
+            <p class="mb-0">
+		        <a href="register.xhtml" class="text-center">Registrarse En CoopExpress</a>
+      		</p>
+       </div>
+      
     </div>
     <!-- /.login-card-body -->
   </div>

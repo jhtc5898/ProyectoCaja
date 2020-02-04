@@ -5,17 +5,13 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="blank2.xhtml">
 
-	<ui:define name="titulo">Creacion de un Nuevo Usuario</ui:define>
+	<ui:define name="titulo">Creacion de un nuevo usuario</ui:define>
 
 	<ui:define name="descripcion">Registro en Coopexpress</ui:define>
 
 	<ui:define name="indicaciones">
-		<p>Nombre.- Ingresar el nombre del nuevo Usuario.</p>
-		<p>Apellido.- Ingresar el apellido del nuevo Usuario.</p>
-		<p>Cedula.- Ingresar el documento de identificacion que consta de 10 digitos.</p>
-		<p>Correo.- Ingresar un correo al cual se pueda contactar con el usuario.</p>
-		<p>Direccion.- Ingresar la ciudad o calle donde se encuentra localizado el Usuario.</p>
-		<p>Telefono.- Ingresar algun tipo de numero telefonico con el cual se pueda contactar con el Usuario.</p>
+		<p>Nombre y Apellido.- Ingresar nombre y apellido</p>
+		<p>Direccion.- Se necesita una calle principal y una calle secundaria (opcional)</p>
 	</ui:define>
 
 	<ui:define name="contenido">
@@ -26,32 +22,46 @@
 			</div>
 			<!-- /.card-header -->
 			<!-- form start -->
-			<h:form>
-				<div class="card-body">
+			<h:form id="register">
+				<div class="card-body" >
+					<b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
 					<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
-						<h:inputText id="txtCedula" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.cedula}" />
+						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.usuario.cedula}">
+							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+						</h:inputText>
 					</div>
+					<h:message for="txtCedula" style="color:red" />
 					<div class="col-4">
 						<label class="col-form-label">Nombre de Usuario</label>
-						<h:inputText id="txtNombre" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.nombre}" />
+						<h:inputText id="txtNombre" styleClass="form-control" required="true" requiredMessage="Debe ingresar sus nombres" validatorMessage="El nombre no puede contener números" value="#{gestionUsuariosBean.usuario.nombre}">
+							<f:validateRegex pattern="^[a-zA-Z ]*$" />
+						</h:inputText>
 					</div>
+					<h:message for="txtNombre" style="color:red" />
+					
 					<div class="col-4">
 						<label class="col-form-label">Apellido de Usuario</label>
-						<h:inputText id="txtApellido" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.apellido}" />
+						<h:inputText id="txtApellido" styleClass="form-control" required="true" requiredMessage="Debe ingresar sus nombres" validatorMessage="El apellido no puede contener números" value="#{gestionUsuariosBean.usuario.apellido}">
+							<f:validateRegex pattern="^[a-zA-Z ]*$" />
+						</h:inputText>
 					</div>
+					<h:message for="txtApellido" style="color:red" />
 					
 					<div class="col-3">
-						<label class="col-form-label">Fecha Nacimiento AAAA/MM/dd</label>
-						 <div class="input-group-prepend">
+						<label class="col-form-label">Fecha Nacimiento AAAA/mm/dd</label>
+						<div class="input-group">
+                    		<div class="input-group-prepend">
                       		<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                      		<h:inputText styleClass="form-control" pt:placeholder="AAAA/MM/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
-    						</h:inputText>
-                    	</div>
+                   		</div>
+                    	<h:inputText id="txtFecha" styleClass="form-control" pt:placeholder="AAAA/mm/dd" required="true" requiredMessage="Debe ingresar sus fecha de nacimiento" validatorMessage="La fecha debe seguir el formato AAAA/mm/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
+    						<f:validateRegex pattern="([12]\d{3}[/-](0[1-9]|1[0-2])[/-](0[1-9]|[12]\d|3[01]))" />
+    					</h:inputText>
+                  		</div>
 					</div>
+					<h:message for="txtFecha" style="color:red" />
+					
 					<div class="col-3">
 						<label class="col-form-label">Nivel Educacion de Usuario</label>
 						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}" styleClass="form-control">
@@ -87,18 +97,20 @@
 					</div>
 					<div class="col-3">
 						<label class="col-form-label">Telefono de Usuario</label>
-						<h:inputText id="txtTelefono" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.telefono}" />
+						<h:inputText id="txtTelefono" styleClass="form-control" required="true" requiredMessage="Debe ingresar un número de telefono" validatorMessage="Telefono no válido" value="#{gestionUsuariosBean.usuario.telefono}">
+							<f:validateLength for="txtTelefono" minimum="7" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+						</h:inputText>
 					</div>
+					<h:message for="txtTelefono" style="color:red" />
 					<div class="col-4">
-						<label class="col-form-label">Calle Principal de Usuario</label>
-						<h:inputText id="txtPrincipal" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.principal}" />
+						<label class="col-form-label">Dirección -Calle Principal</label>
+						<h:inputText id="txtPrincipal" styleClass="form-control" required="true" requiredMessage="Debe ingresar una dirección" value="#{gestionUsuariosBean.usuario.principal}" />
 					</div>
+					<h:message for="txtPrincipal" style="color:red" />
 					<div class="col-4">
-						<label class="col-form-label">Calle Secundaria de Usuario</label>
-						<h:inputText id="txtSecundaria" styleClass="form-control"
-							value="#{gestionUsuariosBean.usuario.secundaria}" />
+						<label class="col-form-label">Direccion - Calle Secundaria(Opcional)</label>
+						<h:inputText id="txtSecundaria" styleClass="form-control" value="#{gestionUsuariosBean.usuario.secundaria}" />
 					</div>
 				</div>
 				<!-- /.card-body -->

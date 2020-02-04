@@ -34,6 +34,7 @@ public class CuentaDAO {
 		return c;
 	}
 	
+	//Obtener las cuentas para iniciar sesion
 	public List<Cuenta> getCuentasLogin(){
 		String jpql = "SELECT c FROM Cuenta c";
 		return em.createQuery(jpql, Cuenta.class).getResultList();

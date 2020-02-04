@@ -3,8 +3,10 @@ package vista;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import modelo.Tipo_Transaccion;
@@ -17,29 +19,32 @@ public class GestionUsuariosBean {
 
 	@Inject
 	private GestionUsuarios gu;
-
-	@Inject
-	private MessagesBean mensaje = new MessagesBean();
 	
 	/* Bean Properties */
 	private Usuario usuario = new Usuario();
 	private String cedula;
 	private List<Usuario> usuarios;
-	
+	private String mensaje;
+	private String mensaje1;
 	
 	@PostConstruct
 	public void init() {
 		usuario = new Usuario();
 		usuarios = gu.getUsuarios();
-		cedula = "";
-
+		cedula = " ";
 	}
 
-	/* Action Controller */
+	//Registro del usuario con el mensaje de confirmacion
 	public String guardarUsuario() {
-		gu.guardarUsuario(usuario);
-		init();
-		return "registro-pendiente";
+		String pagina = "";
+		if(gu.guardarUsuario(usuario)!= null) {
+			init();
+			setMensaje("Su solicitud ha sido ingresada correctamente. Deberá consultar si fue o no aprobado en 'Consultar Aprobacion' en el menú lateral");
+		}else {
+			FacesContext.getCurrentInstance().addMessage("register:txtCedula", new FacesMessage("La cédula ingresada ya se encuentra registrada"));
+			pagina = null;
+		}
+		return pagina;
 	}
 		
 	public String buscar() {
@@ -47,10 +52,19 @@ public class GestionUsuariosBean {
 		if(usuario != null) {
 			return "actualizar-usuario";
 		}else {
-			mensaje.setMensaje("El usuario no se encuentra registrado");
 			return null;
 		}
 		
+	}
+	
+	public String consultarAprobacion() {
+		usuario = gu.obtenerUsuarioAprobado(cedula);
+		if(usuario != null) {
+			setMensaje1("Usuario:  Aprobado, acercarse a crear su cuenta en la cooperativa"); 
+		}else {
+			setMensaje1("Usuario:  Denegado, para mas información acercarse a consultar a Coopexpress");
+		}
+		return null;
 	}
 	
 	public String actualizarUsuarioUsuario() {
@@ -69,7 +83,11 @@ public class GestionUsuariosBean {
 
 	public String actualizar(Usuario usuario) {
 		this.usuario = usuario;
-		return "actualizar-usuario.xhtml";
+		return "actualizar-usuario";
+	}
+	
+	public void vaciarMensaje() {
+		setMensaje(" ");
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -94,6 +112,22 @@ public class GestionUsuariosBean {
 
 	public String getCedula() {
 		return cedula;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
+	public String getMensaje1() {
+		return mensaje1;
+	}
+
+	public void setMensaje1(String mensaje1) {
+		this.mensaje1 = mensaje1;
 	}
 
 }

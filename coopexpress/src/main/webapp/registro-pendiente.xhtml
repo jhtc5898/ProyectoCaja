@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	template="blank2.xhtml">
+
+<ui:define name="titulo">Aprobación de ingreso en Coopexpress</ui:define>
+
+	<ui:define name="descripcion">Consultar aprobación</ui:define>
+
+	<ui:define name="indicaciones">
+		<p><strong>Ingrese su número de cédula para consultar si ha sido aceptado para formar parte de Coopexpress</strong></p>
+	</ui:define>
+
+	<ui:define name="contenido">
+			<h:form id="solicitud">
+			<div class="row">
+				<div class="col-md-6" onload="#{gestionUsuariosBean.init()}">
+					<div class="col-3">
+						<label class="col-form-label">Cedula de Usuario</label>
+						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
+							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+						</h:inputText>
+					</div>
+					<h:message for="txtCedula" style="color:red" />
+				</div>
+				<div class="col-md-4">
+					<b><h:outputText value="#{gestionUsuariosBean.mensaje1}" style="color:#1668DA"> </h:outputText></b>
+				</div>
+				</div>
+					<hr />
+				<div class="col-3">
+					<h:commandButton value="Consultar" styleClass="btn btn-info" action="#{gestionUsuariosBean.consultarAprobacion()}" />
+				</div>
+			</h:form>
+	</ui:define>
+</ui:composition>
