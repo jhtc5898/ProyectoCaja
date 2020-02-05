@@ -1,17 +1,17 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	template="blankAdmin.xhtml">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      template="blankAdmin.xhtml">
+ 
+<ui:define name="titulo">Crear nuevo cajero</ui:define>
 
-	<ui:define name="titulo">Busqueda Usuario</ui:define>
-
-	<ui:define name="descripcion">Buscar un Usuario</ui:define>
-
-	<ui:define name="indicaciones">
-		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
-	</ui:define>
+<ui:define name="descripcion">Creación de un empleado</ui:define>
+  
+<ui:define name="indicaciones">
+	<p>Ingresar los datos personales del nuevo usuario</p>
+</ui:define>
 
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
@@ -23,8 +23,8 @@
 	</ui:define>
 	
 	<ui:define name="menu">
-		<li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+		<li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
               <i class="fas fa-chart-pie"></i>
               <p>
                 Administracion Cuentas
@@ -33,7 +33,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Crear nuevo cajero</p>
                 </a>
@@ -47,7 +47,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="fas fa-user"></i>
               <p>
                 Administracion Usuarios
@@ -104,31 +104,32 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-tipo-transaccion.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Tipo De Transaccion</p>
+                  <p>Crear Tipo Transaccion</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/lista-tipo-transaccion.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Lista de Tipo Transaccion</p>
+                  <p>Lista Tipo Transaccion</p>
                 </a>
               </li>
             </ul>
     	</li>    
 	</ui:define>
 
-	<ui:define name="contenido">
-		<div class="card card-success">
-			<div class="card-header">
-				<h3 class="card-title">Usuario</h3>
-			</div>
-			<h:form>
-			<div class="card-body">
-            	<span class="dropdown-header" style="color: black"><h5> Actualizar información personal</h5></span>
+<ui:define name="contenido">
+<!-- Horizontal Form -->			
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Formulario de registro</h3>
+              </div>
+            <h:form id="crearUsuario">
+            <div class="card-body">
+            	<span class="dropdown-header" style="color: black"><h5> 1. INFORMACION PERSONAL</h5></span>
             	<div class="row">
             		<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
-						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.usuario.cedula}" readonly="true">
+						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.usuario.cedula}">
 							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
 							<f:validateRegex pattern="^[0-9]*$" />
 						</h:inputText>
@@ -232,12 +233,10 @@
             	</div>
             	<hr />
             </div>
-                	<!-- /.card-body -->
-           <div class="card-footer">
-           	<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioAdmin()}" styleClass="btn btn-success" value="Actualizar" />
-            <a href="listar-usuario.xhtml" class="btn btn-secondary">Regresar</a>
-           </div>	
-		</h:form>
-	</div>
-	</ui:define>
+            		<div class="card-footer">
+						<h:commandButton value="Siguiente" styleClass="btn btn-success" action="#{gestionUsuariosBean.guardarCajeroAdmin()}" />
+					</div>
+			</h:form>
+		</div>
+</ui:define>
 </ui:composition>

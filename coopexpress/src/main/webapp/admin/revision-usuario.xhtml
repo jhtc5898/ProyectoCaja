@@ -10,7 +10,9 @@
 	<ui:define name="descripcion">Información del usuario solicitante</ui:define>
 
 	<ui:define name="indicaciones">
-		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+		<p><b style="color:#28a745">Aprobar</b>, aprueba al usuario para que pueda crear su cuenta</p>
+		<p><b style="color:#17a2b8">Registrar</b>, aprueba al usuario y se procede a registrar la cuenta</p>
+		<p>Al presionar <b style="color:red">Denegar</b>, se rechaza la solicitud de un usuario</p>
 	</ui:define>
 
 <ui:define name="menu1">
@@ -33,9 +35,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -120,7 +122,11 @@
 	<ui:define name="contenido">
 		<div class="card card-success">
               <div class="card-header border-0">
-                <h3 class="card-title">Informe general</h3>
+              	<h3 class="card-title">
+              		<a href="solicitudes-usuario.xhtml"><i class="fas fa-arrow-circle-left"></i>
+              			Informacion general
+              		</a>
+            	</h3>
                 <div class="card-tools">
                   <a href="#" class="btn btn-sm btn-tool">
                     <i class="fas fa-download"></i>
@@ -209,5 +215,6 @@
               </h:form>
               </div>
             </div>
+            <a href="solicitudes-usuario.xhtml" class="btn btn-secondary">Regresar</a>
 	</ui:define>
 </ui:composition>

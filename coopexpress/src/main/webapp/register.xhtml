@@ -23,14 +23,11 @@
 			<!-- /.card-header -->
 			<!-- form start -->
 			<h:form id="register">
-				<div class="card-body" >
-				<div class="callout callout-info">
-                  <b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
-                </div>
-					
+				<div class="card-body" onload="#{gestionUsuariosBean.init()} #{gestionUsuariosBean.vaciarMensaje1()}">
+                  <b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>					
 					<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
-						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.usuario.cedula}">
+						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
 							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
 							<f:validateRegex pattern="^[0-9]*$" />
 						</h:inputText>

@@ -2,6 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       template="blankAdmin.xhtml">
  
 <ui:define name="titulo">Crear nueva cuenta</ui:define>
@@ -9,15 +10,12 @@
 <ui:define name="descripcion">Creación de una nueva a un usuario aprobado</ui:define>
   
 <ui:define name="indicaciones">
-	<p><b>Numero.-</b> Ingresar el numero de cuenta</p>
-    <p><b>Saldo.-</b> Ingresar el saldo con el que comienza la nueva cuenta</p>
-    <p><b>Usuario.-</b> Ingresar el numero de cedula del usuario al que pertenece la nueva cuenta</p>
-    <p><b>Tipo Cuenta.-</b> Ingresar el codigo al tipo de cuenta que pertence la nueva cuenta</p>
+	<p>Ingresar la información de la nueva cuenta</p>
 </ui:define>
 
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
-            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
+            	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link active">
               	<i class="nav-icon fas fa-user"></i>
               	<p>Solicitudes Usuario</p>
             </a>
@@ -25,8 +23,8 @@
 	</ui:define>
 	
 	<ui:define name="menu">
-		<li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+		<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="fas fa-chart-pie"></i>
               <p>
                 Administracion Cuentas
@@ -35,9 +33,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link active">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -127,27 +125,28 @@
               </div>
             <h:form id="crearUsuario">
             <div class="card-body">
-            		<div class="col-3">
+            <b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
+            <span class="dropdown-header" style="color: black"><h5> 2. Datos de la cuenta</h5></span>
+              		<div class="col-3">
            				<label class="col-form-label">Cedula usuario</label>
 						<h:inputText styleClass="form-control" value="#{gestionUsuariosBean.usuario.cedula}" readonly="true"/>
-            		</div>
-            		
-            		<div class="col-3">
-            			<label class="col-form-label">Numero de cuenta</label>
-						<h:inputText styleClass="form-control" value="#{gestionCuentasBean.cuenta.numero_cuenta}"/>
             		</div>
             		
             		<div class="row" style="margin-left: 0.0%">
             			<div class="col-4">
             			<label class="col-form-label">Correo Electrónico</label>
-						<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida" value="#{gestionCuentasBean.cuenta.correo_cuenta}">
+						<h:inputText id="txtCorreo" styleClass="form-control" required="true" requiredMessage="Ingresar un correo" validatorMessage="La estructura del correo no es valida" value="#{gestionCuentasBean.cuenta.correo_cuenta}">
 							<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</h:inputText>
+						<h:message for="txtCorreo" style="color:red"/>
             			</div>
-            		
+            			
             			<div class="col-3">
             			<label class="col-form-label">Contraseña</label>
-						<h:inputText styleClass="form-control" value="#{gestionCuentasBean.cuenta.pswd_cuenta}"/>
+						<h:inputText id="txtContrasena" styleClass="form-control" required="true" requiredMessage="Ingresar una contraseña" validatorMessage="Debe tener 6 o mas caracteres" pt:type="password" value="#{gestionCuentasBean.cuenta.pswd_cuenta}">
+							<f:validateLength for="txtContrasena" minimum="6" />
+						</h:inputText>
+						<h:message for="txtContrasena" style="color:red"/>
             			</div>
 					</div>
 					
@@ -159,11 +158,12 @@
             		<div class="col-3">
             		<label class="col-form-label">Tipo Cuenta</label>
             			<h:column>
-							<h:selectOneMenu id="tipo" value="#{gestionCuentasBean.cuenta.tipo_cuenta.codigo_tipo_cuenta}" styleClass="form-control">
-								<f:selectItem itemLabel="-- Seleccione --" itemValue=""/>
+							<h:selectOneMenu id="tipo" required="true" requiredMessage="Seleccionar un tipo" value="#{gestionCuentasBean.cuenta.tipo_cuenta.codigo_tipo_cuenta}" styleClass="form-control">
+								<f:selectItem itemValue="#{null}" itemLabel="--Seleccionar--" />
 								<f:selectItems value="#{gestionCuentasBean.cuentasItem}" />
 							</h:selectOneMenu>
 						</h:column>
+						<h:message for="tipo" style="color:red"/>
             		</div>
             </div>
             		<div class="card-footer">

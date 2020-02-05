@@ -33,9 +33,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -163,6 +163,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                   		<h:commandButton action="#{gestionCuentasBean.actualizarCuentaAdmin()}" value="Actualizar" styleClass="btn btn-success" />
+                  		<a href="listar-cuenta.xhtml" class="btn btn-secondary">Regresar</a>
                  </div>
               </h:form>
             </div>

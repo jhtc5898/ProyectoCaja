@@ -33,10 +33,14 @@ public class GestionCuentasBean implements Serializable{
 	@Inject
 	private LoginBean login;
 		
+	@Inject
+	private GestionUsuariosBean gub;
+	
 	private Cuenta cuenta = new Cuenta();
 	private List<Cuenta> cuentas;
 	private List<SelectItem> cuentasItem;
 	private String mensaje;
+	private String nroCuenta;
 		
 	@PostConstruct
 	public void init() {
@@ -57,12 +61,15 @@ public class GestionCuentasBean implements Serializable{
 		this.cuenta.setUsuario(gu.getUsuarioCedula(cedula));
 		if(gc.guardar(cuenta)!= null) {
 			init();
-			setMensaje("Su cuenta ha sido registrada exitosamente, puede ingresar a Coopexpress en 'Iniciar Sesión'");
+			setMensaje("Cuenta creada exitosamente");
+			gub.init();
+			pagina= "listar-cuenta";
 		}else {
 			FacesContext.getCurrentInstance().addMessage("register:txtCedula", new FacesMessage("El correo ya esta en uso"));
 			pagina = null;
 		}
 		return pagina;
+		
 	}
 	
 	public String guardarCuentaUsuario(String cedula) {
@@ -70,15 +77,14 @@ public class GestionCuentasBean implements Serializable{
 		this.cuenta.setUsuario(gu.getUsuarioCedula(cedula));
 		if(gc.guardarUsuario(cuenta)!= null) {
 			init();
-			setMensaje("Su cuenta ha sido registrada exitosamente, puede ingresar a Coopexpress en 'Iniciar Sesión'");
+			setMensaje("Su cuenta ha sido creada exitosamente, puede ingresar a Coopexpress en 'Iniciar Sesión'");
 		}else {
 			FacesContext.getCurrentInstance().addMessage("register:txtCorreo", new FacesMessage("El correo ya esta en uso"));
 			pagina = null;
 		}
 		return pagina;
 	}
-	
-	
+		
 	public String actualizarCuentaUsuario() {
 		gc.actualizar(cuenta);
 		login.cerrarSesion();
@@ -88,7 +94,7 @@ public class GestionCuentasBean implements Serializable{
 	public String actualizarCuentaAdmin() {
 		gc.actualizar(cuenta);
 		init();
-		return "listar-cuentas";
+		return "listar-cuenta";
 	}
 	
 	public String cuentaActualizar(Cuenta cuenta) {
@@ -100,10 +106,28 @@ public class GestionCuentasBean implements Serializable{
 		return cuenta= gc.obtenerCuentaNumero(numeroCuenta);
 	}
 	
-	public String eliminar(int codigo) {
-		gc.eliminar(codigo);
+	public String eliminar(Cuenta cuenta) {
+		gc.eliminar(cuenta);
 		this.init();
 		return null;
+	}
+	
+	public String buscar() {
+		cuenta = gc.obtenerCuentaNumero(nroCuenta);
+		if(cuenta != null) {
+			return "actualizar-cuenta";
+		}else {
+			FacesContext.getCurrentInstance().addMessage("buscarCuenta:txtCuenta", new FacesMessage("Cuenta no encontrada"));
+			return null;
+		}
+		
+	}
+	
+	public String eliminarUsuario(String numeroCuenta) {
+		this.cuenta= cargarCuenta(numeroCuenta);
+		login.cerrarSesion();
+		gc.actualizarEliminado(this.cuenta);
+		return "logout";
 	}
 	
 	public List<SelectItem> getItems(){
@@ -164,6 +188,18 @@ public class GestionCuentasBean implements Serializable{
 
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+	
+	public void vaciarMensaje() {
+		setMensaje(" ");
+	}
+
+	public String getNroCuenta() {
+		return nroCuenta;
+	}
+
+	public void setNroCuenta(String nroCuenta) {
+		this.nroCuenta = nroCuenta;
 	}
 	
 }

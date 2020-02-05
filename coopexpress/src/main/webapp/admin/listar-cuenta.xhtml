@@ -11,8 +11,8 @@
 </ui:define>
 
 <ui:define name="indicaciones">
-	<p>Ingresar el nombre del tipo de transacción a actualizar y presionar el boton <b>Buscar</b></p>
-    <p>La información del tipo de transacción buscada se cargará en la sección <b>Actualizar</b></p>
+	<p>Al presionar <b style="color:#17a2b8">Actualizar</b>, se podrá actualizar la información de la cuenta seleccionada</p>
+    <p>Al presionar <b style="color:red">Eliminar</b>, se eliminará la cuenta seleccionada</p>
 </ui:define>
 
 <ui:define name="menu1">
@@ -35,9 +35,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -121,6 +121,27 @@
 
 
 <ui:define name="contenido">
+		<h:form id="buscarCuenta">
+			<div class="card-body" onload="#{gestionUsuariosBean.init()}">
+			<div class="card-footer">
+				<div class="input-group">
+					<label class="col-form-label">Buscar por número de cuenta </label>
+                    <div class="custom-file">
+                      	<div class="col-2">
+					 		<h:inputText id="txtCuenta" styleClass="form-control" required="true" validatorMessage="Cuenta no válida" requiredMessage="Ingresar número de cuenta" value="#{gestionCuentasBean.nroCuenta}">
+							<f:validateLength for="txtCuentaDestino" minimum="6" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+							</h:inputText>
+						</div>
+						<div class="input-group-append">
+                        	<h:commandButton styleClass="btn btn-success" action="#{gestionCuentasBean.buscar()}" value="Buscar" />
+                     	</div>&#160;
+                     	<h:message for="txtCuenta" style="color:red" />
+                      </div>
+                    </div>
+                </div>
+			</div>
+		</h:form>
 	<h:form>
 		<h:dataTable value="#{gestionCuentasBean.cuentas}" var="cuenta" styleClass="table table-bordered" >
 		<h:column >
@@ -142,15 +163,10 @@
 		
 		<h:column>
 			<h:commandButton action="#{gestionCuentasBean.cuentaActualizar(cuenta)}" value="Actualizar" styleClass="btn btn-info"/>
-			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta.codigo_cuenta)}" value="Eliminar" styleClass="btn btn-danger"/>
-
+			<h:commandButton action="#{gestionCuentasBean.eliminar(cuenta)}" value="Eliminar" styleClass="btn btn-danger"/>
 		</h:column>
-		
 		</h:dataTable>
-		
-		 	
 	</h:form>
-
 </ui:define>
 	
 </ui:composition>

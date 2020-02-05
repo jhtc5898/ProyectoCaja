@@ -19,6 +19,11 @@ public class UsuarioDAO {
 		usuario.setEstado_usuario("Inhabilitado");
 		em.persist(usuario);
 	}
+	
+	public void insertCajero(Usuario usuario) {
+		usuario.setEstado_usuario("Habilitado");
+		em.persist(usuario);
+	}
 
 	public void update(Usuario usuario) {
 		em.merge(usuario);
@@ -47,7 +52,7 @@ public class UsuarioDAO {
 
 	//Obtener usuarios HABILITADOS
 	public List<Usuario> getUsuariosRegistrados() {
-		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'Inhabilitado' and estado_usuario <> 'Pendiente' and estado_usuario <> 'Denegado'";
+		String jpql = "SELECT u FROM Usuario u WHERE estado_usuario <> 'Inhabilitado' and estado_usuario <> 'Pendiente' and estado_usuario <> 'Denegado' and estado_usuario <> 'Eliminado'";
 		Query q = em.createQuery(jpql, Usuario.class);
 		List<Usuario> usuarios = q.getResultList();
 		return usuarios;

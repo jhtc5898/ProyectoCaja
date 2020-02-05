@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -29,13 +30,14 @@ public class LoginBean {
 	private String contrasena;
 	private String nombreUsuario;
 	private String numeroCuenta;
+	private String mensaje;
 
 	// Inicio de sesion
 	public String iniciarSesion() {
 
 		Cuenta cuenta = validarLoginCuenta();
 
-		if (cuenta != null ) {
+		if (cuenta != null && cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()!= 4 ) {
 			// Si se encontro USUARIO
 			if(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()==1) {
 				System.out.println("Entro En Usuario");
@@ -44,6 +46,8 @@ public class LoginBean {
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
 				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
 				this.numeroCuenta = cuenta.getNumero_cuenta();
+				setEmail("");
+				setContrasena("");
 				return "Usuario/home-Usuario";
 			}
 			//Si se encontro ADMIN
@@ -54,6 +58,8 @@ public class LoginBean {
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
 				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
 				this.numeroCuenta = cuenta.getNumero_cuenta();
+				setEmail("");
+				setContrasena("");
 				return "admin/solicitudes-usuario.xhtml";
 			}
 			//Si se encontro CAJERO
@@ -63,8 +69,12 @@ public class LoginBean {
 				session.setAttribute("rol", String.valueOf(cuenta.getTipo_cuenta().getCodigo_tipo_cuenta()));
 				this.nombreUsuario = cuenta.getUsuario().getNombre() + " "+ cuenta.getUsuario().getApellido();
 				this.numeroCuenta = cuenta.getNumero_cuenta();
+				setEmail("");
+				setContrasena("");
 				return "cajera/home-cajera";
 			}
+		}else {
+			setMensaje("Correo o contraseña incorrectos");
 		}
 		return null;
 	}
@@ -92,6 +102,19 @@ public class LoginBean {
 		}
 		
 	}
+	
+	//Metodo que elimina la sesion y redirige al login
+		public void eliminarCuenta() {
+			HttpSession session = SessionUtils.getSession();
+			session.invalidate();
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	
 	public void redirectLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect(request.getContextPath() + "/faces/login.xhtml");
@@ -127,6 +150,18 @@ public class LoginBean {
 
 	public void setNumeroCuenta(String numeroCuenta) {
 		this.numeroCuenta = numeroCuenta;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+	
+	public void vaciarMensaje() {
+		setMensaje(" ");
 	}
 
 	@Override

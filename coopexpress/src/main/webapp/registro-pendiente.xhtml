@@ -18,7 +18,7 @@
 			<h:form id="solicitud">
 			<div class="row">
 				<div class="col-md-6" onload="#{gestionUsuariosBean.init()}">
-					<div class="col-4">
+					<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
 						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
 							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
@@ -37,4 +37,5 @@
 				</div>
 			</h:form>
 	</ui:define>
+	
 </ui:composition>

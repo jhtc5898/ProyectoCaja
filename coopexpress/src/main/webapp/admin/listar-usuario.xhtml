@@ -10,7 +10,7 @@
 	</ui:define>
 
 	<ui:define name="indicaciones">
-		<p>Comprobar el correcto funcionamiento de la pagina.</p>
+		<p>Al presionar <b style="color:#17a2b8">Actualizar</b>, se podrá actualizar la información del usuario seleccionado</p>
 	</ui:define>
 	
 	<ui:define name="menu1">
@@ -33,9 +33,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -118,25 +118,24 @@
 	</ui:define>
 
 	<ui:define name="contenido">
-		<h:form>
+		<h:form id="buscar">
 			<div class="card-body" onload="#{gestionUsuariosBean.init()}">
-			<h:messages for="cedula" style="color:red" />
 			<div class="card-footer">
 				<div class="input-group">
 					<label class="col-form-label">Buscar por cédula de usuario </label>
                     <div class="custom-file">
                       	<div class="col-2">
-					 		<h:inputText id="cedula" styleClass="form-control" required="true" requiredMessage="Ingresar un numero de cedula" validatorMessage="Ingresar una cédula válida (10 dígitos y sin letras)" converterMessage="Ingresar solo números" binding="#{messagesBean.componente}" value="#{gestionUsuariosBean.cedula}">
-					 			<f:validateLength for="cedula" minimum="9" maximum="9" />
-					 			<f:convertNumber integerOnly="true" type="number" /> 
-					 		</h:inputText>
+					 		<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
+							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+							</h:inputText>
 						</div>
 						<div class="input-group-append">
                         	<h:commandButton styleClass="btn btn-success" action="#{gestionUsuariosBean.buscar()}" value="Buscar" />
-                     	</div>
+                     	</div>&#160;
+                     	<h:message for="txtCedula" style="color:red" />
                       </div>
                     </div>
-                    <h:message for="cedula" style="color:red" />
                 </div>
 			</div>
 			</h:form>

@@ -15,7 +15,7 @@
 	</ui:define>
 
 	<ui:define name="contenido">
-		<div class="form">
+		<div class="form" onload=" #{gestionUsuariosBean.vaciarMensaje1()}">
 			<div class="alert alert-success alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-check"></i> Aceptado!</h5>
@@ -24,7 +24,7 @@
             </div>
             
 			<h:form id="register">
-				<div class="callout callout-info">
+				<div>
                   <b><h:outputText value="#{gestionCuentasBean.mensaje}" style="color:#4AC821"> </h:outputText></b>
             	</div>
 				<div class="card-body" onload="#{gestionUsuariosBean.vaciarMensaje()}">
@@ -47,7 +47,7 @@
             			<div class="col-3">
             			<label class="col-form-label">Contraseña</label>
 						<h:inputText id="txtContrasena" styleClass="form-control" validatorMessage="La contraseña debe tener mas de 5 caracteres" pt:type="password" value="#{gestionCuentasBean.cuenta.pswd_cuenta}">
-							<f:validateLength for="txtContrasena" minimum="5" />
+							<f:validateLength for="txtContrasena" minimum="6" />
 						</h:inputText>
 						<h:message for="txtContrasena" style="color:red"/>
             			</div>

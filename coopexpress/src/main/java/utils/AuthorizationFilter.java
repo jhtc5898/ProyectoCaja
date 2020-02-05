@@ -90,7 +90,7 @@ public class AuthorizationFilter implements Filter {
 			"/faces/admin/eliminar-tipo-transaccion.xhtml", "/faces/admin/listar-cuenta.xhtml",
 			"/faces/admin/listar-tipo-cuenta.xhtml", "/faces/admin/listar-usuario.xhtml",
 			"/faces/admin/lista-tipo-transaccion.xhtml", "/admin/solicitudes-usuario.xhtml",
-			"/faces/admin/revision-usuario.xhtml"
+			"/faces/admin/revision-usuario.xhtml", "/faces/admin/crear-personal.xhtml"
 	};
 
 	private static final String[] soloUsuario = { 

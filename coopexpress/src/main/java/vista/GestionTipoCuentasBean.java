@@ -37,7 +37,7 @@ public class GestionTipoCuentasBean {
 	public String actualizarTipoTransaccion() {
 		gtc.actualizar(tipo_cuenta);
 		tipocuentalist=gtc.getTiposCuentas();
-		return "listar-tipocuenta";
+		return "listar-tipo-cuenta";
 	}
 	
 	public String eliminarTipoCuenta(int codigo){

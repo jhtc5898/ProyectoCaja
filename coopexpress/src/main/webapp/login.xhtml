@@ -22,31 +22,36 @@
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Iniciar Sesion</p>
-
-      <h:form>
-        <div class="input-group mb-3">
-          <h:inputText value="#{loginBean.email}" pt:placeholder="Email" pt:type="email" class="form-control"/>
+      <h:form id="login">
+        <div class="input-group mb-2">
+          <h:inputText value="#{loginBean.email}" id="txtCorreo" required="true" requiredMessage="Ingresar un correo" validatorMessage="La estructura del correo no es valida"  pt:placeholder="Email" pt:type="email" class="form-control"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-        <h:inputText value="#{loginBean.contrasena}" pt:placeholder="Contraseña" pt:type="password" class="form-control"/>
+        <h:message for="txtCorreo" style="color:red" />
+        <div class="input-group mb-2">
+        <h:inputText value="#{loginBean.contrasena}" id="txtContrasena" required="true" requiredMessage="Ingresar una contraseña" pt:placeholder="Contraseña" pt:type="password" class="form-control"/>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        <h:message for="txtContrasena" style="color:red" />
+        <div class="row">
         <div class="col-5">
-            <h:commandButton action="#{loginBean.iniciarSesion()}" value="Iniciar Sesion" class="btn btn-primary btn-block" ></h:commandButton>
+            <h:commandButton action="#{loginBean.iniciarSesion()}" value="Iniciar Sesion" class="btn btn-primary" ></h:commandButton>
         </div>
+        </div>
+        <div class="social-auth-links text-center mb-3">
+      		<h:outputText value="#{loginBean.mensaje}" style="color:red"> </h:outputText>
+      	</div>
       </h:form>
-      <div>
-		<HR/>
-       </div>
+      
+		<hr/>
        <div style="text-align: center">
             <p class="mb-0">
 		        <a href="register.xhtml" class="text-center">Registrarse En CoopExpress</a>

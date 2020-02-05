@@ -5,7 +5,11 @@
       xmlns:p="http://primefaces.org/ui"
       template="blank-Usuarios.xhtml">
       
-<ui:define name="titulo">Perfil</ui:define>
+<ui:define name="titulo">Pagos del credito solicitado</ui:define>
+
+<ui:define name="descripcion">Tabla de amortizacion</ui:define>
+
+<ui:define name="indicaciones"></ui:define>
 
 <ui:define name="navegador">
 	<div class="col-sm-6">
@@ -44,7 +48,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Deposito</p>
+                  <p>Transferencia</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -82,6 +86,36 @@
               </li>
             </ul>
           </li> 
+</ui:define>
+
+<ui:define name="contenido">
+    <!-- Main content -->
+    <div class="card card-success card-outline">
+    <div class="content" onload="#{gestionCreditoBean.vaciarMensaje()}">
+            <div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
+              <div class="card-body table-responsive p-0" style="height: 400px;" onload="#{gestionCreditoBean.getPagosCredito(loginBean.numeroCuenta)}">
+                <h:dataTable value="#{gestionCreditoBean.creditoDetalles}" var="detalle" styleClass="table table-head-fixed table-striped">
+					<h:column >
+						#{detalle.numero_cuota_detalle_credito}
+						<f:facet name="header">Número de la cuota</f:facet>
+					</h:column>
+					<h:column>
+						#{detalle.fecha_detalle_credito}
+						<f:facet name="header">Fecha max. de pago</f:facet>
+					</h:column>
+					<h:column>
+						#{detalle.valor_detalle_credito}
+						<f:facet name="header">Valor a pagar</f:facet>
+					</h:column>
+				</h:dataTable> 
+              </div>
+              <strong><span class="dropdown-header"><h:outputText value="No existen pagos por realizar" rendered="#{empty gestionCreditoBean.creditoDetalles}" /></span></strong>
+            </div>
+        </div>
+        </div>
+        <div class="card-header">
+	        <a href="home-Usuario.xhtml" class="btn btn-danger">Regresar</a>
+        </div>
 </ui:define>
 
 </ui:composition>

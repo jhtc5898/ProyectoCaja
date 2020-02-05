@@ -44,7 +44,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Deposito</p>
+                  <p>Transferencia</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -118,17 +118,17 @@
 					</h:column>
 				</h:dataTable> 
               </div>
-              <strong><span class="dropdown-header"><h:outputText value="No existen depositos recibidos" rendered="#{empty gestionTransaccionesBean.transaccionList}" /></span></strong>
+              <strong><span class="dropdown-header"><h:outputText value="No existen depósitos recibidos" rendered="#{empty gestionTransaccionesBean.transaccionList}" /></span></strong>
             </div>
           
             <!-- /.card -->
             
           
-            <div class="card card-success">
+            <div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
                   <h3 class="card-title">Tabla de pagos de crédito</h3>
-                  <a href="javascript:void(0);">Ampliar</a>
+                  <a href="tabla-pagos.xhtml">Ampliar</a>
                 </div>
               </div>
               <div class="card-body table-responsive p-0" style="height: 300px;" onload="#{gestionCreditoBean.getPagosCredito(loginBean.numeroCuenta)}">
@@ -187,7 +187,7 @@
 
             <div class="card card-info">
               <div class="card-header border-0">
-                <h3 class="card-title">Depositos realizados</h3>
+                <h3 class="card-title">Transferencias realizadas</h3>
                 <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm">
                     <i class="fas fa-download"></i>
@@ -212,8 +212,8 @@
 						<f:facet name="header">A la cuenta</f:facet>
 					</h:column>
 				</h:dataTable> 
-				<span class="dropdown-item dropdown-header"><h:outputText value="No existen depositos realizados" rendered="#{empty gestionTransaccionesBean.transaccionList}" /></span>
               </div>
+              <strong><span class="dropdown-header"><h:outputText value="No existen transferencias realizadas" rendered="#{empty gestionTransaccionesBean.transaccionList}" /></span></strong>
             </div>
           </div>
           <!-- /.col-md-6 -->
@@ -222,15 +222,9 @@
       </div>
       <!-- /.container-fluid -->
     </div>
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
 </ui:define>
 
 <ui:define name="indicaciones">
-    Informacion sobre el estado y la actividad de la cuenta
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> Tipo Prototipado
-    </div>
 </ui:define>
 
 

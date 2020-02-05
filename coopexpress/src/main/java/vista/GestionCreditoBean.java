@@ -125,33 +125,7 @@ public class GestionCreditoBean {
 			}
 	 
 	    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	public void getPagosCredito(String numeroCuenta) {
 		creditoDetalles = gcd.getPagos(Integer.parseInt(numeroCuenta));

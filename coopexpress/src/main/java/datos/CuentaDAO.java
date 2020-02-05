@@ -18,7 +18,14 @@ public class CuentaDAO {
 	
 	
 	public void insert(Cuenta cuenta) {
+		cuenta.setNumero_cuenta(getLastCuenta());
 		em.persist(cuenta);
+	}
+	
+	public String getLastCuenta() {
+		Query query = em.createNativeQuery("SELECT MAX(codigo_cuenta) from Cuenta");
+		int lastCuenta = ((Number) query.getSingleResult()).intValue();
+		return String.valueOf(lastCuenta+1);
 	}
 	
 	public void update(Cuenta cuenta) {
@@ -29,11 +36,12 @@ public class CuentaDAO {
 		Cuenta cuenta  = this.read(codigo);
 		em.remove(cuenta);
 	}
+		
 	public Cuenta read(int codigo) {
 		Cuenta c = em.find(Cuenta.class, codigo);
 		return c;
 	}
-	
+
 	//Obtener las cuentas para iniciar sesion
 	public List<Cuenta> getCuentasLogin(){
 		String jpql = "SELECT c FROM Cuenta c";
@@ -41,7 +49,7 @@ public class CuentaDAO {
 	}
 	
 	public List<Cuenta> getCuentas(){
-		String jpql = "SELECT c FROM Cuenta c WHERE tipo_cuenta_codigo != 2";
+		String jpql = "SELECT c FROM Cuenta c WHERE tipo_cuenta_codigo != 2 AND tipo_cuenta_codigo != 4";
 		return em.createQuery(jpql, Cuenta.class).getResultList();
 	}
 	

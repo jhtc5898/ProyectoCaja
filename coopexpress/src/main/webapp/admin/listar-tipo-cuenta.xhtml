@@ -8,6 +8,11 @@
 
 <ui:define name="descripcion">Listado de los tipos de cuenta</ui:define>
 
+<ui:define name="indicaciones">
+	<p>Al presionar <b style="color:#17a2b8">Actualizar</b>, se podrá actualizar la información del tipo de cuenta</p>
+	<p>Al presionar <b style="color:red">Eliminar</b>, se eliminará el tipo de cuenta seleccionado</p>
+</ui:define>
+
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
             	<a href="/coopexpress/faces/admin/solicitudes-usuario.xhtml" class="nav-link">
@@ -28,9 +33,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/crear-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/crear-personal.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Crear Cuentas</p>
+                  <p>Crear nuevo cajero</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -133,7 +138,6 @@
 		<h:column>
 				<f:facet name="header">Acciones</f:facet>
 				<h:commandButton action="#{gestionTipoCuentasBean.actualizar(tipo_cuenta)}" styleClass="btn btn-info" value="Actualizar" />
-				<h:commandButton action="#{gestionTipoCuentasBean.eliminarTipoCuenta(tipo_cuenta.codigo_tipo_cuenta)}" styleClass="btn btn-danger" value="Eliminar" />
 		</h:column>
 	</h:dataTable>	
 	</h:form>

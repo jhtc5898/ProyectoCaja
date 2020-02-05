@@ -49,12 +49,37 @@ public class GestionUsuariosBean {
 		}
 		return pagina;
 	}
+	
+	public String guardarUsuarioAdmin() {
+		String pagina = "";
+		if(gu.guardarUsuario(usuario)!= null) {
+			init();
+			setMensaje("La solicitud ha sido ingresada correctamente. Deberá aprobar al usuario para registrar una cuenta");
+		}else {
+			FacesContext.getCurrentInstance().addMessage("register:txtCedula", new FacesMessage("La cédula ingresada ya se encuentra registrada"));
+			pagina = null;
+		}
+		return pagina;
+	}
+	
+	public String guardarCajeroAdmin() {
+		String pagina = "";
+		if(gu.guardarUsuario(usuario)!= null) {
+			setMensaje("Usuario creado correctamente");
+			pagina = "crear-cuenta";
+		}else {
+			FacesContext.getCurrentInstance().addMessage("crearUsuario:txtCedula", new FacesMessage("La cédula ingresada ya se encuentra registrada"));
+			pagina = null;
+		}
+		return pagina;
+	}
 		
 	public String buscar() {
 		usuario = gu.obtenerUsuarioCedula(cedula);
 		if(usuario != null) {
 			return "actualizar-usuario";
 		}else {
+			FacesContext.getCurrentInstance().addMessage("buscar:txtCedula", new FacesMessage("Usuario no encontrado"));
 			return null;
 		}
 		
@@ -106,6 +131,11 @@ public class GestionUsuariosBean {
 		return "revision-usuario";
 	}
 	
+	public String cargarUsuarioRevision() {
+		this.usuario = gu.obtenerUsuarioCedula(cedula);
+		return "revision-usuario";
+	}
+	
 	public String registrarUsuario(Usuario usuario) {
 		this.usuario = usuario;
 		return "crear-cuenta";
@@ -124,9 +154,12 @@ public class GestionUsuariosBean {
 	}
 	public void vaciarMensaje() {
 		setMensaje(" ");
-		setMensaje1(" ");
 	}
 
+	public void vaciarMensaje1() {
+		setMensaje1(" ");
+	}
+	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
