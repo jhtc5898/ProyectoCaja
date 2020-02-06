@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html  	xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>CoopExpress</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="Faceletes/plugins/fontawesome-free/css/all.min.css"/>
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <link rel="stylesheet" href="Faceletes/dist/css/adminlte.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+</h:head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>Coop</b>Express</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+    <h3 class="card-title">
+      	<a href="recuperar-clave.xhtml"><i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+      </h3>
+      <h5><p class="login-box-msg">Recuperar contraseña</p></h5>
+      <h:form id="cambio">
+        <div class="input-group mb-2">
+          	<h:inputText id="txtContrasena1" styleClass="form-control" required="true" requiredMessage="Ingresar una contraseña"  pt:placeholder="Contraseña" validatorMessage="Debe tener 6 o mas caracteres" pt:type="password" value="#{recuperarBean.clave1}">
+				<f:validateLength for="txtContrasena" minimum="6" />
+			</h:inputText>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <h:message for="txtContrasena1" style="color:red"/>
+        <div class="input-group mb-2">
+          <h:inputText id="txtContrasena2" styleClass="form-control" required="true" requiredMessage="Ingresar una contraseña"  pt:placeholder="Confirmar contraseña" validatorMessage="Debe tener 6 o mas caracteres" pt:type="password" value="#{recuperarBean.clave2}">
+				<f:validateLength for="txtContrasena" minimum="6" />
+			</h:inputText>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <h:message for="txtContrasena2" style="color:red"/>
+         <div class="row">
+          <div class="col-12">
+          <h:commandButton value="Confirmar cambio de contraseña" class="btn btn-primary btn-block" action="#{recuperarBean.cambiarContraseña()}"></h:commandButton>
+          </div>
+        </div>
+      </h:form>
+		<hr/>
+       <div style="text-align: center">
+            <p class="mb-0">
+		        <a href="login.xhtml" class="text-center">Iniciar sesión</a>
+      		</p>
+       </div>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="Faceletes/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="Faceletes/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="Faceletes/dist/js/adminlte.min.js"></script>
+
+</body>
+</html>

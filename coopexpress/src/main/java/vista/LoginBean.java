@@ -74,7 +74,7 @@ public class LoginBean {
 				return "cajera/home-cajera";
 			}
 		}else {
-			setMensaje("Correo o contraseña incorrectos");
+			FacesContext.getCurrentInstance().addMessage("login:txtContrasena", new FacesMessage("Correo o contraseña incorrectos"));
 		}
 		return null;
 	}

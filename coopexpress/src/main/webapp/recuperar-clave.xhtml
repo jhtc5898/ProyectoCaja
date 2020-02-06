@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html  	xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>CoopExpress</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="Faceletes/plugins/fontawesome-free/css/all.min.css"/>
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+  <link rel="stylesheet" href="Faceletes/dist/css/adminlte.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"/>
+</h:head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a><b>Coop</b>Express</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <h3 class="card-title">
+      	<a href="login.xhtml"><i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+      </h3>
+      <h5><p class="login-box-msg">Recuperar contraseña</p></h5>
+      <h:form id="recuperar">
+      	<p>Ingrese su correo</p>
+        <div class="input-group mb-3">
+        	<h:inputText value="#{recuperarBean.correo}" id="txtCorreo" required="true" requiredMessage="Ingresar un correo" validatorMessage="La estructura del correo no es valida"  pt:placeholder="Email" pt:type="email" class="form-control"/>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <h:message for="txtCorreo" style="color:red" />
+        <div class="row">
+          <div class="col-12">
+          <h:commandButton value="Cambiar contraseña" class="btn btn-primary btn-block" action="#{recuperarBean.recuperarContraseña()}"></h:commandButton>
+          </div>
+        </div>
+      </h:form>
+		<hr/>
+       <div style="text-align: center">
+            <p class="mb-0">
+		        <a href="register.xhtml" class="text-center">Registrarse En CoopExpress</a>
+      		</p>
+       </div>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="Faceletes/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="Faceletes/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="Faceletes/dist/js/adminlte.min.js"></script>
+
+</body>
+</html>

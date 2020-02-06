@@ -78,7 +78,8 @@ public class AuthorizationFilter implements Filter {
 	
 	private static final String[] noLogin = { 
 			"/faces/register.xhtml", "/faces/coopexpress.xhtml", "/faces/login.xhtml",
-			"/faces/404.xhtml", "/faces/registro-pendiente.xhtml", "faces/registrar-cuenta.xhtml"
+			"/faces/404.xhtml", "/faces/registro-pendiente.xhtml", "faces/registrar-cuenta.xhtml",
+			"/faces/recuperar-clave.xhtml", "/faces/cambiar-clave.xhtml"
 	};
 
 	private static final String[] soloAdmin = { 

@@ -21,6 +21,9 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+    <h3 class="card-title">
+      	<a href="coopexpress.xhtml"><i class="fas fa-arrow-alt-circle-left fa-lg"></i></a>
+      </h3>
       <p class="login-box-msg">Iniciar Sesion</p>
       <h:form id="login">
         <div class="input-group mb-2">
@@ -46,15 +49,17 @@
             <h:commandButton action="#{loginBean.iniciarSesion()}" value="Iniciar Sesion" class="btn btn-primary" ></h:commandButton>
         </div>
         </div>
-        <div class="social-auth-links text-center mb-3">
-      		<h:outputText value="#{loginBean.mensaje}" style="color:red"> </h:outputText>
-      	</div>
       </h:form>
       
 		<hr/>
        <div style="text-align: center">
             <p class="mb-0">
 		        <a href="register.xhtml" class="text-center">Registrarse En CoopExpress</a>
+      		</p>
+       </div>
+       <div style="text-align: center">
+            <p class="mb-0">
+		        <a href="recuperar-clave.xhtml" class="text-center">Olvide mi contraseña</a>
       		</p>
        </div>
       
