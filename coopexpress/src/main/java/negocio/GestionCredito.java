@@ -44,6 +44,15 @@ public class GestionCredito {
 		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
 		return creditoDAO.getCreditoCuentaControl(cuenta);
 	}
+	
+	public String getCreditoUnico(String numeroCuenta) {
+		Cuenta cuenta =  cuentaDAO.getCuentaNumeroTransaccion(numeroCuenta);
+		String unico = "";
+		if(creditoDAO.getCreditoCuenta(cuenta) == null) {
+			unico = "si";
+		}
+		return unico;
+	}
 
 	public List<Credito> getCreditos() {
 		return creditoDAO.getCreditos();

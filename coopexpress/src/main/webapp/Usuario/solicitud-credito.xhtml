@@ -98,12 +98,12 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <h:form id="formulario-deposito">
+              <h:form id="formulario-credito">
                 <div class="card-body">
-                  <h:messages style="color:red" />
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
                     <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
+                    <h:message for="txtCuentaOrigen" style="color:red" />     
                   </div>
                   <div class="col-3">
            	        <label class="col-form-label">Cantidad del crédito</label>
@@ -121,21 +121,26 @@
                   </div>
                   <div class="col-3">
                     <label class="col-form-label">Plazo de pago en meses</label>
-                    <h:inputText id="txtMeses" styleClass="form-control" required="true" validatorMessage="La cantidad de meses debe ser entre 5 y 24" requiredMessage="Debe ingresar el numero de meses" value="#{gestionCreditoBean.credito.numero_meses_credito}">
+                    <div class="input-group">
+                    <h:inputText id="txtMeses" styleClass="form-control" required="true" validatorMessage="El plazo de meses debe ser entre 5 y 24" requiredMessage="Debe ingresar el numero de meses" value="#{gestionCreditoBean.credito.numero_meses_credito}">
                     	<f:validateLongRange for="txtMonto" minimum="5" maximum="24"/>
                     </h:inputText>
+                    </div>
+                    <h:message for="txtMeses" style="color:red" /> 
                   </div>
-                  <h:message for="txtMeses" style="color:red" /> 
-                  <div class="form-group">
+                  <div class="col-5">
                   	<label class="col-form-label">Ingresar una descripción sobre la solicitud</label>
                     <h:inputTextarea id="txtDescripcion" styleClass="form-control" required="true" requiredMessage="Debe ingresar una descripción" value="#{gestionCreditoBean.credito.desripcion_credito}" />
+                    <h:message for="txtDescripcion" style="color:red" /> 
                   </div>
-                  <h:message for="txtDescripcion" style="color:red" /> 
-                </div>
+                  
+                  </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionCreditoBean.solicitar(loginBean.numeroCuenta)}" />
+                  <h:commandButton  value="Aceptar" id="boton" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionCreditoBean.solicitarUsuario(loginBean.numeroCuenta)}" />&#160;
                   <a href="home-Usuario.xhtml" class="btn btn-danger">Cancelar</a>
+                  &#160;
+                  <h:message for="boton" style="color: green"/>
                 </div>
               </h:form>
             </div>

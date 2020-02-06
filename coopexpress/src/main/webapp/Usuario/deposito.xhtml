@@ -100,7 +100,6 @@
               <!-- form start -->
               <h:form id="formulario-deposito">
                 <div class="card-body">
-                  <h:messages style="color:red" />
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
                     <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
@@ -129,8 +128,10 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.deposito(loginBean.numeroCuenta)}" />
+                  <h:commandButton  value="Aceptar" id="boton" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.deposito(loginBean.numeroCuenta)}" />&#160;
                   <a href="home-Usuario.xhtml" class="btn btn-danger">Cancelar</a>
+                  &#160;
+                  <h:message for="boton" style="color: green"/>
                 </div>
               </h:form>
             </div>

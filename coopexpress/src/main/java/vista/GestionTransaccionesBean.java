@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import modelo.Cuenta;
@@ -33,33 +35,68 @@ public class GestionTransaccionesBean {
 		cuentaOrigen = "";
 	}
 	
+	//Transferencia usuario
 	public String guardarDeposito() {
-		gt.guardarTransaccionDeposito(transaccion, cuenta, cuentaDestino);
+		String var = gt.guardarTransaccionDeposito(transaccion, cuenta, cuentaDestino);
+		if(var.equals("cuenta")) {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtCuentaDestino", new FacesMessage("La cuenta destino no existe"));
+		}else if(var.equals("dinero")) {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtMonto", new FacesMessage("No dispone del dinero suficiente"));
+		}else if(var.equals("exito")) {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:boton", new FacesMessage("Transferencia realizada correctamente"));
+			init();
+		}
 		init();
+		transaccion.setMonto_transaccion(0);
 		return null;
 	}
+	
+	//Deposito a una cuenta CAJERA
 	public String guardarDepositoCajera() {
-		gt.guardarTransaccionDepositoCajera(transaccion, cuentaDestino);
+		String var = gt.guardarTransaccionDepositoCajera(transaccion, cuentaDestino);
+		if(var.equals("cuenta")) {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtCuentaDestino", new FacesMessage("La cuenta no existe"));
+			init();
+		}else if(var.equals("exito")){
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:boton", new FacesMessage("Depósito realizado correctamente"));
+			init();
+		}
 		init();
 		return null;
 	}
 	
-	public String guardarRetiro() {
-		gt.guardarTransaccionRetiroCajera(transaccion, cuentaOrigen);
+	//Retiro de una cuenta CAJERA
+	public String guardarRetiroCajera() {
+		String var = gt.guardarTransaccionRetiroCajera(transaccion, cuentaOrigen);
+		if(var.equals("dinero")) {
+			FacesContext.getCurrentInstance().addMessage("retiro:txtMonto", new FacesMessage("La cuenta no dispone de suficiente dinero"));
+			init();
+		}else if(var.equals("cuenta")) {
+			FacesContext.getCurrentInstance().addMessage("retiro:txtCuentaOrigen", new FacesMessage("La cuenta no existe"));
+			init();
+		}else if(var.equals("exito")) {
+			FacesContext.getCurrentInstance().addMessage("retiro:boton", new FacesMessage("Transaccion realizada correctamente"));
+			init();
+		}
 		init();
 		return null;
 	}
 	
 	//Datos desde la página
 	public String deposito(String cuentaOrigen) {
-		this.cuenta.setNumero_cuenta(cuentaOrigen);
-		guardarDeposito();
+		if(!cuentaOrigen.equals(cuentaDestino)) {
+			this.cuenta.setNumero_cuenta(cuentaOrigen);
+			guardarDeposito();
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtCuentaDestino", new FacesMessage("No se puede realizar una transferencia hacia su propia cuenta"));
+		}
+		
 		return null;
 	}
 	
 	public String retiro(String cuentaOrigen) {
 		this.cuenta.setNumero_cuenta(cuentaOrigen);
-		guardarRetiro();
+		guardarRetiroCajera();
 		return null;
 	}
 	

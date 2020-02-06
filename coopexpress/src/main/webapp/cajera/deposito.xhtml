@@ -99,7 +99,9 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.guardarDepositoCajera()}" />
+                  <h:commandButton  value="Aceptar" id="boton" styleClass="btn btn-info" update="formulario-deposito" action="#{gestionTransaccionesBean.guardarDepositoCajera()}" />
+                  &#160;
+                  <h:message for="boton" style="color: green"/>
                 </div>
               </h:form>
             </div>

@@ -91,6 +91,10 @@ public class GestionCuentas {
 		return cuentadDAO.getCuentaNumero(numeroCuenta);
 	}
 	
+	public Cuenta obtenerCuentaNumeroCredito(String numeroCuenta) {
+		return cuentadDAO.getCuentaNumeroTransaccion(numeroCuenta);
+	}
+	
 	public List<Cuenta> listaEliminar(String numeroCuenta){
 		return cuentadDAO.listaEliminar(numeroCuenta);
 	}

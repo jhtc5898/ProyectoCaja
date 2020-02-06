@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -67,11 +68,11 @@ public class GestionCreditoBean {
 	
 	public String guardarSolicitudCredito() {
 		gc.guardar(credito);
-		writePDF();
+		//writePDF();
 		init();
-		return "informe-credito";
+		return "solicitudes-credito";
 	}
-		
+	
 	public String getCreditoDisponible(String numeroCuenta) {
 		credito = gc.getCreditoCuentaDisponible(numeroCuenta);
 		if(credito == null) {
@@ -80,11 +81,35 @@ public class GestionCreditoBean {
 		return "informe-credito";
 	}
 	
-	public String solicitar() {
-		Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
-		credito.setCodigo_cuenta(cuenta);
-		guardarSolicitudCredito();
-		return "solicitudes-credito";
+	public void solicitar() {
+		if(gc.getCreditoUnico(numeroCuenta).equals("si")) {
+			Cuenta cuenta = gcu.obtenerCuentaNumeroCredito(numeroCuenta);
+			if(cuenta != null) {
+				credito.setCodigo_cuenta(cuenta);
+				guardarSolicitudCredito();
+			}else {
+				FacesContext.getCurrentInstance().addMessage("formulario-credito:txtCuentaOrigen", new FacesMessage("La cuenta no existe"));
+			}
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-credito:txtCuentaOrigen", new FacesMessage("El usuario ya dispone de un credito"));
+		}
+	}
+	
+	public void solicitarUsuario(String numeroCuenta) {
+		if(gc.getCreditoUnico(numeroCuenta).equals("si")) {
+			Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
+			credito.setCodigo_cuenta(cuenta);
+			guardarSolicitudCreditoUsuario();
+			FacesContext.getCurrentInstance().addMessage("formulario-credito:boton", new FacesMessage("Solicitud ingresada correctamente"));
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-credito:txtCuentaOrigen", new FacesMessage("No se puede tener mas de un crédito"));
+		}
+	}
+	
+	public void guardarSolicitudCreditoUsuario() {
+		gc.guardar(credito);
+		//writePDF();
+		init();
 	}
 	
 	public String aprobar(Credito credito)

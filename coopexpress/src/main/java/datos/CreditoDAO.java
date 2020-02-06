@@ -45,12 +45,15 @@ public class CreditoDAO {
 	}
 	
 	public Credito getCreditoCuenta(Cuenta numeroCuenta) {
-		String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1";
-		Query q = em.createQuery(jpql, Credito.class);
-		q.setParameter(1, numeroCuenta);
-		Credito credito = (Credito) q.getSingleResult();
-		return credito;
-		
+		try {
+			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1";
+			Query q = em.createQuery(jpql, Credito.class);
+			q.setParameter(1, numeroCuenta);
+			Credito credito = (Credito) q.getSingleResult();
+			return credito;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public Credito getCreditoCuentaDisponible(Cuenta numeroCuenta) {
@@ -68,7 +71,7 @@ public class CreditoDAO {
 	
 	public Credito getCreditoCuentaControl(Cuenta numeroCuenta) {
 		try {
-			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito = 'p'";
+			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito = 'P'";
 			Query q = em.createQuery(jpql, Credito.class);
 			q.setParameter(1, numeroCuenta);
 			Credito credito = (Credito) q.getSingleResult();

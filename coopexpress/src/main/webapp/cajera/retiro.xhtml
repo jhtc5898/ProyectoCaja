@@ -74,8 +74,8 @@
                 <div class="card-body">
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
-                    	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaOrigen}">
+                    	<f:validateLength for="txtCuentaOrigen" minimum="6" /> 
                     </h:inputText>
                     <h:message for="txtCuentaOrigen" style="color:red" />    
                   </div>
@@ -96,7 +96,9 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <h:commandButton  value="Aceptar" styleClass="btn btn-info" action="#{gestionTransaccionesBean.retiro(loginBean.numeroCuenta)}" />
+                  <h:commandButton  value="Aceptar" id="boton" styleClass="btn btn-info" action="#{gestionTransaccionesBean.guardarRetiroCajera()}" />
+                  &#160;
+                  <h:message for="boton" style="color: green"/>
                 </div>
               </h:form>
             </div>

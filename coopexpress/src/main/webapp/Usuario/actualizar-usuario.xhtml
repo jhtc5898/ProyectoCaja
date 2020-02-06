@@ -20,7 +20,8 @@
 	<ui:define name="descripcion">Actualiza tu informacion</ui:define>
 
 	<ui:define name="indicaciones">
-		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+		<p>Para aplicar los cambios presionar <b style="color: #17a2b8;">Actualizar</b></p>
+		<p>Para descartar los cambios presionar <b style="color: #dc3545;">Cancelar</b></p>
 	</ui:define>
 
 <ui:define name="menu1">
@@ -93,76 +94,116 @@
 	<ui:define name="contenido">
 		<div class="card card-success">
 			<div class="card-header">
-				<h3 class="card-title">Usuario</h3>
+				<h3 class="card-title">Información de usuario</h3>
 			</div>
-			<!-- /.card-header -->
-			<!-- form start -->
+			<div class="card-body">
 			<h:form>
-				
-				<h:form>
-					<div class="form-group">
-						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							
-							<h:column>
-								<h:inputText value="#{usuario.nombre}" />
-								<f:facet name="header">Nombre</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.apellido}" />
-								<f:facet name="header">Apellido</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.fecha_nacimiento}" pt:placeholder="AAAA/MM/dd"></h:inputText>
-								<f:facet name="header">Fecha Nacimiento</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.educacion}" />
-								<f:facet name="header">Nivel Educacion</f:facet>
-							</h:column>
-							
-							<h:column>
-								<h:inputText value="#{usuario.estado}" />
-								<f:facet name="header">Estado Civil</f:facet>
-							</h:column>
-						</h:dataTable>
-					</div>
-					<div class="form-group">
-						<h:dataTable value="#{gestionUsuariosBean.usuario}" var="usuario" styleClass="table table-bordered">
-							<h:column>
-								<h:inputText value="#{usuario.genero}" />
-								<f:facet name="header">Genero</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.telefono}" />
-								<f:facet name="header">Telefono</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.ciudad}" />
-								<f:facet name="header">Ciudad</f:facet>
-							</h:column>
-
-							<h:column>
-								<h:inputText value="#{usuario.principal}" />
-								<f:facet name="header">Calle Principal</f:facet>
-							</h:column>
-							
-							<h:column>
-								<h:inputText value="#{usuario.secundaria}" />
-								<f:facet name="header">Calle Secundaria</f:facet>
-							</h:column>
-						</h:dataTable>
-					</div>
-					<div class="card-footer">
-                  		<h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioUsuario()}" styleClass="btn btn-info" value="Actualizar" />
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                   <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      #{gestionUsuariosBean.usuario.cedula}
+                    </span>
+                    <span class="text-muted">Número de cédula</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                	<p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      <h:inputText value="#{gestionUsuariosBean.usuario.nombre}" styleClass="form-control" />
+                    </span>
+                    <span class="font-weight-bold">Nombres</span>
+                  	</p>
+                	<p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                     <h:inputText value="#{gestionUsuariosBean.usuario.apellido}" styleClass="form-control" />
+                    </span>
+                    <span class="font-weight-bold">Apellidos</span>
+                  </p>
+                </div>
+                <!-- /.d-flex -->
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                 <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                    <h:inputText value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" styleClass="form-control" />
+                    </span>
+                    <span class="font-weight-bold">Fecha de nacimiento</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                    <span class="font-weight-bold">
+                     <h:selectOneMenu id="txtCiudad" styleClass="form-control" value="#{gestionUsuariosBean.usuario.ciudad}">
+							<f:selectItem itemValue="Cuenca" itemLabel="Cuenca" />
+							<f:selectItem itemValue="Azogues" itemLabel="Azogues" />
+							<f:selectItem itemValue="Loja" itemLabel="Loja" />
+						</h:selectOneMenu>
+                    </span>
+                    <span class="font-weight-bold">Ciudad</span>
+                  </p>
+                </div>
+                <!-- /.d-flex -->
+                <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="d-flex flex-column text-left">
+                  	<span class="font-weight-bold">
+                      <h:inputText id="txtTelefono" styleClass="form-control" required="true" requiredMessage="Debe ingresar un número de telefono" validatorMessage="Telefono no válido" value="#{gestionUsuariosBean.usuario.telefono}">
+							<f:validateLength for="txtTelefono" minimum="7" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+						</h:inputText>
+                    </span>
+                    <span class="font-weight-bold">Telefono</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                  	 <span class="font-weight-bold">
+                     	<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}" styleClass="form-control">
+							<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+							<f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+							<f:selectItem itemValue="Otro" itemLabel="Otro" />
+						</h:selectOneMenu>
+                    </span>
+                    <span class="font-weight-bold">Género</span>
+                  </p>
+                </div>
+                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                  <p class="d-flex flex-column text-left">
+                  	<span class="font-weight-bold">
+                      <h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}" styleClass="form-control">
+							<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
+							<f:selectItem itemValue="Casado" itemLabel="Casado" />
+							<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
+							<f:selectItem itemValue="Union Libre" itemLabel="Union Libre" />
+						</h:selectOneMenu>
+                    </span>
+                    <span class="font-weight-bold">Estado civil</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                     <span class="font-weight-bold">
+                      <h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}" styleClass="form-control">
+							<f:selectItem itemValue="Primario" itemLabel="Primario" />
+							<f:selectItem itemValue="Secundario" itemLabel="Secundario" />
+							<f:selectItem itemValue="Superior" itemLabel="Superior" />
+						</h:selectOneMenu>
+                    </span>
+                    <span class="font-weight-bold">Nivel de educación</span>
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                 	<p class="d-flex flex-column text-left">
+                 		<span class="font-weight-bold">
+                      		<h:inputText id="txtPrincipal" styleClass="form-control" required="true" requiredMessage="Debe ingresar una dirección" value="#{gestionUsuariosBean.usuario.principal}" />
+                      		
+                    	</span>
+                    	<span class="font-weight-bold">Dirección calle principal</span>
+                 	</p>
+                  <p class="d-flex flex-column text-right">
+                  	<span class="font-weight-bold">
+                      		<h:inputText id="txtSecundaria" styleClass="form-control" value="#{gestionUsuariosBean.usuario.secundaria}" />
+                    	</span>
+                    	<span class="font-weight-bold">Dirección calle secundaria</span>
+                  </p>
+                </div>
+                <h:commandButton action="#{gestionUsuariosBean.actualizarUsuarioUsuario()}" styleClass="btn btn-info" value="Actualizar" />
                   		<a href="perfil.xhtml" class="btn btn-danger">Cancelar</a>
-                 	</div>
-				</h:form>
-			</h:form>
+                </h:form>
+                
+              </div>
 		</div>
 	</ui:define>
 </ui:composition>
