@@ -19,11 +19,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -112,6 +115,13 @@ public class GestionCreditoBean {
 		init();
 	}
 	
+	public String solicitar(String numeroCuenta) {
+		Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
+		credito.setCodigo_cuenta(cuenta);
+		guardarSolicitudCredito();
+		return "solicitudes-credito";
+	}
+	
 	public String aprobar(Credito credito)
 	{
 		credito.setEstado_credito("H");
@@ -143,14 +153,24 @@ public class GestionCreditoBean {
 	            document.open();
 	 
 	            Image imagen = Image.getInstance("Caja.png");  
-	            imagen.setAlignment(Image.MIDDLE);
 	            document.add(imagen);
+	            
+
+	            Font fuente = new Font(FontFamily.COURIER);
+	            
+	            Paragraph p;
+	            p = new Paragraph("Estado:  ");
+	            p.add(new Chunk("Revision", FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE,BaseColor.RED)));
+	            p.setAlignment(Element.ALIGN_RIGHT);
+	            document.add(p);
+	            
+	            Paragraph saltoLinea = new Paragraph("\n",fuente);
+	            document.add(saltoLinea);
 	            
 	            Paragraph detallesUsuario = new Paragraph("Detalles del Usuario"+"\n");
 	            detallesUsuario.setAlignment(Element.ALIGN_JUSTIFIED);
 	            document.add(detallesUsuario);
 	            
-	            Font fuente = new Font(FontFamily.COURIER);
 	            
 	            Paragraph cedulaDocumento = new Paragraph("CI: "+credito.getCodigo_cuenta().getUsuario().getCedula(),fuente);
 	            document.add(cedulaDocumento);
@@ -167,7 +187,7 @@ public class GestionCreditoBean {
 	            Paragraph correoCuenta = new Paragraph("Correo: "+credito.getCodigo_cuenta().getCorreo_cuenta(),fuente);
 	            document.add(correoCuenta);
 	            
-	            Paragraph saltoLinea = new Paragraph("\n",fuente);
+	          
 	            document.add(saltoLinea);
 	            
 	            Paragraph solicitud = new Paragraph("Detalles de la solicitud del Credito"+"\n");
@@ -189,24 +209,53 @@ public class GestionCreditoBean {
 	            Paragraph descripcionCredito = new Paragraph("Descripcion: "+credito.getDesripcion_credito(),fuente);
 	            document.add(descripcionCredito);
 	            
+	            
+	            
 	            Paragraph paragraphLorem = new Paragraph();
 	            
 	            paragraphLorem.add("");
 
 	            document.add(saltoLinea);
 	            
-	            //generar tabla PDF
-	            PdfPTable table = new PdfPTable(3);
-	            table.addCell("Celda 1");
-	            table.addCell("Celda 2");
-	            table.addCell("Celda 3");
-	            PdfPCell celdaFinal = new PdfPCell(new Paragraph("Final de la tabla"));
-	             
-	            // Indicamos cuantas columnas ocupa la celda
-	            celdaFinal.setColspan(3);
-	            table.addCell(celdaFinal);
+	            Paragraph informacionTabla = new Paragraph("En el caso de que su solicitud sea aprobada, esta seria su tabla de amortizacion",fuente);
+	            document.add(informacionTabla);
 	            
-	            //IMAGEN
+	            document.add(saltoLinea);
+	            
+	           //TABLA AMORIZACION
+	            
+	            PdfPTable table = new PdfPTable(3);
+	            
+	            Paragraph columnaNumeroCuota = new Paragraph("Numero Cuota");
+	            columnaNumeroCuota.getFont().setStyle(Font.BOLD);
+	            columnaNumeroCuota.getFont().setSize(10);
+	            
+	            Paragraph columnaFechaPago= new Paragraph("Fecha Pago");
+	            columnaFechaPago.getFont().setStyle(Font.BOLD);
+	            columnaFechaPago.getFont().setSize(10);
+	            
+	            Paragraph columnaMonto= new Paragraph("Monto");
+	            columnaMonto.getFont().setStyle(Font.BOLD);
+	            columnaMonto.getFont().setSize(10);
+	            
+	            table.addCell(columnaNumeroCuota);
+	            table.addCell(columnaFechaPago);
+	            table.addCell(columnaMonto);
+	            
+	            List<Credito_Detalle> detalle =gcd.detallePDF(credito);
+	            
+	            for (int i = 0; i < detalle.size(); i++) {
+	            	String monto=String.valueOf(detalle.get(i).getValor_detalle_credito());
+					monto=monto.substring(0,3);
+					
+					String fecha=detalle.get(i).getFecha_detalle_credito();
+					String cuota=String.valueOf(detalle.get(i).getNumero_cuota_detalle_credito());
+					
+					table.addCell(cuota);
+					table.addCell(fecha);
+					table.addCell(monto);
+					
+				}
 	            
 	            
 	            java.util.List<Element> paragraphList = new ArrayList<>();
@@ -223,9 +272,9 @@ public class GestionCreditoBean {
 	            p3.addAll(paragraphList);
 	            p3.add("Archivo Den Gran Importacia");
 	 
-	            document.add(p3);
+	           
 	            document.add(table);
-	            
+	            document.add(p3);
 	            document.close();
 
 	            //descargar PDF
