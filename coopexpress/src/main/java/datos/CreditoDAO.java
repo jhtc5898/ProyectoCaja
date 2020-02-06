@@ -24,6 +24,10 @@ public class CreditoDAO {
 		credito.setFecha_solicitud_credito(sdf.format(fecha));
 		em.persist(credito);
 	}
+
+	public void update(Credito credito) {
+		em.merge(credito);
+	}
 	
 	public Credito read(int codigo_credito) {
 		try {
@@ -52,6 +56,19 @@ public class CreditoDAO {
 	public Credito getCreditoCuentaDisponible(Cuenta numeroCuenta) {
 		try {
 			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito <> 'P'";
+			Query q = em.createQuery(jpql, Credito.class);
+			q.setParameter(1, numeroCuenta);
+			Credito credito = (Credito) q.getSingleResult();
+			return credito;
+		} catch (Exception e) {
+			return null;
+		}
+		
+	}
+	
+	public Credito getCreditoCuentaControl(Cuenta numeroCuenta) {
+		try {
+			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1 and estado_credito = 'p'";
 			Query q = em.createQuery(jpql, Credito.class);
 			q.setParameter(1, numeroCuenta);
 			Credito credito = (Credito) q.getSingleResult();

@@ -6,6 +6,7 @@ import datos.CreditoDAO;
 import datos.CuentaDAO;
 import modelo.Credito;
 import modelo.Cuenta;
+import modelo.Usuario;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -32,9 +33,16 @@ public class GestionCredito {
 		creditoDAO.insert(credito);
 	}
 	
+	public void actualizarCredito(Credito credito) {
+		creditoDAO.update(credito);
+	}
 	public Credito getCreditoCuentaDisponible(String numeroCuenta) {
 		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
 		return creditoDAO.getCreditoCuentaDisponible(cuenta);
+	}
+	public Credito getCreditoCuentaControl(String numeroCuenta) {
+		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
+		return creditoDAO.getCreditoCuentaControl(cuenta);
 	}
 
 	public List<Credito> getCreditos() {

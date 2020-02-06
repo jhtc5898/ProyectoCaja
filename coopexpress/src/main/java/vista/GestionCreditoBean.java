@@ -51,19 +51,23 @@ public class GestionCreditoBean {
 	
 	private Credito credito =  new Credito();
 	private List<Credito_Detalle> creditoDetalles = new ArrayList<Credito_Detalle>();
+	private List<Credito> creditos;
 	private String numeroCuenta;
 	private String mensaje;
+	private String estado;
 
 	
 	private static final int DEFAULT_BUFFER_SIZE = 10240; // 10KB.
 	@PostConstruct
 	public void init() {
 		credito = new Credito();
+		creditos = gc.getCreditos();
 	}
 	
 	public String guardarSolicitudCredito() {
 		gc.guardar(credito);
 		writePDF();
+		init();
 		return "informe-credito";
 	}
 		
@@ -80,6 +84,31 @@ public class GestionCreditoBean {
 		credito.setCodigo_cuenta(cuenta);
 		guardarSolicitudCredito();
 		return null;
+	}
+	
+	public String  Control()
+	{
+		System.out.println("Ingreso en control Datos=estado="+estado+"NumeroCuenta="+numeroCuenta);
+		if(estado.equals("H"))
+		{
+			System.out.println("Credito Numero Cuenta :"+numeroCuenta);
+			credito = gc.getCreditoCuentaControl(numeroCuenta);
+			credito.setEstado_credito(estado);
+			gc.actualizarCredito(credito);
+			System.out.println("Atualizacin Completada");
+			gcd.guardarCredito(credito);
+			return null;	
+		}	
+		else
+		{
+			System.out.println("Ingreso Solo Actualizar");
+			credito = gc.getCreditoCuentaControl(numeroCuenta);
+			credito.setEstado_credito(estado);
+			gc.actualizarCredito(credito);
+			return null;
+			
+		}
+		
 	}
 	
 
@@ -273,6 +302,22 @@ public class GestionCreditoBean {
 	
 	public void vaciarMensaje() {
 		setMensaje(" ");
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public List<Credito> getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(List<Credito> creditos) {
+		this.creditos = creditos;
 	}
 
 	
