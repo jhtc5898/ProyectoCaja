@@ -39,13 +39,13 @@ public class GestionTransaccionesBean {
 		return null;
 	}
 	public String guardarDepositoCajera() {
-		gt.guardarTransaccionDepositoCajera(transaccion, cuentaOrigen, cuentaDestino);
+		gt.guardarTransaccionDepositoCajera(transaccion, cuentaDestino);
 		init();
 		return null;
 	}
 	
 	public String guardarRetiro() {
-		gt.guardarTransaccionRetiro(transaccion, cuenta);
+		gt.guardarTransaccionRetiroCajera(transaccion, cuentaOrigen);
 		init();
 		return null;
 	}

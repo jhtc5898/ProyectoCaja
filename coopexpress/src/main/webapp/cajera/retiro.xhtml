@@ -9,7 +9,7 @@
 <ui:define name="navegador">
 	<div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="solicitudes-credito.xhtml">Inicio</a></li>
               <li class="breadcrumb-item active">Transaccion - Retiro</li>
             </ol>
     </div>
@@ -70,17 +70,14 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <h:form>
+              <h:form id="retiro">
                 <div class="card-body">
-                 <h:messages style="color:red" />
                   <div class="col-3">
                     <label class="col-form-label">Su número de cuenta</label>
-                    
-                    
-                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{loginBean.numeroCuenta}">
+                    <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
                     	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
-                    </h:inputText>CAJERA POR FAVOR VERIFICA EL USUARIO NO HAGAS HUEVADAS
-                    
+                    </h:inputText>
+                    <h:message for="txtCuentaOrigen" style="color:red" />    
                   </div>
                   <div class="col-3">
            	        <label class="col-form-label">Monto a retirar</label>
@@ -91,7 +88,7 @@
                     		</span>
                   		</div>
                   		<h:inputText id="txtMonto" styleClass="form-control" required="true" requiredMessage="Debe ingresar un valor" validatorMessage="Ingresar una cantidad entre 10 y 500$" value="#{gestionTransaccionesBean.transaccion.monto_transaccion}">
-                  			<f:validateLongRange for="txtMonto" minimum="10" maximum="500"/>
+                  			<f:validateLongRange for="txtMonto" minimum="10" maximum="2500"/>
                   		</h:inputText>
                 	</div>   
                 	<h:message for="txtMonto" style="color:red" />                  

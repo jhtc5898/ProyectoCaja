@@ -3,6 +3,8 @@ package negocio;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import datos.CuentaDAO;
@@ -55,48 +57,24 @@ public class GestionTransaccion {
 
 	}
 	
-	public void guardarTransaccionDepositoCajera(Transaccion transaccion, String cuentaOrig, String ctaDestino) {
+	public void guardarTransaccionDepositoCajera(Transaccion transaccion, String ctaDestino) {
 		Transaccion transaccionDest =  new Transaccion();
-		
-		Cuenta cuentaOrigen = cuentaDAO.getCuentaNumeroTransaccion(cuentaOrig); 
-		
 		Cuenta cuentaDestino = cuentaDAO.getCuentaNumeroTransaccion(ctaDestino); 
-		
-		cuentaOrigen = cuentaDAO.getCuentaNumeroTransaccion(cuentaOrigen.getNumero_cuenta());	
 		if(cuentaDestino !=  null) {
-			if(cuentaOrigen.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
+			if(cuentaDestino.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
 				//Guardar transaccion origen
 				transaccion.setTipo_transaccion(tipoTransaccionDAO.read(1));
-				transaccion.setDescripcion_transaccion("Deposito a la cuenta " + ctaDestino);
-				transaccion.setCuenta_transaccion(cuentaOrigen);
+				transaccion.setDescripcion_transaccion("Deposito MATR1 " + ctaDestino);
+				transaccion.setCuenta_transaccion(cuentaDestino);
 				transaccionDAO.insertarTransaccionDeposito(transaccion);
-				//Guardar transaccion destino
-				transaccionDest.setMonto_transaccion(transaccion.getMonto_transaccion());
-				transaccionDest.setTipo_transaccion(tipoTransaccionDAO.read(2));
-				transaccionDest.setDescripcion_transaccion("Deposito recibido de" + cuentaOrigen.getNumero_cuenta());
-				transaccionDest.setCuenta_transaccion(cuentaDestino);
-				transaccionDAO.insertarTransaccionDeposito(transaccionDest);
-				//Retiro de dinero de una cuentaOrigen y deposito en una cuentaDestino
-				transaccionDAO.realizarDeposito(cuentaOrigen.getNumero_cuenta().toString(), ctaDestino, transaccion.getMonto_transaccion());
 			}else {
-				mensaje.setMensaje("Su cuenta no dispone de dinero suficiente para realizar la transacción");
+				FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtMonto", new FacesMessage("Dinero insuficiente"));
 			}
 		}else {
-			mensaje.setMensaje("La cuenta destino no existe");
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtCuentaDestino", new FacesMessage("La cuenta no existe"));
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public void guardarTransaccionRetiro(Transaccion transaccion, Cuenta cuentaOrigen) {
 		cuentaOrigen =  cuentaDAO.getCuentaNumero(cuentaOrigen.getNumero_cuenta());
@@ -110,6 +88,25 @@ public class GestionTransaccion {
 			transaccionDAO.realizarRetiro(cuentaOrigen.getNumero_cuenta(), transaccion.getMonto_transaccion());
 		}else {
 			mensaje.setMensaje("Su cuenta no dispone de dinero suficiente");
+		}
+	}
+	
+	public void guardarTransaccionRetiroCajera(Transaccion transaccion, String ctaOrigen) {
+		Cuenta cuentaOrigen =  cuentaDAO.getCuentaNumero(ctaOrigen);
+		if(cuentaOrigen != null) {
+			if(cuentaOrigen.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
+				//Guardar la transaccion
+				transaccion.setTipo_transaccion(tipoTransaccionDAO.read(3));
+				transaccion.setDescripcion_transaccion("Retiro de la cuenta " + cuentaOrigen.getNumero_cuenta());
+				transaccion.setCuenta_transaccion(cuentaOrigen);
+				transaccionDAO.insertarTransaccionRetiro(transaccion);
+				//Retiro de dinero de la cuenta
+				transaccionDAO.realizarRetiro(cuentaOrigen.getNumero_cuenta(), transaccion.getMonto_transaccion());
+			}else {
+				FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtMonto", new FacesMessage("Dinero insuficiente"));
+			}
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:txtCuentaOrigen", new FacesMessage("La cuenta no existe"));
 		}
 	}
 	

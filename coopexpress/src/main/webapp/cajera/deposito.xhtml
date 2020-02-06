@@ -10,7 +10,7 @@
 <ui:define name="navegador">
 	<div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="home-Usuario.xhtml">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="solicitudes-credito.xhtml">Inicio</a></li>
               <li class="breadcrumb-item active">Transaccion - Depósito</li>
             </ol>
     </div>
@@ -75,18 +75,11 @@
               <!-- form start -->
               <h:form id="formulario-deposito">
                 <div class="card-body">
-                  <h:messages style="color:red" />
-                  <div class="col-3">
-                    <label class="col-form-label">Numero De Cuenta De Origen</label>
-                   <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaOrigen}">
-                    	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
-                    </h:inputText>VERIFICAR USUARIO
-                  </div>
                   <div class="col-3">
                     <label class="col-form-label">Numero de cuenta destino</label>
                     <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
                     	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
-                    </h:inputText>VERIFICAR USUARIO
+                    </h:inputText>
                     <h:message for="txtCuentaDestino" style="color:red" />
                   </div>  
                   <div class="col-3">

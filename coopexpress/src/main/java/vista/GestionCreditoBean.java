@@ -80,7 +80,7 @@ public class GestionCreditoBean {
 		return "informe-credito";
 	}
 	
-	public String solicitar(String numeroCuenta) {
+	public String solicitar() {
 		Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
 		credito.setCodigo_cuenta(cuenta);
 		guardarSolicitudCredito();
