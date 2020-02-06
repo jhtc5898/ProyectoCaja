@@ -1,5 +1,8 @@
 package vista;
 
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -43,7 +46,15 @@ public class RecuperarBean {
 		if(clave1.equals(clave2)) {
 			cuenta.setPswd_cuenta(clave1);
 			gc.actualizar(cuenta);
-			FacesContext.getCurrentInstance().addMessage("cambio:txtContrasena2", new FacesMessage("La contraseña ha sido actualizada"));
+			try {
+				FacesContext.getCurrentInstance().addMessage("cambio:txtContrasena2", new FacesMessage("La contraseña ha sido actualizada"));
+				TimeUnit.SECONDS.sleep(3);
+				FacesContext.getCurrentInstance().getExternalContext().redirect("../login.xhtml");
+			} catch (InterruptedException e) {
+				System.out.println("Fallo tiempo");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}else {
 			FacesContext.getCurrentInstance().addMessage("cambio:txtContrasena2", new FacesMessage("Las contraseñas no coinciden"));
 		}

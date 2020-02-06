@@ -32,6 +32,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import modelo.Credito;
 import modelo.Credito_Detalle;
 import modelo.Cuenta;
+import modelo.Usuario;
 import negocio.GestionCredito;
 import negocio.GestionCreditoDetalle;
 import negocio.GestionCuentas;
@@ -83,32 +84,22 @@ public class GestionCreditoBean {
 		Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
 		credito.setCodigo_cuenta(cuenta);
 		guardarSolicitudCredito();
-		return null;
+		return "solicitudes-credito";
 	}
 	
-	public String  Control()
+	public String aprobar(Credito credito)
 	{
-		System.out.println("Ingreso en control Datos=estado="+estado+"NumeroCuenta="+numeroCuenta);
-		if(estado.equals("H"))
-		{
-			System.out.println("Credito Numero Cuenta :"+numeroCuenta);
-			credito = gc.getCreditoCuentaControl(numeroCuenta);
-			credito.setEstado_credito(estado);
-			gc.actualizarCredito(credito);
-			System.out.println("Atualizacin Completada");
-			gcd.guardarCredito(credito);
-			return null;	
-		}	
-		else
-		{
-			System.out.println("Ingreso Solo Actualizar");
-			credito = gc.getCreditoCuentaControl(numeroCuenta);
-			credito.setEstado_credito(estado);
-			gc.actualizarCredito(credito);
-			return null;
-			
-		}
-		
+		credito.setEstado_credito("H");
+		gc.actualizarCredito(credito);
+		gcd.guardarCredito(credito);
+		return "solicitudes-credito";	
+	}
+	
+	public String denegar(Credito credito)
+	{
+		credito.setEstado_credito("R");
+		gc.actualizarCredito(credito);
+		return "solicitudes-credito";	
 	}
 	
 
@@ -261,8 +252,10 @@ public class GestionCreditoBean {
 		    
 		}
 
-	
-	
+	 public String cargarCreditoRevision(Credito credito) {
+			this.credito = credito;
+			return "revision-credito";
+	}
 	
 	public void getPagosCredito(String numeroCuenta) {
 		creditoDetalles = gcd.getPagos(Integer.parseInt(numeroCuenta));

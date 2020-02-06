@@ -5,12 +5,21 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="blankAdmin.xhtml">
 
-	<ui:define name="titulo">Busqueda Usuario</ui:define>
+	<ui:define name="titulo">Actualizar usuario</ui:define>
 
-	<ui:define name="descripcion">Buscar un Usuario</ui:define>
+	<ui:define name="descripcion">Actualizar la información personal del usuario</ui:define>
 
 	<ui:define name="indicaciones">
 		<p>Nombre.- Verificar funcionamiento de la pagina.</p>
+	</ui:define>
+	
+	<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            	<li class="breadcrumb-item"><a href="listar-usuario.xhtml">Lista de Usuarios</a></li>
+              	<li class="breadcrumb-item active">Actualizar usuario</li>
+            </ol>
+    </div>
 	</ui:define>
 
 <ui:define name="menu1">
@@ -46,7 +55,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-user"></i>
               <p>
@@ -58,11 +67,11 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
+                  <p>Crear nuevo usuario</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/listar-usuario.xhtml" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lista de Usuarios</p>
                 </a>
@@ -120,7 +129,7 @@
 	<ui:define name="contenido">
 		<div class="card card-success">
 			<div class="card-header">
-				<h3 class="card-title">Usuario</h3>
+				<h3 class="card-title">Formulario de actualización</h3>
 			</div>
 			<h:form>
 			<div class="card-body">

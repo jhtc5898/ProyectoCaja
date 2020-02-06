@@ -9,7 +9,6 @@ import javax.persistence.Query;
 
 import modelo.Credito;
 import modelo.Credito_Detalle;
-import modelo.Cuenta;
 
 @Stateless
 public class CreditoDetalleDAO {

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html  	xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:f="http://java.sun.com/jsf/core" 
-		xmlns:h="http://java.sun.com/jsf/html">
+<html  xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -29,16 +28,14 @@
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="" class="nav-link">Bienvenido: #{loginBean.nombreUsuario.toUpperCase()} </a>
+        <a href="solicitudes-usuario.xhtml" class="nav-link">Bienvenido: #{loginBean.nombreUsuario.toUpperCase()} </a>
       </li>
     </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-      <h:form id="sign-out">
       	<a href="${pageContext.request.contextPath}/coopexpress/logout" id="cerrarSesion" class="btn btn-block btn-outline-danger">CERRAR SESIÓN</a>
-      </h:form>
       </li>
       <!-- Notifications Dropdown Menu -->
     </ul>
@@ -48,21 +45,18 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="Faceletes/index3.html" class="brand-link">
-      <img src="../Faceletes/dist/img/AdminLTELogo.png"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8"/>
+    <a href="../Faceletes/index3.html" class="brand-link">
+    <img src="../Faceletes/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"/>
       <span class="brand-text font-weight-light">CoopExpress</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+     <div class="sidebar">
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">  
-      	  	<ui:insert name="menu1">Menu1</ui:insert>
-		</ul>
+      	  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
+          	<ui:insert name="menu1">Menu1</ui:insert>
+       	</ul>
       </div>
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -70,6 +64,7 @@
   			<ui:insert name="menu">Menu</ui:insert>  
         </ul>
       </nav>
+      <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
   </aside>
@@ -83,11 +78,7 @@
           <div class="col-sm-6">
             <h1><ui:insert name="titulo">Titulo</ui:insert></h1>
           </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            
-            </ol>
-          </div>
+          <ui:insert name="navegador">Ruta pagina</ui:insert>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -124,7 +115,8 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.0.2-pre
     </div>
-
+    <strong>Copyright copy: 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
+    reserved.
   </footer>
 
   <!-- Control Sidebar -->

@@ -38,7 +38,7 @@ public class CreditoDAO {
 	}
 	
 	public List<Credito> getCreditos(){
-		String jpql = "SELECT c FROM Credito c ";
+		String jpql = "SELECT c FROM Credito c WHERE estado_credito <> 'H' AND estado_credito <> ''";
 		Query q = em.createQuery(jpql);
 		List<Credito> creditos =q.getResultList();
 		return creditos;

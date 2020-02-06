@@ -4,13 +4,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blankAdmin.xhtml">
       
-<ui:define name="titulo">Nuevo Tipo de Transaccion</ui:define>
+<ui:define name="titulo">Crear Tipo de Transaccion</ui:define>
 
 <ui:define name="descripcion">Creación de un nuevo tipo de transacción</ui:define>
 
 <ui:define name="indicaciones">
 	<p>Nombre.- Ingresar el nombre del nuevo tipo de transacción</p>
     <p>Descripción.- Ingresar una descripción sobre el nuevo tipo de transacción</p>
+</ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              	<li class="breadcrumb-item active">Crear Tipo de Transaccion</li>
+            </ol>
+    </div>
 </ui:define>
 
 <ui:define name="menu1">
@@ -58,7 +66,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
+                  <p>Crear nuevo usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -118,7 +126,7 @@
 <!-- Horizontal Form -->
             <div class="card card-info" onload="#{gestionTipoTransaccionesBean.init()}">
               <div class="card-header">
-                <h3 class="card-title">Tipo de transacción</h3>
+                <h3 class="card-title">Formulario de registro de creación de nuevo tipo de transacción</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -128,7 +136,7 @@
                     <label class="col-form-label">Nombre de tipo de transacción</label>
                     <h:inputText id="txtNombre" styleClass="form-control" value="#{gestionTipoTransaccionesBean.tipoTransaccion.nombre_tipo_transaccion}" />
                   </div>
-                  <div class="form-group">
+                  <div class="col-4">
                   	<label class="col-form-label">Descripcion de tipo de transaccion</label>
                     <h:inputTextarea id="txtDescripcion" styleClass="form-control" value="#{gestionTipoTransaccionesBean.tipoTransaccion.descripcion_tipo_transaccion}" />
                   </div>

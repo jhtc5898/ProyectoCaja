@@ -4,13 +4,22 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blankAdmin.xhtml"> 
       
-<ui:define name="titulo">Actualizar tipo de cuenta</ui:define>
+<ui:define name="titulo">Actualizar Tipo de Cuenta</ui:define>
 
 <ui:define name="descripcion">Actualizar la informacion de un tipo de cuenta ya existente</ui:define>
 
 <ui:define name="indicaciones">
 	<p>1.- Modificar los datos cargados en la sección <b>Actualizar</b></p>
 </ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            	<li class="breadcrumb-item"><a href="listar-tipo-cuenta.xhtml">Lista de Tipo Cuenta</a></li>
+              	<li class="breadcrumb-item active">Actualizar Tipo de Cuenta</li>
+            </ol>
+    </div>
+	</ui:define>
 
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
@@ -57,7 +66,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
+                  <p>Crear nuevo usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -68,7 +77,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-edit"></i>
               <p>Tipo de Cuenta                
@@ -83,7 +92,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/admin/listar-tipo-cuenta.xhtml" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Lista de Tipo Cuenta</p>
                 </a>

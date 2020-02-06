@@ -1,0 +1,131 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="blank-cajera.xhtml"> 
+            
+<ui:define name="titulo">Solicitudes de crédito </ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">Solicitudes De Crédito</li>
+            </ol>
+    </div>
+</ui:define>
+
+<ui:define name="descripcion">Listado de solicitudes de crédito pendientes de aprobación</ui:define>
+<ui:define name="indicaciones">
+		<p><b style="color:#007bff">Revision</b>, cargará la información del crédito solicitado</p>
+</ui:define>
+
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/solicitudes-credito.xhtml" class="nav-link active">
+	<i class="nav-icon fas fa-home"></i>
+	<p>Solicitudes de crédito</p>
+	</a>
+</li>
+</ui:define>
+
+<ui:define name="menu">
+	<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+</ui:define>
+
+<ui:define name="contenido">
+
+		<h:form>
+			<div class="card-body" onload="#{gestionCreditoBean.init()}">
+			<div class="card-footer">
+				<div class="input-group">
+					<label class="col-form-label">Buscar por numero de cuenta </label>
+                    <div class="custom-file">
+                      	<div class="col-2">
+					 		<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
+								<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+								<f:validateRegex pattern="^[0-9]*$" />
+							</h:inputText>
+						</div>
+						<div class="input-group-append">
+                        	<h:commandButton styleClass="btn btn-success" action="#{gestionUsuariosBean.cargarUsuarioRevision()}" value="Buscar" />
+                     	</div>&#160;
+                     	<h:message for="txtCedula" style="color:red" />
+                      </div>
+                    </div>
+                    <h:message for="cedula" style="color:red" />
+                </div>
+			</div>
+			</h:form>
+<!-- Horizontal Form -->
+	<h:form>
+		<h:dataTable value="#{gestionCreditoBean.creditos}" var="credito" styleClass="table table-striped table-valign-middle" >
+		<h:column >
+			#{credito.codigo_credito}
+			<f:facet name="header"># Credito</f:facet>
+		</h:column>
+		<h:column>
+			#{credito.monto_credito}
+			<f:facet name="header">Monto Credito</f:facet>
+		</h:column>
+		<h:column>
+			#{credito.numero_meses_credito}
+			<f:facet name="header">Numero Meses Credito</f:facet>
+		</h:column>
+		<h:column>
+			#{credito.fecha_solicitud_credito}
+			<f:facet name="header">Fecha Solicitud</f:facet>
+		</h:column>
+		
+		<h:column>
+			#{credito.fecha_pago_credito}
+			<f:facet name="header">Fecha Pago Credito</f:facet>
+		</h:column>
+		
+		<h:column>
+			#{credito.estado_credito}
+			<f:facet name="header">Estado Credito</f:facet>
+		</h:column>
+		
+		<h:column>
+			#{credito.codigo_cuenta.numero_cuenta}
+			<f:facet name="header">Numero Cuenta</f:facet>
+		</h:column>
+		
+		<h:column>
+			<h:commandButton action="#{gestionCreditoBean.cargarCreditoRevision(credito)}" styleClass="btn btn-primary" value="Revisión" />
+		</h:column>
+		</h:dataTable>
+	</h:form>
+	<strong><span class="dropdown-header" style="color: red; "><h:outputText value="No existen solicitudes de creditos" rendered="#{empty gestionCreditoBean.creditos}" /></span></strong>
+
+</ui:define>
+</ui:composition>

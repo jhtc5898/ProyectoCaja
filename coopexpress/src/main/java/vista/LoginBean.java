@@ -71,7 +71,7 @@ public class LoginBean {
 				this.numeroCuenta = cuenta.getNumero_cuenta();
 				setEmail("");
 				setContrasena("");
-				return "cajera/home-cajera";
+				return "cajera/solicitudes-credito.xhtml";
 			}
 		}else {
 			FacesContext.getCurrentInstance().addMessage("login:txtContrasena", new FacesMessage("Correo o contraseña incorrectos"));
@@ -115,10 +115,6 @@ public class LoginBean {
 			}
 			
 		}
-	
-	public void redirectLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/faces/login.xhtml");
-	}
 	
 	public String getNombreUsuario() {
 		return nombreUsuario;

@@ -3,7 +3,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      template="blank-Usuarios.xhtml">
+      template="blank-cajera.xhtml">
       
 <ui:define name="titulo">Informe de crédito</ui:define>
 
@@ -19,18 +19,12 @@
 </ui:define>
 
 <ui:define name="menu1">
-<li class="nav-item has-treeview">
-            	<a href="/coopexpress/faces/Usuario/home-Usuario.xhtml" class="nav-link">
-              	<i class="nav-icon fas fa-home"></i>
-              	<p>Pagina de Inicio</p>
-            </a>
-      		</li>
-      		<li class="nav-item has-treeview">
-            	<a href="/coopexpress/faces/Usuario/perfil.xhtml" class="nav-link">
-              	<i class="nav-icon fas fa-user"></i>
-              	<p>Mi perfil</p>
-            </a>
-      		</li>
+	<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/solicitudes-credito.xhtml" class="nav-link active">
+		<i class="nav-icon fas fa-home"></i>
+		<p>Solicitudes de crédito</p>
+	</a>
+	</li>
 </ui:define>
 
 <ui:define name="menu">
@@ -44,46 +38,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/deposito.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/cajera/deposito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Transferencia</p>
+                  <p>Deposito</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/retiro.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/cajera/retiro.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Retiro</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/solicitud-credito.xhtml" class="nav-link">
+                <a href="/coopexpress/faces/cajera/solicitud-credito.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Solicitud de crédito</p>
                 </a>
               </li>
             </ul>
-          </li> 
-          
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fas fa-file-invoice-dollar"></i>
-              <p>Creditos <i class="fas fa-angle-left right"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tabla de pagos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/coopexpress/faces/Usuario/informe-credito.xhtml" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Informe del crédito</p>
-                </a>
-              </li>
-            </ul>
-          </li> 
+          </li>
 </ui:define>
 
 <ui:define name="contenido">
@@ -92,7 +65,7 @@
 	<b><h:outputText value="#{gestionCreditoBean.mensaje}" style="color:red"> </h:outputText></b>
 	</div>
 	
-	<div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
+	<div class="card card-success">
               <div class="card-header border-0">
                 <h3 class="card-title">Informe general</h3>
                 <div class="card-tools">
@@ -155,6 +128,15 @@
                 <!-- /.d-flex -->
               </div>
             </div>
+            <h:form>
+            <h:dataTable value="#{gestionCreditoBean.credito}" var="credito">
+             	<h:column>
+             		<h:commandButton action="#{gestionCreditoBean.aprobar(credito)}" styleClass="btn btn-success" value="Aprobar" />&#160; &#160;
+              		<h:commandButton action="#{gestionCreditoBean.denegar(credito)}" styleClass="btn btn-danger" value="Denegar" />&#160; &#160;
+              		<a href="solicitudes-credito.xhtml" class="btn btn-secondary">Regresar</a>
+            	</h:column>
+             </h:dataTable>
+             </h:form>
 </ui:define>
 
 <ui:define name="indicaciones">

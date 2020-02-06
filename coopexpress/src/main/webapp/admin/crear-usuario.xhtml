@@ -5,13 +5,21 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	template="blankAdmin.xhtml">
 
-	<ui:define name="titulo">Nuevo Usuario</ui:define>
+	<ui:define name="titulo">Crear nuevo Usuario</ui:define>
 
-	<ui:define name="descripcion">Registro en Coopexpress</ui:define>
+	<ui:define name="descripcion">Registro un nuevo usuario en Coopexpress</ui:define>
 
 	<ui:define name="indicaciones">
 		<p>Ingresar los datos personales del nuevo usuario</p>
 	</ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active">Crear nuevo usuario</li>
+            </ol>
+    </div>
+</ui:define>
 
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
@@ -58,7 +66,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
+                  <p>Crear nuevo usuario</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -121,59 +129,77 @@
 		<!-- Horizontal Form -->
 		<div class="card card-info" onload="#{gestionUsuariosBean.init()}">
 			<div class="card-header">
-				<h3 class="card-title">Formulario de registro</h3>
+				<h3 class="card-title">Formulario de registro de nuevo usuario</h3>
 			</div>
-			<!-- /.card-header -->
-			<!-- form start -->
-			<h:form id="register">
-				<div class="card-body">
-                  <b><h:outputText value="#{gestionUsuariosBean.mensaje}" style="color:#4AC821"> </h:outputText></b>					
-					<div class="col-3">
+			 <h:form id="crearUsuario">
+            <div class="card-body">
+            	<span class="dropdown-header" style="color: black"><h5> 1. INFORMACION PERSONAL</h5></span>
+            	<div class="row">
+            		<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
 						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.usuario.cedula}">
 							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
 							<f:validateRegex pattern="^[0-9]*$" />
 						</h:inputText>
+						<h:message for="txtCedula" style="color:red" />
 					</div>
-					<h:message for="txtCedula" style="color:red" />
+            		
 					<div class="col-4">
 						<label class="col-form-label">Nombres</label>
 						<h:inputText id="txtNombre" styleClass="form-control" required="true" requiredMessage="Debe ingresar sus nombres" validatorMessage="El nombre no puede contener números" value="#{gestionUsuariosBean.usuario.nombre}">
 							<f:validateRegex pattern="^[a-zA-Z ]*$" />
 						</h:inputText>
+						<h:message for="txtNombre" style="color:red" />
 					</div>
-					<h:message for="txtNombre" style="color:red" />
 					
-					<div class="col-4">
+            		<div class="col-4">
 						<label class="col-form-label">Apellidos</label>
 						<h:inputText id="txtApellido" styleClass="form-control" required="true" requiredMessage="Debe ingresar sus nombres" validatorMessage="El apellido no puede contener números" value="#{gestionUsuariosBean.usuario.apellido}">
 							<f:validateRegex pattern="^[a-zA-Z ]*$" />
 						</h:inputText>
+						<h:message for="txtApellido" style="color:red" />
 					</div>
-					<h:message for="txtApellido" style="color:red" />
 					
-					<div class="col-3">
+            		
+            		<div class="col-3">
 						<label class="col-form-label">Fecha Nacimiento AAAA/mm/dd</label>
 						<div class="input-group">
                     		<div class="input-group-prepend">
                       		<span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                    		</div>
-                    	<h:inputText id="txtFecha" styleClass="form-control" pt:placeholder="AAAA/mm/dd" required="true" requiredMessage="Debe ingresar sus fecha de nacimiento" validatorMessage="La fecha debe seguir el formato AAAA/mm/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
+                    	<h:inputText id="txtFecha" styleClass="form-control" pt:placeholder="AAAA/mm/dd" required="true" requiredMessage="Debe ingresar su fecha de nacimiento" validatorMessage="La fecha debe seguir el formato AAAA/mm/dd" value="#{gestionUsuariosBean.usuario.fecha_nacimiento}" >
     						<f:validateRegex pattern="([12]\d{3}[/-](0[1-9]|1[0-2])[/-](0[1-9]|[12]\d|3[01]))" />
     					</h:inputText>
+    					<h:message for="txtFecha" style="color:red" />
                   		</div>
 					</div>
-					<h:message for="txtFecha" style="color:red" />
+					
 					<div class="col-3">
-						<label class="col-form-label">Nivel Educacion de Usuario</label>
+						<label class="col-form-label">Telefono de Usuario</label>
+						<h:inputText id="txtTelefono" styleClass="form-control" required="true" requiredMessage="Debe ingresar un número de telefono" validatorMessage="Telefono no válido" value="#{gestionUsuariosBean.usuario.telefono}">
+							<f:validateLength for="txtTelefono" minimum="7" maximum="10" />
+							<f:validateRegex pattern="^[0-9]*$" />
+						</h:inputText>
+						<h:message for="txtTelefono" style="color:red" />
+					</div>
+					
+            	</div>
+            	<hr />
+            	
+            	<div class="row">
+					
+					
+					<div class="col-3">
+						<label class="col-form-label">Nivel Educacion</label>
 						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.educacion}" styleClass="form-control">
 							<f:selectItem itemValue="Primario" itemLabel="Primario" />
 							<f:selectItem itemValue="Secundario" itemLabel="Secundario" />
 							<f:selectItem itemValue="Superior" itemLabel="Superior" />
 						</h:selectOneMenu>
 					</div>
+					
 					<div class="col-3">
-						<label class="col-form-label">Estado civil Usuario</label>
+						<label class="col-form-label">Estado civil del usuario</label>
 						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.estado}" styleClass="form-control">
 							<f:selectItem itemValue="Soltero" itemLabel="Soltero" />
 							<f:selectItem itemValue="Casado" itemLabel="Casado" />
@@ -181,6 +207,7 @@
 							<f:selectItem itemValue="Union Libre" itemLabel="Union Libre" />
 						</h:selectOneMenu>
 					</div>
+					
 					<div class="col-3">
 						<label class="col-form-label">Genero Usuario</label>
 						<h:selectOneMenu value="#{gestionUsuariosBean.usuario.genero}" styleClass="form-control">
@@ -189,7 +216,11 @@
 							<f:selectItem itemValue="Otro" itemLabel="Otro" />
 						</h:selectOneMenu>
 					</div>
-					<div class="col-3">
+            	</div>
+            	<hr />
+            	
+            	<div class="row">
+            		<div class="col-3">
 						<label class="col-form-label">Ciudad de Usuario</label>
 						<h:selectOneMenu id="txtCiudad" styleClass="form-control" value="#{gestionUsuariosBean.usuario.ciudad}">
 							<f:selectItem itemValue="Cuenca" itemLabel="Cuenca" />
@@ -197,28 +228,22 @@
 							<f:selectItem itemValue="Loja" itemLabel="Loja" />
 						</h:selectOneMenu>
 					</div>
-					<div class="col-3">
-						<label class="col-form-label">Telefono de Usuario</label>
-						<h:inputText id="txtTelefono" styleClass="form-control" required="true" requiredMessage="Debe ingresar un número de telefono" validatorMessage="Telefono no válido" value="#{gestionUsuariosBean.usuario.telefono}">
-							<f:validateLength for="txtTelefono" minimum="7" maximum="10" />
-							<f:validateRegex pattern="^[0-9]*$" />
-						</h:inputText>
-					</div>
-					<h:message for="txtTelefono" style="color:red" />
 					<div class="col-4">
 						<label class="col-form-label">Dirección -Calle Principal</label>
 						<h:inputText id="txtPrincipal" styleClass="form-control" required="true" requiredMessage="Debe ingresar una dirección" value="#{gestionUsuariosBean.usuario.principal}" />
+						<h:message for="txtPrincipal" style="color:red" />
 					</div>
-					<h:message for="txtPrincipal" style="color:red" />
+					
 					<div class="col-4">
 						<label class="col-form-label">Direccion - Calle Secundaria(Opcional)</label>
 						<h:inputText id="txtSecundaria" styleClass="form-control" value="#{gestionUsuariosBean.usuario.secundaria}" />
 					</div>
-				</div>
-				<!-- /.card-body -->
-				<div class="card-footer">
-					<h:commandButton value="Guardar" styleClass="btn btn-info" action="#{gestionUsuariosBean.guardarUsuarioAdmin()}" />
-				</div>
+            	</div>
+            	<hr />
+            </div>
+            		<div class="card-footer">
+						<h:commandButton value="Siguiente" styleClass="btn btn-success" action="#{gestionUsuariosBean.guardarCajeroAdmin()}" />
+					</div>
 			</h:form>
 		</div>
 	</ui:define>

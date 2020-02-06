@@ -4,14 +4,21 @@
       xmlns:h="http://java.sun.com/jsf/html"
       template="blankAdmin.xhtml">
       
-<ui:define name="titulo">Listar Tipo De Cuentas</ui:define>
+<ui:define name="titulo">Lista de Tipo De Cuenta</ui:define>
 
-<ui:define name="descripcion">Listado de los tipos de cuenta</ui:define>
+<ui:define name="descripcion">Tipos de cuenta existentes</ui:define>
 
 <ui:define name="indicaciones">
 	<p>Al presionar <b style="color:#17a2b8">Actualizar</b>, se podrá actualizar la información del tipo de cuenta</p>
-	<p>Al presionar <b style="color:red">Eliminar</b>, se eliminará el tipo de cuenta seleccionado</p>
 </ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              	<li class="breadcrumb-item active">Lista de Tipo Cuenta</li>
+            </ol>
+    </div>
+	</ui:define>
 
 <ui:define name="menu1">
 	<li class="nav-item has-treeview">
@@ -58,7 +65,7 @@
               <li class="nav-item">
                 <a href="/coopexpress/faces/admin/crear-usuario.xhtml" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Creacion De Usuarios</p>
+                  <p>Crear nuevo usuario</p>
                 </a>
               </li>
               <li class="nav-item">
