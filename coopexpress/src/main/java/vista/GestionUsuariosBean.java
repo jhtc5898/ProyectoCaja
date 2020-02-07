@@ -34,7 +34,7 @@ public class GestionUsuariosBean {
 		usuario = new Usuario();
 		usuarios = gu.getUsuarios();
 		usuariosPendientes = gu.getUsuariosPendientes();
-		cedula = " ";
+		cedula = "";
 	}
 
 	//Registro del usuario con el mensaje de confirmacion

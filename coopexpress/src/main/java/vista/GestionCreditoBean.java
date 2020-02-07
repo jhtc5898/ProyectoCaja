@@ -71,6 +71,7 @@ public class GestionCreditoBean {
 	public void init() {
 		credito = new Credito();
 		creditos = gc.getCreditos();
+		numeroCuenta="";
 	}
 	
 	public String guardarSolicitudCredito() {

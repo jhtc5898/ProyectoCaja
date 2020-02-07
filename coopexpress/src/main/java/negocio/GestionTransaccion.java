@@ -102,7 +102,7 @@ public class GestionTransaccion {
 			if(cuentaOrigen.getSaldo_cuenta() >= transaccion.getMonto_transaccion()) {
 				//Guardar la transaccion
 				transaccion.setTipo_transaccion(tipoTransaccionDAO.read(3));
-				transaccion.setDescripcion_transaccion("Retiro de la cuenta " + cuentaOrigen.getNumero_cuenta());
+				transaccion.setDescripcion_transaccion("Retiro en MAT1 ");
 				transaccion.setCuenta_transaccion(cuentaOrigen);
 				transaccionDAO.insertarTransaccionRetiro(transaccion);
 				//Retiro de dinero de la cuenta

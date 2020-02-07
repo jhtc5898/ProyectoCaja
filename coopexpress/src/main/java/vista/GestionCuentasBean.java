@@ -86,9 +86,15 @@ public class GestionCuentasBean implements Serializable{
 	}
 		
 	public String actualizarCuentaUsuario() {
-		gc.actualizar(cuenta);
-		login.cerrarSesion();
-		return "logout";
+		String ret="";
+		if(gc.actualizar(cuenta) != null) {
+			login.cerrarSesion();
+			ret= "logout";
+		}else {
+			FacesContext.getCurrentInstance().addMessage("actualizar:boton", new FacesMessage("El correo ya esta en uso"));
+			ret = null;
+		}
+		return ret;
 	}
 	
 	public String actualizarCuentaAdmin() {

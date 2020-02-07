@@ -28,7 +28,9 @@ public class RecuperarBean {
 	@PostConstruct
 	public void init() {
 		cuenta = new Cuenta();
-		correo = " ";
+		correo = "";
+		clave1 ="";
+		clave2 ="";
 	}
 	
 	public String recuperarContraseña() {
@@ -45,7 +47,8 @@ public class RecuperarBean {
 	public void cambiarContraseña() {
 		if(clave1.equals(clave2)) {
 			cuenta.setPswd_cuenta(clave1);
-			gc.actualizar(cuenta);
+			gc.actualizarC(cuenta);
+			init();
 			try {
 				FacesContext.getCurrentInstance().addMessage("cambio:txtContrasena2", new FacesMessage("La contraseña ha sido actualizada"));
 				TimeUnit.SECONDS.sleep(3);
@@ -57,7 +60,10 @@ public class RecuperarBean {
 			}
 		}else {
 			FacesContext.getCurrentInstance().addMessage("cambio:txtContrasena2", new FacesMessage("Las contraseñas no coinciden"));
+			setClave1("");
+			setClave2("");
 		}
+
 	}
 
 	public String getCorreo() {

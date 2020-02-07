@@ -93,14 +93,6 @@
           <div class="card card-info">
               <div class="card-header border-0">
                 <h3 class="card-title">Depositos recibidos</h3>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
               </div>
               <div class="card-body table-responsive p-0" onload="#{gestionTransaccionesBean.getDepositosRecibidos(loginBean.numeroCuenta)}">
                 <h:dataTable value="#{gestionTransaccionesBean.transaccionList}" var="transaccion" styleClass="table table-striped table-valign-middle" >
@@ -127,8 +119,8 @@
             <div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
               <div class="card-header border-0">
                 <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Tabla de pagos de crédito</h3>
-                  <a href="tabla-pagos.xhtml">Ampliar</a>
+                  <h3 class="card-title">Pagos del crédito</h3>
+                  <a href="/coopexpress/faces/Usuario/tabla-pagos.xhtml">Ampliar</a>
                 </div>
               </div>
               <div class="card-body table-responsive p-0" style="height: 300px;" onload="#{gestionCreditoBean.getPagosCredito(loginBean.numeroCuenta)}">
@@ -158,17 +150,9 @@
           <div class="card card-warning">
               <div class="card-header border-0">
                 <h3 class="card-title">Retiros realizados</h3>
-                <div class="card-tools">
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
               </div>
-              <div class="card-body table-responsive p-0" onload="#{gestionTransaccionesBean.getRetirosHechos(loginBean.numeroCuenta)}">
-                <h:dataTable value="#{gestionTransaccionesBean.transaccionList}" var="transaccion" styleClass="table table-striped table-valign-middle" >
+              <div class="card-body table-responsive p-0" style="height: 300px;" onload="#{gestionTransaccionesBean.getRetirosHechos(loginBean.numeroCuenta)}">
+                <h:dataTable value="#{gestionTransaccionesBean.transaccionList}" var="transaccion" styleClass="table table-head-fixed" >
 					<h:column >
 						#{transaccion.monto_transaccion}
 						<f:facet name="header">Monto retirado</f:facet>
@@ -188,14 +172,6 @@
             <div class="card card-info">
               <div class="card-header border-0">
                 <h3 class="card-title">Transferencias realizadas</h3>
-                <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-download"></i>
-                  </a>
-                  <a href="#" class="btn btn-tool btn-sm">
-                    <i class="fas fa-bars"></i>
-                  </a>
-                </div>
               </div>
               <div class="card-body table-responsive p-0" onload="#{gestionTransaccionesBean.getDepositosRealizados(loginBean.numeroCuenta)}">
 				 <h:dataTable value="#{gestionTransaccionesBean.transaccionList}" var="transaccion" styleClass="table table-striped table-valign-middle" >

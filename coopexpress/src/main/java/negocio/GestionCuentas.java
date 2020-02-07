@@ -39,7 +39,6 @@ public class GestionCuentas {
 		if (cuentadDAO.getCuentaCorreo(cuenta.getCorreo_cuenta()) == null) {
 			cuenta.setSaldo_cuenta(0);
 			cuenta.setTipo_cuenta(tipoCuentaDAO.read(1));
-			cuenta.setNumero_cuenta("10000001");
 			usuarioDAO.habilitarUsuario(cuenta.getUsuario().getCedula());
 			cuentadDAO.insert(cuenta);
 		}else {
@@ -53,7 +52,6 @@ public class GestionCuentas {
 		if (cuentadDAO.getCuentaCorreo(cuenta.getCorreo_cuenta()) == null) {
 			cuenta.setSaldo_cuenta(0);
 			cuenta.setTipo_cuenta(tipoCuentaDAO.read(3));
-			cuenta.setNumero_cuenta("10000001");
 			cuentadDAO.insert(cuenta);
 		}else {
 			resultado = null;
@@ -61,7 +59,18 @@ public class GestionCuentas {
 		return resultado;
 	}
 	
-	public void actualizar(Cuenta cuenta) {
+	public String actualizar(Cuenta cuenta) {
+		String resultado = "";
+		if (cuentadDAO.getCuentaCorreo(cuenta.getCorreo_cuenta()) == null) {
+			cuentadDAO.update(cuenta);
+		}else {
+			resultado = null;
+		}
+		return resultado;
+		
+	}
+	
+	public void actualizarC(Cuenta cuenta) {
 		cuentadDAO.update(cuenta);
 	}
 	

@@ -2,6 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       template="blank-Usuarios.xhtml"> 
       
 <ui:define name="titulo">Actualizar datos de cuenta</ui:define>
@@ -93,7 +94,7 @@
 <ui:define name="contenido">
 <div class="card card-info">
               <!-- form start -->
-              <h:form>
+              <h:form id="actualizar">
               
               	<div class="card card-success">
               		<div class="card-header">
@@ -119,18 +120,26 @@
 					</h:column>
 					<h:column>
 						<label class="col-form-label">Correo  </label>
-						<h:inputText value="#{cuenta.correo_cuenta}" styleClass="form-control"/>
+						<h:inputText id="txtCorreo" styleClass="form-control" validatorMessage="La estructura del correo no es valida" value="#{cuenta.correo_cuenta}">
+							<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</h:inputText>
+						<h:message for="txtCorreo" style="color:red"/>
 					</h:column>
+						
 					<h:column>
 						<label class="col-form-label">Modificar Contraseña  </label>
-						<h:inputText value="#{cuenta.pswd_cuenta}" type="password" styleClass="form-control" />
+						<h:inputText id="txtContrasena" styleClass="form-control" validatorMessage="La contraseña debe tener mas de 5 caracteres" pt:type="password" value="#{cuenta.pswd_cuenta}">
+							<f:validateLength for="txtContrasena" minimum="6" />
+						</h:inputText>
+						<h:message for="txtContrasena" style="color:red"/>
 					</h:column>
 				</h:dataTable>
                 </div>  
                 <!-- /.card-body -->
                 <div class="card-footer">
-                 	<h:commandButton action="#{gestionCuentasBean.actualizarCuentaUsuario()}" value="Actualizar" styleClass="btn btn-info" />
-                 	<a href="perfil.xhtml" class="btn btn-danger">Cancelar</a>
+                 	<h:commandButton action="#{gestionCuentasBean.actualizarCuentaUsuario()}" id="boton" value="Actualizar" styleClass="btn btn-info" />&#160;
+                 	<a href="perfil.xhtml" class="btn btn-danger">Cancelar</a>&#160;
+                 	<h:message for="boton" style="color:red"/>
                 </div>
               </h:form>
             </div>
