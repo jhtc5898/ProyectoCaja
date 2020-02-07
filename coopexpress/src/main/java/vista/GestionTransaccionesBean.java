@@ -290,6 +290,56 @@ public class GestionTransaccionesBean {
 		            	
 	            }
 	            
+	            //DEPOSITOS RELIZADOS CAJERA
+	            
+	            Paragraph informacionCajera= new Paragraph("Depositos Realizados en la Matriz ",fuente);
+	            document.add(informacionCajera);
+	            document.add(saltoLinea);
+	            
+	            PdfPTable table4 = new PdfPTable(3);
+	            
+	            Paragraph columnaMontoCajera= new Paragraph("Monto");
+	            columnaMontoCajera.getFont().setStyle(Font.BOLD);
+	            columnaMontoCajera.getFont().setSize(10);
+	            
+	            Paragraph columnaFechaCajera= new Paragraph("Fecha y Hora");
+	            columnaFechaCajera.getFont().setStyle(Font.BOLD);
+	            columnaFechaCajera.getFont().setSize(10);
+	            
+	            Paragraph columnaDescripcionCajera= new Paragraph("Descripcion");
+	            columnaDescripcionCajera.getFont().setStyle(Font.BOLD);
+	            columnaDescripcionCajera.getFont().setSize(10);
+	            
+	            table4.addCell(columnaMontoCajera);
+	            table4.addCell(columnaFechaCajera);
+	            table4.addCell(columnaDescripcionCajera);
+	            
+	            List<Transaccion> depositoCajera = gt.getDepositosCajera(numeroCuenta);
+	            
+	            if (depositoCajera == null || depositoCajera.size()==0) {
+	            	Paragraph noCajera = new Paragraph();
+	            	noCajera.setAlignment(Element.ALIGN_CENTER);
+	            	noCajera.setFont(FontFactory.getFont("Arial", 11, Font.BOLD, BaseColor.ORANGE));
+	            	noCajera.add("No a realizado ningun deposito en nuestra Matriz");
+	 	            document.add(noCajera);
+	 	            document.add(saltoLinea);
+				} else {
+
+					for (int i = 0; i < depositoCajera.size(); i++) {
+						String monto=String.valueOf(depositoCajera.get(i).getMonto_transaccion());
+						monto=monto.substring(0,2);
+						
+						String fecha=depositoCajera.get(i).getFecha_transaccion();
+						String descripcion= depositoCajera.get(i).getDescripcion_transaccion();
+						System.out.println(descripcion);
+						table4.addCell(monto);
+						table4.addCell(fecha);
+						table4.addCell(descripcion);
+					}
+					document.add(table4);
+		            document.add(saltoLinea);
+				}
+	            
 	            //TRANSFRENCIAS REALIZADAS
 	            
 	            Paragraph informacionTransferencias= new Paragraph("Transferencias Realizadas",fuente);
