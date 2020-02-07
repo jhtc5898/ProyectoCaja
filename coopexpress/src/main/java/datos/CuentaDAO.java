@@ -23,7 +23,7 @@ public class CuentaDAO {
 	}
 	
 	public String getLastCuenta() {
-		Query query = em.createNativeQuery("SELECT MAX(codigo_cuenta) from Cuenta");
+		Query query = em.createNativeQuery("SELECT MAX(codigo_cuenta) from Cuenta c");
 		int lastCuenta = ((Number) query.getSingleResult()).intValue();
 		return String.valueOf(lastCuenta+1);
 	}
