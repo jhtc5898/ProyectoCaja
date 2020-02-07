@@ -240,7 +240,7 @@ public class GestionTransaccionesBean {
 	            
 	            Paragraph p3 = new Paragraph();
 	            p3.setFont(f);
-	            p3.add("Archivo Den Gran Importacia");
+	            p3.add("Archivo De Gran Importacia");
 	 
 	            
 	            
