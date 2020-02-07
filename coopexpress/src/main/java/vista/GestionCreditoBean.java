@@ -40,6 +40,7 @@ import modelo.Usuario;
 import negocio.GestionCredito;
 import negocio.GestionCreditoDetalle;
 import negocio.GestionCuentas;
+import negocio.GestionTransaccion;
 
 @ManagedBean
 @SessionScoped
@@ -53,6 +54,9 @@ public class GestionCreditoBean {
 	
 	@Inject
 	private GestionCuentas gcu;
+	
+	@Inject
+	private GestionTransaccion gt;
 	
 	private Credito credito =  new Credito();
 	private List<Credito_Detalle> creditoDetalles = new ArrayList<Credito_Detalle>();
@@ -96,6 +100,7 @@ public class GestionCreditoBean {
 		}else {
 			FacesContext.getCurrentInstance().addMessage("formulario-credito:txtCuentaOrigen", new FacesMessage("El usuario ya dispone de un credito"));
 		}
+		init();
 	}
 	
 	public void solicitarUsuario(String numeroCuenta) {
@@ -107,11 +112,12 @@ public class GestionCreditoBean {
 		}else {
 			FacesContext.getCurrentInstance().addMessage("formulario-credito:txtCuentaOrigen", new FacesMessage("No se puede tener mas de un crédito"));
 		}
+		init();
 	}
 	
 	public void guardarSolicitudCreditoUsuario() {
 		gc.guardar(credito);
-		//writePDF();
+		writePDF();
 		init();
 	}
 	
@@ -127,6 +133,7 @@ public class GestionCreditoBean {
 		credito.setEstado_credito("H");
 		gc.actualizarCredito(credito);
 		gcd.guardarCredito(credito);
+		gt.asignarCredito(credito.getCodigo_cuenta(), credito.getMonto_credito());
 		return "solicitudes-credito";	
 	}
 	
@@ -146,7 +153,6 @@ public class GestionCreditoBean {
 	        	String path = new File(".").getCanonicalPath();
 	        
 	        	String FILE_NAME = path + "/Reportes/"+credito.getDesripcion_credito()+".pdf";
-	        	System.out.println(FILE_NAME);
 	        	
 	            PdfWriter.getInstance(document, new FileOutputStream(new File(FILE_NAME)));
 	 
@@ -270,7 +276,7 @@ public class GestionCreditoBean {
 	            Paragraph p3 = new Paragraph();
 	            p3.setFont(f);
 	            p3.addAll(paragraphList);
-	            p3.add("Archivo Den Gran Importacia");
+	            p3.add("Archivo De Gran Importacia");
 	 
 	           
 	            document.add(table);
@@ -325,14 +331,27 @@ public class GestionCreditoBean {
 		    context.responseComplete();
 		    
 		}
-
+	 
 	 public String cargarCreditoRevision(Credito credito) {
 			this.credito = credito;
 			return "revision-credito";
 	}
+
+	 public String cargarCreditoRevision1() {
+		 this.credito=gc.getCredito(numeroCuenta);
+		 String pagina = "";
+		 	if(this.credito != null) {
+		 		pagina = "revision-credito";
+		 	}else {
+		 		FacesContext.getCurrentInstance().addMessage("solicitudes:txtCuenta", new FacesMessage("No existe un credito perteneciente a esta cuenta"));
+		 		pagina = null;
+			 	init();
+		 	}
+		 	return pagina;
+	}
 	
 	public void getPagosCredito(String numeroCuenta) {
-		creditoDetalles = gcd.getPagos(Integer.parseInt(numeroCuenta));
+		creditoDetalles = gcd.getPagos(numeroCuenta);
 	}
 
 	public Credito getCredito() {

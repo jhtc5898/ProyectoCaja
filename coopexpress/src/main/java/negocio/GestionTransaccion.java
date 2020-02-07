@@ -59,6 +59,10 @@ public class GestionTransaccion {
 		return resultado;
 	}
 	
+	public void asignarCredito(Cuenta cuenta, double monto) {
+		transaccionDAO.asignarCredito(cuenta, monto);
+	}
+	
 	public String guardarTransaccionDepositoCajera(Transaccion transaccion, String ctaDestino) {
 		Cuenta cuentaDestino = cuentaDAO.getCuentaNumeroTransaccion(ctaDestino); 
 		String resultado = "";

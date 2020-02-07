@@ -63,22 +63,22 @@
 
 <ui:define name="contenido">
 
-		<h:form>
+		<h:form id="solicitudes">
 			<div class="card-body" onload="#{gestionCreditoBean.init()}">
 			<div class="card-footer">
 				<div class="input-group">
 					<label class="col-form-label">Buscar por numero de cuenta </label>
                     <div class="custom-file">
                       	<div class="col-2">
-					 		<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
-								<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+					 		<h:inputText id="txtCuenta" styleClass="form-control" required="true" validatorMessage="Cuenta no valida" requiredMessage="Ingresar un número de cuenta" value="#{gestionCreditoBean.numeroCuenta}">
+								<f:validateLength for="txtCuenta" minimum="6"/>
 								<f:validateRegex pattern="^[0-9]*$" />
 							</h:inputText>
 						</div>
 						<div class="input-group-append">
-                        	<h:commandButton styleClass="btn btn-success" action="#{gestionUsuariosBean.cargarUsuarioRevision()}" value="Buscar" />
+                        	<h:commandButton styleClass="btn btn-success" action="#{gestionCreditoBean.cargarCreditoRevision1()}" value="Buscar" />
                      	</div>&#160;
-                     	<h:message for="txtCedula" style="color:red" />
+                     	<h:message for="txtCuenta" style="color:red" />
                       </div>
                     </div>
                     <h:message for="cedula" style="color:red" />

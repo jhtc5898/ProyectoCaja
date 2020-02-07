@@ -88,6 +88,13 @@ public class TransaccionDAO {
 		return retiros;
 	}
 	
+	public void asignarCredito(Cuenta cuenta, double monto) {
+		Query depositarCredito = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta + ?1 WHERE numero_cuenta = ?2");
+		depositarCredito.setParameter(1, monto);
+		depositarCredito.setParameter(2, cuenta.getNumero_cuenta());
+		depositarCredito.executeUpdate();
+	}
+	
 	public void depositar(String cuenta, double monto) {
 		Query depositar = em.createQuery("UPDATE Cuenta c SET saldo_cuenta = saldo_cuenta + ?1 WHERE numero_cuenta = ?2");
 		depositar.setParameter(1, monto);

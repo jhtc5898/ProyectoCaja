@@ -21,7 +21,7 @@
 					<div class="col-3">
 						<label class="col-form-label">Cedula de Usuario</label>
 						<h:inputText id="txtCedula" styleClass="form-control" required="true" validatorMessage="Cedula no válida" requiredMessage="Ingresar número de cédula" value="#{gestionUsuariosBean.cedula}">
-							<f:validateLength for="txtCuentaDestino" minimum="10" maximum="10" />
+							<f:validateLength for="txtCuentaDestino" maximum="10" />
 							<f:validateRegex pattern="^[0-9]*$" />
 						</h:inputText>
 					</div>
