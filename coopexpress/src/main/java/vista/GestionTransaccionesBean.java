@@ -219,7 +219,7 @@ public class GestionTransaccionesBean {
 	            }else {
 	            	for (int i = 0; i < depositosRecibidos.size(); i++) {
 						String monto=String.valueOf(depositosRecibidos.get(i).getMonto_transaccion());
-						monto=monto.substring(0,2);
+						monto=monto.substring(0,4);
 						
 						String fecha=depositosRecibidos.get(i).getFecha_transaccion();
 						String descripcion=depositosRecibidos.get(i).getDescripcion_transaccion();
@@ -277,7 +277,7 @@ public class GestionTransaccionesBean {
 	            }else {
 	            	for (int i = 0; i < retirosRealizados.size(); i++) {
 		            	String monto=String.valueOf(retirosRealizados.get(i).getMonto_transaccion());
-						monto=monto.substring(0,2);
+		            	monto=monto.substring(0,3);
 						
 						String fecha=retirosRealizados.get(i).getFecha_transaccion();
 						
@@ -327,7 +327,7 @@ public class GestionTransaccionesBean {
 
 					for (int i = 0; i < depositoCajera.size(); i++) {
 						String monto=String.valueOf(depositoCajera.get(i).getMonto_transaccion());
-						monto=monto.substring(0,2);
+						monto=monto.substring(0,4);
 						
 						String fecha=depositoCajera.get(i).getFecha_transaccion();
 						String descripcion= depositoCajera.get(i).getDescripcion_transaccion();
@@ -379,7 +379,7 @@ public class GestionTransaccionesBean {
 	            	
 	 	            for (int i = 0; i < transferencias.size(); i++) {
 	 	            	String monto=String.valueOf(transferencias.get(i).getMonto_transaccion());
-	 					monto=monto.substring(0,2);
+	 	            	monto=monto.substring(0,4);
 	 					
 	 					String fecha=transferencias.get(i).getFecha_transaccion();
 	 					String descripcion=transferencias.get(i).getDescripcion_transaccion();
