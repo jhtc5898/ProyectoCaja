@@ -218,8 +218,12 @@
           </div>
           <!-- /.col-md-6 -->
         </div>
+        
         <!-- /.row -->
       </div>
+      	<h:form>
+			<h:commandButton action="#{gestionTransaccionesBean.generarEstadoCuentaPDF(loginBean.numeroCuenta)}" value="Generar Estado Cuenta" styleClass="btn btn-info" style="float:right;"/>
+		</h:form>
       <!-- /.container-fluid -->
     </div>
 </ui:define>
