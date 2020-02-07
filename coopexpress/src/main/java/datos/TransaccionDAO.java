@@ -70,6 +70,16 @@ public class TransaccionDAO {
 		return depositos;
 	}
 	
+	//Deositos Cajera
+	public List<Transaccion> getDepositoCajera(Cuenta cuenta){
+		String jpql = "SELECT t FROM Transaccion t WHERE cuenta_transaccion = ?1 AND tipo_transaccion = 4 ORDER BY t.fecha_transaccion DESC";
+		Query q = em.createQuery(jpql, Transaccion.class);
+		q.setParameter(1, cuenta);
+		List<Transaccion> depositos = q.getResultList();
+		return depositos;
+		
+	}
+	
 	//Depositos realizados
 	public List<Transaccion> getDepositosRealizados(Cuenta cuenta){
 		String jpql = "SELECT t FROM Transaccion t WHERE cuenta_transaccion = ?1 AND tipo_transaccion = 1 ORDER BY t.fecha_transaccion DESC";

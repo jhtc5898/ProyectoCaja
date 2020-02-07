@@ -131,6 +131,11 @@ public class GestionTransaccion {
 		return transaccionDAO.getDepositosRealizados(cuenta);
 	}
 	
+	public List<Transaccion> getDepositosCajera(String numeroCuenta){
+		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
+		return transaccionDAO.getDepositoCajera(cuenta);
+	}
+	
 	public List<Transaccion> getRetirosHechos(String numeroCuenta){
 		Cuenta cuenta = cuentaDAO.getCuentaNumero(numeroCuenta);
 		return transaccionDAO.getRetirosHechos(cuenta);
