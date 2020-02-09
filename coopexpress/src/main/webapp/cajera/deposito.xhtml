@@ -31,6 +31,12 @@
               	<p>Solicitudes de crédito</p>
             </a>
 </li>
+<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link">
+                  <i class="fas fa-credit-card nav-icon"></i>
+                  <p>Pagar crédito</p>
+                </a>
+</li>
 </ui:define>
 
 <ui:define name="menu">
@@ -75,11 +81,21 @@
               <!-- form start -->
               <h:form id="formulario-deposito">
                 <div class="card-body">
-                  <div class="col-3">
-                    <label class="col-form-label">Numero de cuenta destino</label>
+                  <div class="col-6">
+                  <label class="col-form-label">Numero de cuenta destino</label>
+                  <div class="row">
+                    <div>
                     <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
                     	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
                     </h:inputText>
+                    </div>
+                    <div>
+                    <h:commandButton  value="Verificar" id="usuario" styleClass="btn btn-info" action="#{gestionTransaccionesBean.cargarUsuario1()}" />
+                    </div>
+                    <div>
+                    	&#160;Usuario: <h:message for="usuario"/>   
+                    </div>
+                    </div>
                     <h:message for="txtCuentaDestino" style="color:red" />
                   </div>  
                   <div class="col-3">

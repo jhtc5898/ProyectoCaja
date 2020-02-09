@@ -30,6 +30,12 @@
     <p>Solicitudes de crédito</p>
     </a>
 </li>
+<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link">
+                  <i class="fas fa-credit-card nav-icon"></i>
+                  <p>Pagar crédito</p>
+                </a>
+</li>
 </ui:define>
 
 <ui:define name="menu">
@@ -66,7 +72,7 @@
 
 <ui:define name="contenido">
 <!-- Horizontal Form -->
-            <div class="card card-info" onload="#{gestionCreditoBean.init()}">
+            <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Solicitud de crédito</h3>
               </div>
@@ -74,11 +80,21 @@
               <!-- form start -->
               <h:form id="formulario-credito">
                 <div class="card-body">
-                  <div class="col-3">
-                    <label class="col-form-label">Su número de cuenta</label>
+                  <div class="col-6">
+                  <label class="col-form-label">Su número de cuenta</label>
+                  <div class="row">
+                    <div>
                     <h:inputText id="txtCuentaOrigen" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionCreditoBean.numeroCuenta}">
                     	<f:validateLength for="txtCuentaOrigen" minimum="6" /> 
-                    </h:inputText>                    
+                    </h:inputText> 
+                    </div>
+                    <div>
+                    <h:commandButton  value="Verificar" id="usuario" styleClass="btn btn-info" action="#{gestionCreditoBean.cargarUsuario()}" />
+                    </div>
+                    <div>
+                    	&#160;Usuario: <h:message for="usuario"/>   
+                    </div>
+                    </div>
                     <h:message for="txtCuentaOrigen" style="color:red" />
                   </div>
                   <div class="col-3">

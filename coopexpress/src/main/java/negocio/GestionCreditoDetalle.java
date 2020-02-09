@@ -109,7 +109,6 @@ public class GestionCreditoDetalle {
 		Date fecha = null;
 		try {
 		fecha = formatoDelTexto.parse(strFecha);
-		System.out.println(fecha);
 		for (int i = 1; i <= credito.getNumero_meses_credito(); i++) 
 		{
 			Calendar cal = Calendar.getInstance();
@@ -142,4 +141,11 @@ public class GestionCreditoDetalle {
 		return detalleDAO.getPagosCuenta(credito);
 	}
 
+	public void cancelarPago(Credito_Detalle pago) {
+		Credito credito = creditoDAO.read(pago.getCodigo_credito().getCodigo_credito());
+		credito.setMonto_credito(credito.getMonto_credito()-pago.getValor_detalle_credito());
+		credito.setNumero_meses_credito(credito.getNumero_meses_credito()-1);
+		detalleDAO.eliminar(pago);
+		creditoDAO.update(credito);
+	}
 }

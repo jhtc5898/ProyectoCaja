@@ -105,7 +105,7 @@ public class AuthorizationFilter implements Filter {
 	private static final String[] soloCajera = { 
 			"/faces/cajera/deposito.xhtml","/faces/cajera/retiro.xhtml","/faces/cajera/home-cajera.xhtml",
 			"/faces/cajera/solicitud-credito.xhtml","/faces/cajera/solicitudes-credito.xhtml",
-			"/faces/cajera/revision-credito.xhtml"
+			"/faces/cajera/revision-credito.xhtml", "/faces/cajera/pagar-credito.xhtml", "/faces/cajera/pagar.xhtml"
 	};
 
 	private boolean noLoguear(String url) {

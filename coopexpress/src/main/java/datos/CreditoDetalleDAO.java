@@ -22,6 +22,10 @@ public class CreditoDetalleDAO {
 		em.persist(detalle);
 	}
 	
+	public void eliminar(Credito_Detalle pago) {
+		em.remove(em.contains(pago) ? pago : em.merge(pago));
+	}
+	
 	public List<Credito> getCreditoDetalleCodigo() {
 		String jpql = "SELECT c from Credito_Detalle c ORDER BY c.codigo_credito DESC";
 		Query q = em.createQuery(jpql);

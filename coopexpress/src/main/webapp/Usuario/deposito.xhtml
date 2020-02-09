@@ -104,11 +104,22 @@
                     <label class="col-form-label">Su número de cuenta</label>
                     <h:inputText id="txtCuentaOrigen" styleClass="form-control" value="#{loginBean.numeroCuenta}" readonly = "true"/>
                   </div>
-                  <div class="col-3">
+                  <div class="col-6">
                     <label class="col-form-label">Numero de cuenta destino</label>
-                    <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
+                    
+                    <div class="row">
+                    <div>
+                     <h:inputText id="txtCuentaDestino" styleClass="form-control" required="true" validatorMessage="Numero de cuenta no válido" requiredMessage="Ingresar un numero de cuenta" value="#{gestionTransaccionesBean.cuentaDestino}">
                     	<f:validateLength for="txtCuentaDestino" minimum="6" /> 
                     </h:inputText>
+                    </div>
+                    <div>
+                    <h:commandButton  value="Verificar" id="usuario" styleClass="btn btn-info" action="#{gestionTransaccionesBean.cargarUsuario1()}" />
+                    </div>
+                    <div>
+                    	&#160;Usuario: <h:message for="usuario"/>   
+                    </div>
+                    </div>
                     <h:message for="txtCuentaDestino" style="color:red" />
                   </div>  
                   <div class="col-3">

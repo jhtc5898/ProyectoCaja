@@ -93,7 +93,7 @@
 	</div>
 	
 	<div class="card card-success" onload="#{gestionCreditoBean.getCreditoDisponible(loginBean.numeroCuenta)}">
-              <div class="card-header border-0">
+    	<div class="card-header border-0">
                 <h3 class="card-title">Informe general</h3>
                 <div class="card-tools">
                   <a href="#" class="btn btn-sm btn-tool">
@@ -110,10 +110,25 @@
                     <span class="text-muted">ID DE CREDITO</span>
                   </p>
                   <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">$
-                     #{gestionCreditoBean.credito.monto_credito}
+                 	<span class="font-weight-bold">#
+                   		#{gestionCreditoBean.credito.codigo_cuenta.numero_cuenta}
+                  	</span>
+                   	<span class="text-muted">Cuenta</span>
+                  </p>
+                </div>
+                
+                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                   <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      #{gestionCreditoBean.credito.codigo_cuenta.usuario.cedula}
                     </span>
-                    <span class="text-muted">MONTO SOLICITADO</span>
+                    <span class="text-muted">Cedula del usuario</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                 	<span class="font-weight-bold">
+                   		#{gestionCreditoBean.credito.codigo_cuenta.usuario.nombre} #{gestionCreditoBean.credito.codigo_cuenta.usuario.apellido}
+                  	</span>
+                   	<span class="text-muted">Nombre del usuario</span>
                   </p>
                 </div>
                 <!-- /.d-flex -->
@@ -122,19 +137,24 @@
                     <span class="font-weight-bold">
                       #{gestionCreditoBean.credito.numero_meses_credito} meses
                     </span>
-                    <span class="text-muted">PLAZO EN MESES DEL CREDITO</span>
+                    <span class="text-muted">Plazo en meses del credito</span>
                   </p>
                   <p class="d-flex flex-column text-right">
-                    <span class="font-weight-bold">
-                      #{gestionCreditoBean.credito.fecha_solicitud_credito}
+                  <span class="font-weight-bold">$
+                     #{gestionCreditoBean.credito.monto_credito}
                     </span>
-                    <span class="text-muted">FECHA DE SOLICITUD</span>
+                    <span class="text-muted">Monto solicitado</span>
                   </p>
                 </div>
                 
                 <!-- /.d-flex -->
                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                  <p class="d-flex flex-column text-left"></p>
+                  <p class="d-flex flex-column text-left">
+                  	 <span class="font-weight-bold">
+                      #{gestionCreditoBean.credito.fecha_solicitud_credito}
+                    </span>
+                    <span class="text-muted">Fecha de solicitud</span>
+                  </p>
                   <p class="d-flex flex-column text-right">
                     <span class="font-weight-bold">
                       #{gestionCreditoBean.credito.fecha_pago_credito}
@@ -150,11 +170,13 @@
                       		#{gestionCreditoBean.credito.desripcion_credito}
                     	</span>
                  	</p>
-                  <p class="d-flex flex-column text-right"></p>
+                  <p class="d-flex flex-column text-right">
+                  
+                  </p>
                 </div>
                 <!-- /.d-flex -->
               </div>
-            </div>
+    </div>
 </ui:define>
 
 <ui:define name="indicaciones">

@@ -25,6 +25,12 @@
 		<p>Solicitudes de crédito</p>
 	</a>
 	</li>
+	<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link">
+                  <i class="fas fa-credit-card nav-icon"></i>
+                  <p>Pagar crédito</p>
+                </a>
+</li>
 </ui:define>
 
 <ui:define name="menu">
@@ -83,6 +89,21 @@
                    		#{gestionCreditoBean.credito.codigo_cuenta.numero_cuenta}
                   	</span>
                    	<span class="text-muted">Cuenta solicitante</span>
+                  </p>
+                </div>
+                
+                 <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
+                   <p class="d-flex flex-column text-left">
+                    <span class="font-weight-bold">
+                      #{gestionCreditoBean.credito.codigo_cuenta.usuario.cedula}
+                    </span>
+                    <span class="text-muted">Cedula del usuario</span>
+                  </p>
+                  <p class="d-flex flex-column text-right">
+                 	<span class="font-weight-bold">
+                   		#{gestionCreditoBean.credito.codigo_cuenta.usuario.nombre} #{gestionCreditoBean.credito.codigo_cuenta.usuario.apellido}
+                  	</span>
+                   	<span class="text-muted">Nombre del solicitante</span>
                   </p>
                 </div>
                 <!-- /.d-flex -->

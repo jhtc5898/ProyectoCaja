@@ -61,6 +61,8 @@ public class GestionCreditoBean {
 	private Credito credito =  new Credito();
 	private List<Credito_Detalle> creditoDetalles = new ArrayList<Credito_Detalle>();
 	private List<Credito> creditos;
+	private List<Credito> creditosPago;
+	private Credito_Detalle pago;
 	private String numeroCuenta;
 	private String mensaje;
 	private String estado;
@@ -71,6 +73,7 @@ public class GestionCreditoBean {
 	public void init() {
 		credito = new Credito();
 		creditos = gc.getCreditos();
+		creditosPago = gc.getCreditosPago();
 		numeroCuenta="";
 	}
 	
@@ -143,6 +146,15 @@ public class GestionCreditoBean {
 		credito.setEstado_credito("R");
 		gc.actualizarCredito(credito);
 		return "solicitudes-credito";	
+	}
+	
+	public void cargarUsuario() {
+		Cuenta cuenta = gcu.obtenerCuentaNumero(numeroCuenta);
+		if(cuenta != null) {
+			FacesContext.getCurrentInstance().addMessage("formulario-credito:usuario", new FacesMessage(cuenta.getUsuario().getNombre()+" "+cuenta.getUsuario().getApellido()));
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-credito:usuario", new FacesMessage("No encontrado"));
+		}
 	}
 	
 
@@ -336,8 +348,8 @@ public class GestionCreditoBean {
 	 public String cargarCreditoRevision(Credito credito) {
 			this.credito = credito;
 			return "revision-credito";
-	}
-
+	 }
+	 
 	 public String cargarCreditoRevision1() {
 		 this.credito=gc.getCredito(numeroCuenta);
 		 String pagina = "";
@@ -349,6 +361,18 @@ public class GestionCreditoBean {
 			 	init();
 		 	}
 		 	return pagina;
+	}
+	 
+	public String cargarPagosCredito(Credito credito) {
+		this.credito = credito;
+		 creditoDetalles = gcd.getPagos(credito.getCodigo_cuenta().getNumero_cuenta());
+		 pago = creditoDetalles.get(0);
+		 return "pagar";
+	} 
+	 
+	public String pagar(Credito_Detalle pago) {
+		gcd.cancelarPago(pago);
+		return "pagar-credito";
 	}
 	
 	public void getPagosCredito(String numeroCuenta) {
@@ -407,5 +431,20 @@ public class GestionCreditoBean {
 		this.creditos = creditos;
 	}
 
+	public List<Credito> getCreditosPago() {
+		return creditosPago;
+	}
+
+	public void setCreditosPago(List<Credito> creditosPago) {
+		this.creditosPago = creditosPago;
+	}
+
+	public Credito_Detalle getPago() {
+		return pago;
+	}
+
+	public void setPago(Credito_Detalle pago) {
+		this.pago = pago;
+	}
 	
 } 

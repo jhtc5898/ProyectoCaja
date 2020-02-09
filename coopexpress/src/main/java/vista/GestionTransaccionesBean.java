@@ -130,6 +130,25 @@ public class GestionTransaccionesBean {
 		return null;
 	}
 	
+	public void cargarUsuario() {
+		Cuenta cuenta = gc.obtenerCuentaNumero(cuentaOrigen);
+		if(cuenta != null) {
+			FacesContext.getCurrentInstance().addMessage("retiro:usuario", new FacesMessage(cuenta.getUsuario().getNombre()+" "+cuenta.getUsuario().getApellido()));
+		}else {
+			FacesContext.getCurrentInstance().addMessage("retiro:usuario", new FacesMessage("No encontrado"));
+		}
+		
+	}
+	
+	public void cargarUsuario1() {
+		Cuenta cuenta = gc.obtenerCuentaNumero(cuentaDestino);
+		if(cuenta != null) {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:usuario", new FacesMessage(cuenta.getUsuario().getNombre()+" "+cuenta.getUsuario().getApellido()));
+		}else {
+			FacesContext.getCurrentInstance().addMessage("formulario-deposito:usuario", new FacesMessage("No encontrado"));
+		}
+	}
+	
 	//GENERAR PDF ESTADO CUENTA
 	
 	public void generarEstadoCuentaPDF(String numeroCuenta) {

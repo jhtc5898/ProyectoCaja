@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      template="blank-cajera.xhtml">
+      
+<ui:define name="titulo">Pagos del credito solicitado</ui:define>
+
+<ui:define name="descripcion">Tabla de amortizacion</ui:define>
+
+<ui:define name="indicaciones"></ui:define>
+
+<ui:define name="navegador">
+	<div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            	<li class="breadcrumb-item"><a href="pagar-credito.xhtml">Pagar Crédito</a></li>
+              <li class="breadcrumb-item active">Tabla de pagos</li>
+            </ol>
+    </div>
+</ui:define>
+
+<ui:define name="menu1">
+<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/solicitudes-credito.xhtml" class="nav-link">
+	<i class="nav-icon fas fa-home"></i>
+	<p>Solicitudes de crédito</p>
+	</a>
+</li>
+<li class="nav-item has-treeview">
+	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link active">
+	<i class="fas fa-credit-card nav-icon"></i>
+	<p>Pagar crédito</p>
+  	</a>
+</li>
+</ui:define>
+
+<ui:define name="menu">
+<li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-dollar-sign"></i>
+              <p>
+                Transacciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/deposito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Deposito</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/retiro.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retiro</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/coopexpress/faces/cajera/solicitud-credito.xhtml" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Solicitud de crédito</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+</ui:define>
+
+<ui:define name="contenido">
+    <!-- Main content -->
+    <div class="card card-info card-outline">
+    <span class="dropdown-header"><h5>Información del crédito</h5></span>
+    <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID Crédito</th>
+                      <th># Cuenta</th>
+                      <th>Nombre usuario</th>
+                      <th>Monto del crédito</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#{gestionCreditoBean.credito.codigo_credito}</td>
+                      <td>#{gestionCreditoBean.credito.codigo_cuenta.numero_cuenta}</td>
+                      <td>#{gestionCreditoBean.credito.codigo_cuenta.usuario.nombre} #{gestionCreditoBean.credito.codigo_cuenta.usuario.apellido}</td>
+                      <td>#{gestionCreditoBean.credito.monto_credito}</td>
+                    </tr>
+                  </tbody>
+                </table>
+	</div>
+	<br />
+
+    <div class="card card-success card-outline">
+    <span style="text-align: center"><h5>Pago pendiente del crédito</h5></span>
+    <div class="content">
+            <div class="card card-success">
+            <h:form>
+              <div class="card-body">
+              
+                <h:dataTable value="#{gestionCreditoBean.pago}" var="pago" styleClass="table table-bordered">
+					<h:column >
+						#{pago.numero_cuota_detalle_credito}
+						<f:facet name="header">Número de la cuota</f:facet>
+					</h:column>
+					<h:column>
+						#{pago.fecha_detalle_credito}
+						<f:facet name="header">Fecha max. de pago</f:facet>
+					</h:column>
+					<h:column>
+						#{pago.valor_detalle_credito}
+						<f:facet name="header">Valor a pagar</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Acciones</f:facet>
+						<h:commandButton action="#{gestionCreditoBean.pagar(pago)}" styleClass="btn btn-success" value="Realizar pago" />
+					</h:column>
+				</h:dataTable> 
+              </div>
+              <strong><span class="dropdown-header"><h:outputText value="No existen pagos por realizar" rendered="#{empty gestionCreditoBean.pago}" /></span></strong>
+             </h:form>
+            </div>
+             
+        </div>
+        </div>
+        <div class="card-header">
+	        <a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="btn btn-danger">Regresar</a>
+        </div>
+</ui:define>
+
+</ui:composition>

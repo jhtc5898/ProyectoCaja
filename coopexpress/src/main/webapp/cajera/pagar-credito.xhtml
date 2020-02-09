@@ -5,34 +5,33 @@
       xmlns:p="http://primefaces.org/ui"
       template="blank-cajera.xhtml"> 
             
-<ui:define name="titulo">Solicitudes de crédito </ui:define>
+<ui:define name="titulo">Pagar crédito </ui:define>
 
 <ui:define name="navegador">
 	<div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active">Solicitudes De Crédito</li>
+              <li class="breadcrumb-item active">Pagar crédito</li>
             </ol>
     </div>
 </ui:define>
 
-<ui:define name="descripcion">Listado de solicitudes de crédito pendientes de aprobación</ui:define>
+<ui:define name="descripcion">Listado de creditos</ui:define>
 <ui:define name="indicaciones">
-		<p><b style="color:#007bff">Revision</b>, cargará la información del crédito solicitado</p>
+		<p><b style="color:#007bff">Cargar cuotas</b>, cargará la información de las cuotas del credito</p>
 </ui:define>
 
 <ui:define name="menu1">
 <li class="nav-item has-treeview">
-	<a href="/coopexpress/faces/cajera/solicitudes-credito.xhtml" class="nav-link active">
+	<a href="/coopexpress/faces/cajera/solicitudes-credito.xhtml" class="nav-link">
 	<i class="nav-icon fas fa-home"></i>
 	<p>Solicitudes de crédito</p>
 	</a>
-	 
 </li>
 <li class="nav-item has-treeview">
-	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link">
-                  <i class="fas fa-credit-card nav-icon"></i>
-                  <p>Pagar crédito</p>
-                </a>
+	<a href="/coopexpress/faces/cajera/pagar-credito.xhtml" class="nav-link active">
+	<i class="fas fa-credit-card nav-icon"></i>
+	<p>Pagar crédito</p>
+  	</a>
 </li>
 </ui:define>
 
@@ -69,32 +68,8 @@
 </ui:define>
 
 <ui:define name="contenido">
-
-		<h:form id="solicitudes">
-			<div class="card-body" onload="#{gestionCreditoBean.init()}">
-			<div class="card-footer">
-				<div class="input-group">
-					<label class="col-form-label">Buscar por numero de cuenta </label>
-                    <div class="custom-file">
-                      	<div class="col-2">
-					 		<h:inputText id="txtCuenta" styleClass="form-control" required="true" validatorMessage="Cuenta no valida" requiredMessage="Ingresar un número de cuenta" value="#{gestionCreditoBean.numeroCuenta}">
-								<f:validateLength for="txtCuenta" minimum="6"/>
-								<f:validateRegex pattern="^[0-9]*$" />
-							</h:inputText>
-						</div>
-						<div class="input-group-append">
-                        	<h:commandButton styleClass="btn btn-success" action="#{gestionCreditoBean.cargarCreditoRevision1()}" value="Buscar" />
-                     	</div>&#160;
-                     	<h:message for="txtCuenta" style="color:red" />
-                      </div>
-                    </div>
-                    <h:message for="cedula" style="color:red" />
-                </div>
-			</div>
-			</h:form>
-<!-- Horizontal Form -->
 	<h:form>
-		<h:dataTable value="#{gestionCreditoBean.creditos}" var="credito" styleClass="table table-striped table-valign-middle" >
+		<h:dataTable value="#{gestionCreditoBean.creditosPago}" var="credito" styleClass="table table-striped table-valign-middle" >
 		<h:column >
 			#{credito.codigo_credito}
 			<f:facet name="header"># Credito</f:facet>
@@ -113,11 +88,6 @@
 		</h:column>
 		
 		<h:column>
-			#{credito.estado_credito}
-			<f:facet name="header">Estado Credito</f:facet>
-		</h:column>
-		
-		<h:column>
 			#{credito.codigo_cuenta.numero_cuenta}
 			<f:facet name="header">Cuenta</f:facet>
 		</h:column>
@@ -128,11 +98,12 @@
 		</h:column>
 		
 		<h:column>
-			<h:commandButton action="#{gestionCreditoBean.cargarCreditoRevision(credito)}" styleClass="btn btn-primary" value="Revisión" />
+			<h:commandButton action="#{gestionCreditoBean.cargarPagosCredito(credito)}" styleClass="btn btn-success" value="Cargar cuotas" />
 		</h:column>
 		</h:dataTable>
+		<strong><span class="dropdown-header" style="color: red; "><h:outputText value="No existen creditos " rendered="#{empty gestionCreditoBean.creditosPago}" /></span></strong>
 	</h:form>
-	<strong><span class="dropdown-header" style="color: red; "><h:outputText value="No existen solicitudes de creditos" rendered="#{empty gestionCreditoBean.creditos}" /></span></strong>
+	
 
 </ui:define>
 </ui:composition>

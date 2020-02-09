@@ -44,6 +44,13 @@ public class CreditoDAO {
 		return creditos;
 	}
 	
+	public List<Credito> getCreditosPago(){
+		String jpql = "SELECT c FROM Credito c WHERE estado_credito <> 'P'";
+		Query q = em.createQuery(jpql);
+		List<Credito> creditos =q.getResultList();
+		return creditos;
+	}
+	
 	public Credito getCreditoCuenta(Cuenta numeroCuenta) {
 		try {
 			String jpql = "SELECT c FROM Credito c WHERE codigo_cuenta = ?1";

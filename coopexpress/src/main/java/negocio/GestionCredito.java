@@ -65,6 +65,10 @@ public class GestionCredito {
 	public List<Credito> getCreditos() {
 		return creditoDAO.getCreditos();
 	}
+	
+	public List<Credito> getCreditosPago() {
+		return creditoDAO.getCreditosPago();
+	}
 
 	public List<Credito> getCodigo() {
 		return creditoDAO.getCreditoCodigo();
