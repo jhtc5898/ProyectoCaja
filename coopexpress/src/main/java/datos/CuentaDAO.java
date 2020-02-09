@@ -18,7 +18,7 @@ public class CuentaDAO {
 	
 	
 	public void insert(Cuenta cuenta) {
-		cuenta.setNumero_cuenta(getLastCuenta());
+		cuenta.setNumero_cuenta(getLastCuenta2());
 		em.persist(cuenta);
 	}
 	
@@ -26,6 +26,17 @@ public class CuentaDAO {
 		Query query = em.createNativeQuery("SELECT MAX(c.codigo_cuenta) from Cuenta c");
 		int lastCuenta = ((Number) query.getSingleResult()).intValue();
 		return String.valueOf(lastCuenta+1);
+	}
+	
+	public String getLastCuenta2() {
+		String jpql = "SELECT c FROM Cuenta c ORDER BY c.numero_cuenta DESC";
+		Query q = em.createQuery(jpql, Cuenta.class);
+		List<Cuenta> cuentas =q.getResultList();
+		Cuenta c =cuentas.get(0);
+		int numeroCuenta = Integer.parseInt(c.getNumero_cuenta())+1;
+		System.out.println(c.getNumero_cuenta());
+		
+		return String.valueOf(numeroCuenta);
 	}
 	
 	public void update(Cuenta cuenta) {
