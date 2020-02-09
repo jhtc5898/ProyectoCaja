@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -255,6 +256,10 @@ public class GestionCreditoBean {
 	            	String monto=String.valueOf(detalle.get(i).getValor_detalle_credito());
 					monto=monto.substring(0,3);
 					
+					double val=detalle.get(i).getValor_detalle_credito();
+	            	DecimalFormat formato1 = new DecimalFormat("#.00");
+	            	monto=formato1.format(val);
+	            	
 					String fecha=detalle.get(i).getFecha_detalle_credito();
 					String cuota=String.valueOf(detalle.get(i).getNumero_cuota_detalle_credito());
 					

@@ -30,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import modelo.Cuenta;
 import modelo.Transaccion;
@@ -219,8 +220,12 @@ public class GestionTransaccionesBean {
 	            }else {
 	            	for (int i = 0; i < depositosRecibidos.size(); i++) {
 						String monto=String.valueOf(depositosRecibidos.get(i).getMonto_transaccion());
-						monto=monto.substring(0,4);
+//						monto=monto.substring(0,4);
 						
+						double val=depositosRecibidos.get(i).getMonto_transaccion();
+		            	DecimalFormat formato1 = new DecimalFormat("#.00");
+		            	monto=formato1.format(val);
+		            	
 						String fecha=depositosRecibidos.get(i).getFecha_transaccion();
 						String descripcion=depositosRecibidos.get(i).getDescripcion_transaccion();
 						
@@ -277,7 +282,11 @@ public class GestionTransaccionesBean {
 	            }else {
 	            	for (int i = 0; i < retirosRealizados.size(); i++) {
 		            	String monto=String.valueOf(retirosRealizados.get(i).getMonto_transaccion());
-		            	monto=monto.substring(0,3);
+//		            	monto=monto.substring(0,3);
+		            	
+		            	double val=retirosRealizados.get(i).getMonto_transaccion();
+		            	DecimalFormat formato1 = new DecimalFormat("#.00");
+		            	monto=formato1.format(val);
 						
 						String fecha=retirosRealizados.get(i).getFecha_transaccion();
 						
@@ -327,7 +336,10 @@ public class GestionTransaccionesBean {
 
 					for (int i = 0; i < depositoCajera.size(); i++) {
 						String monto=String.valueOf(depositoCajera.get(i).getMonto_transaccion());
-						monto=monto.substring(0,4);
+//						monto=monto.substring(0,4);
+						double val=depositoCajera.get(i).getMonto_transaccion();
+		            	DecimalFormat formato1 = new DecimalFormat("#.00");
+		            	monto=formato1.format(val);
 						
 						String fecha=depositoCajera.get(i).getFecha_transaccion();
 						String descripcion= depositoCajera.get(i).getDescripcion_transaccion();
@@ -379,7 +391,11 @@ public class GestionTransaccionesBean {
 	            	
 	 	            for (int i = 0; i < transferencias.size(); i++) {
 	 	            	String monto=String.valueOf(transferencias.get(i).getMonto_transaccion());
-	 	            	monto=monto.substring(0,4);
+//	 	            	monto=monto.substring(0,4);
+	 	            	
+	 	            	double val=transferencias.get(i).getMonto_transaccion();
+		            	DecimalFormat formato1 = new DecimalFormat("#.00");
+		            	monto=formato1.format(val);
 	 					
 	 					String fecha=transferencias.get(i).getFecha_transaccion();
 	 					String descripcion=transferencias.get(i).getDescripcion_transaccion();
