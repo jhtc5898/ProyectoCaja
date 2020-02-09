@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,14 +237,35 @@ public class GestionCreditoBean {
 
 	            document.add(saltoLinea);
 	            
+	            
+	            List<Credito_Detalle> detalle =gcd.detallePDF(credito);
+	            
+	            double montoTotal=0;
+	            for (int i = 0; i < detalle.size(); i++) {
+					montoTotal=detalle.get(i).getValor_detalle_credito()+montoTotal;
+				}
+	            System.out.println(montoTotal);
+	            
+	            double interesTotal=montoTotal*0.20123;
+	            montoTotal=Math.ceil(montoTotal+interesTotal);
+	            
+	            
+	            
 	            Paragraph informacionTabla = new Paragraph("En el caso de que su solicitud sea aprobada, esta seria su tabla de amortizacion",fuente);
 	            document.add(informacionTabla);
+	            
+	            Paragraph informacionInteres;
+	            informacionInteres= new Paragraph("Con un valor final a pagar de:  ");
+	            informacionInteres.add(new Chunk(String.valueOf(montoTotal), FontFactory.getFont(FontFactory.HELVETICA, Font.DEFAULTSIZE,BaseColor.BLUE)));
+	            informacionInteres.setAlignment(Element.ALIGN_LEFT);
+	            document.add(informacionInteres);
+	            
 	            
 	            document.add(saltoLinea);
 	            
 	           //TABLA AMORIZACION
 	            
-	            PdfPTable table = new PdfPTable(3);
+	            PdfPTable table = new PdfPTable(6);
 	            
 	            Paragraph columnaNumeroCuota = new Paragraph("Numero Cuota");
 	            columnaNumeroCuota.getFont().setStyle(Font.BOLD);
@@ -253,26 +275,67 @@ public class GestionCreditoBean {
 	            columnaFechaPago.getFont().setStyle(Font.BOLD);
 	            columnaFechaPago.getFont().setSize(10);
 	            
-	            Paragraph columnaMonto= new Paragraph("Monto");
+	            Paragraph columnaMonto= new Paragraph("Capital");
 	            columnaMonto.getFont().setStyle(Font.BOLD);
 	            columnaMonto.getFont().setSize(10);
+	            
+	            Paragraph columnaInteres= new Paragraph("Interes");
+	            columnaInteres.getFont().setStyle(Font.BOLD);
+	            columnaInteres.getFont().setSize(10);
+	            
+	            Paragraph columnaPagar= new Paragraph("Cuanto me toca Pagar");
+	            columnaPagar.getFont().setStyle(Font.BOLD);
+	            columnaPagar.getFont().setSize(10);
+	            
+	            Paragraph columnaFaltaPagar= new Paragraph("Cuanto me falta Pagar");
+	            columnaFaltaPagar.getFont().setStyle(Font.BOLD);
+	            columnaFaltaPagar.getFont().setSize(10);
+	            
+	            
 	            
 	            table.addCell(columnaNumeroCuota);
 	            table.addCell(columnaFechaPago);
 	            table.addCell(columnaMonto);
+	            table.addCell(columnaInteres);
+	            table.addCell(columnaPagar);
+	            table.addCell(columnaFaltaPagar);
 	            
-	            List<Credito_Detalle> detalle =gcd.detallePDF(credito);
-	            
+	           
 	            for (int i = 0; i < detalle.size(); i++) {
 	            	String monto=String.valueOf(detalle.get(i).getValor_detalle_credito());
-					monto=monto.substring(0,3);
+//					monto=monto.substring(0,3);
 					
+					
+					double val=detalle.get(i).getValor_detalle_credito();
+	            	DecimalFormat formato1 = new DecimalFormat("#.00");
+	            	monto=formato1.format(val);
+	            	
+	            	//calcular interes del pago
+	            	double interes=val*0.20123;
+	            	String valorInteres=formato1.format(interes);
+	            	
+	            	//sumar interes al pago
+	            	double valorPagar=interes+val;
+	            	String pagar=formato1.format(valorPagar);
+	            	
 					String fecha=detalle.get(i).getFecha_detalle_credito();
 					String cuota=String.valueOf(detalle.get(i).getNumero_cuota_detalle_credito());
+					
+					montoTotal=montoTotal-valorPagar;
+					
+					if(i+1==detalle.size()) {
+						montoTotal=0.00;
+					}
+					System.out.println(i);
+					String total=formato1.format(montoTotal);
+					
 					
 					table.addCell(cuota);
 					table.addCell(fecha);
 					table.addCell(monto);
+					table.addCell(valorInteres);
+					table.addCell(pagar);
+					table.addCell(total);
 					
 				}
 	            
