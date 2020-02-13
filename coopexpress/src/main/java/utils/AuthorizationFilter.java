@@ -43,7 +43,7 @@ public class AuthorizationFilter implements Filter {
 				if (userName.equals("2")) {
 					chain.doFilter(request, response);
 				}else {
-					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+					resp.sendRedirect(reqt.getContextPath() + "/faces/404.xhtml");
 				}
 			}
 			// Si es una pagina de USUARIO
@@ -52,7 +52,7 @@ public class AuthorizationFilter implements Filter {
 				if (userName.equals("1")) {
 					chain.doFilter(request, response);
 				}else {
-					resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+					resp.sendRedirect(reqt.getContextPath() + "/faces/404.xhtml");
 				}
 			}
 			// Si es una pagina de CAJERA
@@ -62,7 +62,7 @@ public class AuthorizationFilter implements Filter {
 							if (userName.equals("3")) {
 								chain.doFilter(request, response);
 							}else {
-								resp.sendRedirect(reqt.getContextPath() + "/faces/login.xhtml");
+								resp.sendRedirect(reqt.getContextPath() + "/faces/404.xhtml");
 							}
 						}
 			
